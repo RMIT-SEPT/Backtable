@@ -1,4 +1,0 @@
-# requirements/build.txt
-twine==1.9.1
-
-wheel==0.29.0
