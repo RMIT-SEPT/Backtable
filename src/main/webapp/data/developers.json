@@ -1684,7 +1684,14 @@
       "url": "http://www.comp.nus.edu.sg/~damithch/",
       "username": "damithc",
       "image": "images/teammembers/damith.png",
-      "currentPosition": "Founder, Project Mentor (2010 - )"
+      "currentPosition": "Founder, Project Mentor (2010 - )" 
+    },
+    {
+      "name": "Christina Papadopoulos",
+      "url": "https://www.linkedin.com/in/christina-au/",
+      "username": "cp89",
+      "image": "images/teammembers/christina.png", 
+      "currentPosition": "Scrum Master (July 2018 - )" 
     },
     {
       "name": "Wilson Kurniawan",
