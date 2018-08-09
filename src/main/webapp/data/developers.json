@@ -1679,6 +1679,12 @@
     }
   ],
   "teammembers": [
+  {
+      "name": "Luke W. Sewart",
+      "username": "lukes",
+      "image": "images/teammembers/luke.png",
+      "currentPosition": "Developer, Product Owner, Boss"
+    },
     {
       "name": "Damith C. Rajapakse",
       "url": "http://www.comp.nus.edu.sg/~damithch/",
