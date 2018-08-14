@@ -29,6 +29,9 @@
         <li<c:if test="${fn:contains(data.getClass(), 'Student')}"> class="active"</c:if>>
           <a class='nav students' data-link="instructorStudent" href="${data.instructorStudentListLink}">Students</a>
         </li>
+        <li> <!-- Simple link -->
+          <a class="navLinks" id="DiscussionBoardNavLink" href="#">Discussion Board</a>
+        </li>
         <li<c:if test="${fn:contains(data.getClass(), 'Search')}"> class="active"</c:if>>
           <a class='nav search' data-link="instructorSearch" href="${data.instructorSearchLink}">
             Search
