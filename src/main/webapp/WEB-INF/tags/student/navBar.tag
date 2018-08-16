@@ -24,8 +24,8 @@
             Home
           </a>
         </li>
-        <li> <!-- Simple link -->
-          <a class="navLinks" id="DiscussionBoardNavLink" href="#">
+        <li<c:if test="${fn:contains(data.getClass(), 'StudentDiscussionBoardPage')}"> class="active"</c:if>>
+          <a class="navLinks" id="studentDiscussionBoardLink" href="${data.studentDiscussionBoardLink}">
             Discussion Board
           </a>
         </li>

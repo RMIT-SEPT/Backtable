@@ -207,6 +207,10 @@ public class PageData {
         return link;
     }
 
+    public String getStudentDiscussionBoardLink() {
+      String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_PAGE;
+      return link;
+    }
     /**
      * Returns The relative path to the student profile page. Defaults to whether the student is unregistered.
      */
