@@ -20,6 +20,9 @@
         <li<c:if test="${fn:contains(data.getClass(), 'Home')}"> class="active"</c:if>>
           <a class='nav home' data-link="instructorHome" href="${data.instructorHomeLink}">Home</a>
         </li>
+        <li<c:if test="${fn:contains(data.getClass(), 'instructorDiscussionBoard')}"> class="active"</c:if>>
+          <a class='nav' data-link="instructorDiscussionBoard" href="${data.instructorDiscussionBoardLink}">Discussion Board</a>
+        </li>
         <li<c:if test="${fn:contains(data.getClass(), 'InstructorCourse') && !fn:contains(data.getClass(), 'CourseStudent')}"> class="active"</c:if>>
           <a class='nav courses' data-link="instructorCourse" href="${data.instructorCoursesLink}">Courses</a>
         </li>

@@ -1073,6 +1073,9 @@ public final class Const {
 
         public static final String BACKDOOR = "/backdoor";
 
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
+        public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";
+
     }
 
     /**
@@ -1142,6 +1145,7 @@ public final class Const {
         public static final String INSTRUCTOR_FEEDBACK_EDIT_PAGE = "instructorFeedbackEditPage";
         public static final String INSTRUCTOR_FEEDBACK_COPY = "instructorFeedbackCopy";
         public static final String INSTRUCTOR_STUDENT_LIST_PAGE = "instructorStudentListPage";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "instructorDiscussionBoardPage";
     }
 
     public static class ViewURIs {
@@ -1223,6 +1227,9 @@ public final class Const {
         public static final String MASHUP = "/test/mashup.jsp";
         public static final String TABLE_SORT = "/test/tableSort.jsp";
         public static final String TIMEZONE = "/test/timezone.jsp";
+
+        public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/jsp/studentDiscussionBoard.jsp";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/jsp/instructorDiscussionBoard.jsp";
     }
 
     /* These are status messages that may be shown to the user */

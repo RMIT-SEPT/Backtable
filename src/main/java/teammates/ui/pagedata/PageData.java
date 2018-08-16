@@ -207,6 +207,10 @@ public class PageData {
         return link;
     }
 
+    public String getStudentDiscussionBoardLink() {
+      String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_PAGE;
+      return link;
+    }
     /**
      * Returns The relative path to the student profile page. Defaults to whether the student is unregistered.
      */
@@ -614,6 +618,11 @@ public class PageData {
         link = addUserIdToUrl(link);
         link = addSessionTokenToUrl(link);
         return link;
+    }
+
+    public String getInstructorDiscussionBoardLink() {
+      String link = Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE;
+      return link;
     }
 
     public static String getInstructorSubmissionStatusForFeedbackSession(FeedbackSessionAttributes session) {

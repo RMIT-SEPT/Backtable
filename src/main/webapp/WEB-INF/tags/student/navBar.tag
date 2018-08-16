@@ -24,6 +24,11 @@
             Home
           </a>
         </li>
+        <li<c:if test="${fn:contains(data.getClass(), 'StudentDiscussionBoardPage')}"> class="active"</c:if>>
+          <a class="navLinks" id="studentDiscussionBoardLink" href="${data.studentDiscussionBoardLink}">
+            Discussion Board
+          </a>
+        </li>
         <li<c:if test="${fn:contains(data.getClass(), 'StudentProfilePage')}"> class="active"</c:if>>
           <a class="navLinks" id="studentProfileNavLink" href="${data.studentProfileLink}"
               <c:if test="${isUnregistered}">data-unreg="true"</c:if>>
