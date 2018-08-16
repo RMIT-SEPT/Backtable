@@ -132,6 +132,7 @@ public class ActionFactory {
         map(IMAGE_UPLOAD, ImageUploadAction.class);
 
         map(STUDENT_DISCUSSION_BOARD_PAGE, StudentDiscussionBoardPageAction.class);
+        map(INSTRUCTOR_DISCUSSION_BOARD_PAGE, InstructorDiscussionBoardPageAction.class);
 
         map(ERROR_FEEDBACK_SUBMIT, ErrorUserReportLogAction.class);
     }

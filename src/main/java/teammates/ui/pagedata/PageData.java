@@ -620,6 +620,11 @@ public class PageData {
         return link;
     }
 
+    public String getInstructorDiscussionBoardLink() {
+      String link = Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE;
+      return link;
+    }
+
     public static String getInstructorSubmissionStatusForFeedbackSession(FeedbackSessionAttributes session) {
         if (session.isOpened()) {
             return "Open";
