@@ -13,8 +13,12 @@ public class StudentDiscussionBoardPageAction extends Action {
 
     @Override
     protected ActionResult execute() {
+        
+        account.studentProfile = logic.getStudentProfile(account.googleId);
+        
+            
         StudentDiscussionBoardPageData data = new StudentDiscussionBoardPageData(account, sessionToken);
-
+        data.createFalseData();
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
     }
 
