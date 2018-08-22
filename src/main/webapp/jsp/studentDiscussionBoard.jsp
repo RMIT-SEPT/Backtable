@@ -31,11 +31,10 @@
       </thead>
       <c:forEach items="${data.topics}" var="details">
         <tr class="home_evaluations_row" id="evaluation">
-          <td>${topic.id}</td>
-          <td>${topic.name}</td>
-          <td>${topic.desc}</td>
+          <td>${details.topic.id}</td>
+          <td>${details.topic.name}</td>
+          <td>${details.topic.desc}</td>
           <td data-date-stamp="${sessionRow.endTimeIso8601Utc}">${sessionRow.endTime}</td>
-         
         </tr>
       </c:forEach>
     </c:when>
@@ -50,9 +49,6 @@
 </table>
 
 <br/>
- 
- 
- 
  
  
  
