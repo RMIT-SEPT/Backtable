@@ -14,6 +14,39 @@
     <tsd:topic topic="${details.topic}">
     </tsd:topic>
  </c:forEach>
+ 
+  
+ <div class="well well-plain">
+  <div>
+    <label class="label-control">Add Topic</label>
+  </div>
+  <br>
+  <div>
+    <label class="label-control">Topic ID:</label>
+    <input class="form-control addInstructorFormControl" type="text" id="topicId" value="${topic.id}">
+  </div>
+  <br>
+  <div>
+    <label class="label-control">Topic Name: </label>
+    <input class="form-control" type="text" id="topicName" value="${topic.name}">
+  </div>
+  <br>
+  <div>
+    <label class="label-control">Topic Description: </label>
+    <input class="form-control addInstructorFormControl" type="text" id="topicDesc" value="${topic.desc}">
+  </div>
+  <br>
+
+  <div>
+    <button class="btn btn-primary addInstructorFormControl addInstructorBtn" id="btnAddInstructor">Add Topic</button>
+  </div>
+</div>
+
+ 
+ 
+
+ 
+ 
 
 
   <c:if test="${empty data.topics}">
