@@ -46,6 +46,12 @@ Apply to alert to override Bootstrap's default 3d alerts
     text-align: justify;
 }
 
+
+.testing-colour-change
+{
+ color: #d30e0e !important;
+ }
+
 .background-color-white {
     background-color: white;
 }

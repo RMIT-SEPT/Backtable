@@ -17,6 +17,59 @@
  
  
  
+ 
+  <c:if test="${!data.usingAjax}">
+    <tsd:topic topicIdToShow="${data.topicIdToShow}"
+        topicNameToShow="${data.topicNameToShow}"
+        googleId="${data.account.googleId}"
+        sessionToken="${data.sessionToken}"/>
+       <%--  <course:loadCoursesTableByAjaxForm /> --%>
+  </c:if>
+
+
+  <div id="coursesList" class="align-center">
+    <c:if test="${data.usingAjax}">
+      <course:activeCoursesTable activeTopics="${data.activeTopics}"/>
+      <br>
+      <br>
+      <c:if test="${empty data.activeTopics.rows}">
+        No records found. <br>
+        <br>
+      </c:if>
+      <br>
+      <br>
+
+      <c:if test="${not empty data.archivedCourses.rows}">
+        <course:archivedCoursesTable archivedCourses="${data.archivedCourses}"
+            activeCourses="${data.activeCourses}"/>
+        <br>
+        <br>
+        <br>
+        <br>
+      </c:if>
+    </c:if>
+  </div>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  <!-- discussion board table -->
  
  <table class="table-responsive table table-striped table-bordered margin-0">
@@ -80,7 +133,7 @@
   <br>
 
   <div>
-  <input type = "submit" value = "Submit"/>
+  <input  type = "submit" value = "Submit"/>
     <!-- <button class="btn btn-primary addInstructorFormControl addInstructorBtn" id="btnAddInstructor">Add Topic</button> -->
   </div>
 </div>
@@ -88,7 +141,7 @@
  
  
 
- 
+ <input id="btnAddCourse" type="submit" class="btn btn-primary" value="Add Course" tabindex="3">
  
 
 

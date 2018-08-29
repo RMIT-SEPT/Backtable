@@ -1,10 +1,16 @@
 package teammates.logic.core;
 
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
+import teammates.common.datatransfer.attributes.InstructorAttributes;
+import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
+import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
+import teammates.common.util.Assumption;
 import teammates.common.util.Logger;
-import teammates.storage.api.CoursesDb;
 import teammates.storage.api.TopicsDb;
 
 public class TopicsLogic {
@@ -12,7 +18,7 @@ public class TopicsLogic {
 
   private static TopicsLogic instance = new TopicsLogic();
 
-  /* Explanation: This class depends on CoursesDb class but no other *Db classes.
+  /* Explanation: This class depends on TopicsDb class but no other *Db classes.
    * That is because reading/writing entities from/to the datastore is the
    * responsibility of the matching *Logic class.
    * However, this class can talk to other *Logic classes. That is because
@@ -30,13 +36,79 @@ public class TopicsLogic {
       // prevent initialization
   }
 
-  public void createTopic(String id, String desc, String studentName) 
+  public void createTopic(String id, String desc, ZoneId zone) 
       throws InvalidParametersException, EntityAlreadyExistsException
   {
-    TopicAttributes topicToAdd = new TopicAttributes(id, desc, studentName);
+    TopicAttributes topicToAdd = new TopicAttributes(id, desc, zone);
     topicsDb.createEntity(topicToAdd);
     System.out.println("Topic entity has been created...");
   }
+  
+  
+  /**
+   * Returns a list of {@link TopicAttributes} for all topics a given student is enrolled in.
+   *
+   * @param googleId The Google ID of the student
+   */
+  public List<TopicAttributes> getTopicsForStudentAccount(String googleId) throws EntityDoesNotExistException {
+      List<StudentAttributes> studentDataList = studentsLogic.getStudentsForGoogleId(googleId);
+
+      if (studentDataList.isEmpty()) {
+          throw new EntityDoesNotExistException("Student with Google ID " + googleId + " does not exist");
+      }
+
+      List<String> topicIds = new ArrayList<>();
+      for (StudentAttributes s : studentDataList) {
+          topicIds.add(s.topic);
+      }
+      return topicsDb.getTopics(topicIds);
+  }
+
+  
+  
+  
+  
+  public List<TopicAttributes> getTopicsForInstructor(String googleId) {
+      return getTopicsForInstructor(googleId, false);
+  }
+
+  
+  
+  
+  public List<TopicAttributes> getTopicsForInstructor(String googleId, boolean omitArchived) {
+      List<InstructorAttributes> instructorList = instructorsLogic.getInstructorsForGoogleId(googleId, omitArchived);
+      return getTopicsForInstructor(instructorList);
+  }
+
+ 
+  
+  
+  
+  
+  public List<TopicAttributes> getTopicsForInstructor(List<InstructorAttributes> instructorList) {
+      Assumption.assertNotNull("Supplied parameter was null", instructorList);
+      List<String> topicIdList = new ArrayList<>();
+
+      for (InstructorAttributes instructor : instructorList) {
+          topicIdList.add(instructor.topicId);
+      }
+
+      List<TopicAttributes> topicList = topicsDb.getTopics(topicIdList);
+
+      // Check that all topicIds queried returned a topic.
+      if (topicIdList.size() > topicList.size()) {
+          for (TopicAttributes ca : topicList) {
+              topicIdList.remove(ca.getId());
+          }
+          log.severe("Topic(s) was deleted but the instructor still exists: " + System.lineSeparator()
+                  + topicIdList.toString());
+      }
+
+      return topicList;
+  }
+
+  
+  
   
   public static TopicsLogic inst() {
       return instance;
