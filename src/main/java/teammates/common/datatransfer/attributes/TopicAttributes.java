@@ -15,6 +15,7 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public String id;
   public String desc;
   public String studentName;
+  public ZoneId timeZone;
   
   public TopicAttributes(String id, String desc, String studentName) {
     this.id = SanitizationHelper.sanitizeTitle(id);
@@ -22,6 +23,15 @@ public class TopicAttributes extends EntityAttributes<Topic> {
     this.studentName = SanitizationHelper.sanitizeTitle(studentName);
     this.createdAt = Instant.now();
 }
+  
+  public TopicAttributes(String id, String studentName, ZoneId timeZone) {
+      this.id = SanitizationHelper.sanitizeTitle(id);
+      this.timeZone = timeZone;
+      this.studentName = SanitizationHelper.sanitizeTitle(studentName);
+      this.createdAt = Instant.now();
+  }
+  
+  
   
    public String getId() {
      System.out.println("get id has been called = " + id);
@@ -77,3 +87,4 @@ public class TopicAttributes extends EntityAttributes<Topic> {
     
   }
 }
+
