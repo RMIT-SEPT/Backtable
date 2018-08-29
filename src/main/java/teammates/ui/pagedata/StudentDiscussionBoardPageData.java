@@ -60,7 +60,7 @@ public class StudentDiscussionBoardPageData extends PageData {
   }
   
   
-  /*public void init(List<TopicDetailsBundle> topics, StudentAttributes student) {
+  public void init(List<TopicDetailsBundle> topics, StudentAttributes student) {
       this.student = student;
       this.topics = topics;
       
@@ -76,7 +76,7 @@ public class StudentDiscussionBoardPageData extends PageData {
   
   public List<TopicDetailsBundle> getTopics(){
     return this.topics;
-  }*/
+  }
   
   
   

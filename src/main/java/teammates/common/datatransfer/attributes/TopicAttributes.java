@@ -35,6 +35,15 @@ public class TopicAttributes extends EntityAttributes<Topic> implements Comparab
     }
 
     /**
+     * @param courseId
+     * @param name2
+     * @param string
+     */
+    public TopicAttributes(String courseId, String name2, String string) {
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
      * Returns new builder instance with default values for optional fields.
      *
      * <p>Following default values are set to corresponding attributes:

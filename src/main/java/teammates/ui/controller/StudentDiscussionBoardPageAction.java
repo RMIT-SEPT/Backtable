@@ -13,6 +13,7 @@ import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
+import teammates.common.util.Logger;
 import teammates.common.util.SanitizationHelper;
 import teammates.common.util.StatusMessage;
 import teammates.common.util.StatusMessageColor;
@@ -25,9 +26,16 @@ import teammates.ui.pagedata.StudentDiscussionBoardPageData;
  */
 public class StudentDiscussionBoardPageAction extends Action {
     private StudentDiscussionBoardPageData data;
-
+    private static final Logger log = Logger.getLogger();
+    
     @Override
     public ActionResult execute() {
+        
+        account.studentProfile = logic.getStudentProfile(account.googleId);
+        
+        
+        
+        
         String newTopicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, newTopicId);
         String newTopicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
@@ -40,6 +48,7 @@ public class StudentDiscussionBoardPageAction extends Action {
 
         /* Create a new course in the database */
         data = new StudentDiscussionBoardPageData(account, sessionToken);
+        data.createFalseData();
 
         createTopic(newTopicId, newTopicName, newTopicTimeZone);
 
@@ -48,8 +57,11 @@ public class StudentDiscussionBoardPageAction extends Action {
         List<TopicAttributes> activeTopics = new ArrayList<>();
         List<TopicAttributes> archivedTopics = new ArrayList<>();
         
-        return isError ? createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data)
-                : createRedirectResult(Const.ActionURIs.STUDENT_DISCUSSION_BOARD_PAGE);
+        return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
+        
+        
+        
+        
         
     }
 
