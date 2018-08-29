@@ -4,20 +4,10 @@ import teammates.common.util.Const;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import teammates.common.datatransfer.CourseDetailsBundle;
-import teammates.common.datatransfer.TeamDetailsBundle;
 import teammates.common.datatransfer.TopicDetailsBundle;
 import teammates.common.datatransfer.attributes.AccountAttributes;
-import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.CourseAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
@@ -42,13 +32,10 @@ public class StudentDiscussionBoardPageData extends PageData {
   //***********************ATTRIBUTES*************************************//  
     
   public List<TopicDetailsBundle> topics;
-//Flag for deciding if loading the courses table, or the new course form.
-  // if true -> loads the courses table, else load the form
   private boolean isUsingAjax;
   private ActiveTopicsTable activeTopics;
   private String topicIdToShow;
   private String topicNameToShow;
- // private Map<String, InstructorAttributes> instructorsForCourses;
   
   
   
@@ -64,9 +51,9 @@ public class StudentDiscussionBoardPageData extends PageData {
       this.student = student;
       this.topics = topics;
       
-      //studentCourseDetailsPanel = createStudentCourseDetailsPanel(
-      //               courseDetails, instructors, student, team);
 }
+  
+  
   public void createFalseData() {
     this.topics = new ArrayList<TopicDetailsBundle>();
     this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the id", "this is a test topic desc", "Luke Sewart")));
@@ -78,13 +65,8 @@ public class StudentDiscussionBoardPageData extends PageData {
     return this.topics;
   }
   
-  
-  
-  
-  
-  
       public void init(List<TopicAttributes> activeTopicsParam) {
-          init(activeTopicsParam);
+          init(activeTopicsParam, "", "");
       }
 
       public void init(List<TopicAttributes> activeTopicsParam, String topicIdToShowParam, String topicNameToShowParam) {

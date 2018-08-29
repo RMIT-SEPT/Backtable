@@ -24,8 +24,7 @@ import teammates.ui.pagedata.StudentDiscussionBoardPageData;
 /**
  * Action: adding a course for an instructor.
  */
-public class StudentDiscussionBoardPageAction extends Action {
-    private StudentDiscussionBoardPageData data;
+public class StudentDiscussionBoardPageAction extends Action { 
     private static final Logger log = Logger.getLogger();
     
     @Override
@@ -33,96 +32,47 @@ public class StudentDiscussionBoardPageAction extends Action {
         
         account.studentProfile = logic.getStudentProfile(account.googleId);
         
-        
-        
-        
-        String newTopicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
+       /*String newTopicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, newTopicId);
         String newTopicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, newTopicName);
         String newTopicTimeZone = getRequestParamValue(Const.ParamsNames.TOPIC_TIME_ZONE);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_TIME_ZONE, newTopicTimeZone);
+        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_TIME_ZONE, newTopicTimeZone);*/
 
         /* Check if user has the right to execute the action */
       //  gateKeeper.verifyInstructorPrivileges(account);
 
         /* Create a new course in the database */
-        data = new StudentDiscussionBoardPageData(account, sessionToken);
+        StudentDiscussionBoardPageData data = new StudentDiscussionBoardPageData(account, sessionToken);
         data.createFalseData();
 
-        createTopic(newTopicId, newTopicName, newTopicTimeZone);
-
-        /* Prepare data for the refreshed page after executing the adding action */
-        Map<String, StudentAttributes> studentTopics = new HashMap<>();
-        List<TopicAttributes> activeTopics = new ArrayList<>();
-        List<TopicAttributes> archivedTopics = new ArrayList<>();
+        
+       // createTopic(newTopicId, newTopicName, newTopicTimeZone);
+        
+        //Map<String, StudentAttributes> studentTopics = new HashMap<>();
+        //List<TopicAttributes> activeTopics = new ArrayList<>();
+        //List<TopicAttributes> archivedTopics = new ArrayList<>();
+        
+        String topicIdToShowParam = "";
+        String topicNameToShowParam = "";
+        
+        //data.init(activeTopics, topicIdToShowParam, topicNameToShowParam);
+        
+        System.out.println("made it this far");
         
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
         
         
-        
-        
-        
     }
 
-        // Get list of InstructorAttributes that belong to the user.
-      /* List<StudentAttributes> studentList = logic.getStudentsForGoogleId(data.account.googleId);
-        for (StudentAttributes student : studentList) {
-            studentTopics.put(student.topicId, student);
-        }*/
+      
 
-        // Get corresponding courses of the instructors.
-       // List<TopicAttributes> alltopics = logic.getCoursesForInstructor(instructorList);
 
-        
-        
-       // List<String> archivedCourseIds = logic.getArchivedCourseIds(allCourses, instructorsForCourses);
-       /* for (CourseAttributes course : allCourses) {
-            if (archivedCourseIds.contains(course.getId())) {
-                archivedCourses.add(course);
-            } else {
-                activeCourses.add(course);
-            }
-        }
-
-        // Sort CourseDetailsBundle lists by course id
-        CourseAttributes.sortById(activeCourses);
-        CourseAttributes.sortById(archivedCourses);
-
-        String courseIdToShowParam = "";
-        String courseNameToShowParam = "";*/
-
-      /*  if (isError) { // there is error in adding the course
-            courseIdToShowParam = SanitizationHelper.sanitizeForHtml(newCourseId);
-            courseNameToShowParam = SanitizationHelper.sanitizeForHtml(newCourseName);
-
-            List<String> statusMessageTexts = new ArrayList<>();
-
-            for (StatusMessage msg : statusToUser) {
-                statusMessageTexts.add(msg.getText());
-            }
-
-            statusToAdmin = StringHelper.toString(statusMessageTexts, "<br>");
-        } else {
-            statusToAdmin = "Course added : " + newCourseId;
-            statusToAdmin += "<br>Total courses: " + allCourses.size();
-        }
-
-        data.init(activeCourses, archivedCourses, instructorsForCourses, courseIdToShowParam, courseNameToShowParam);
-
-        return isError ? createShowPageResult(Const.ViewURIs.INSTRUCTOR_COURSES, data)
-                : createRedirectResult(Const.ActionURIs.INSTRUCTOR_COURSES_PAGE);
-    }*/
-
+       
+    
     private void createTopic(String newTopicId, String newTopicName, String newCourseTimeZone) {
         try {
-            logic.createCourseAndInstructor(data.account.googleId, newTopicId, newTopicName, newCourseTimeZone);
-            String statusMessage = Const.StatusMessages.COURSE_ADDED.replace("${courseEnrollLink}",
-                    data.getInstructorCourseEnrollLink(newTopicId)).replace("${courseEditLink}",
-                    data.getInstructorCourseEditLink(newTopicId));
-            statusToUser.add(new StatusMessage(statusMessage, StatusMessageColor.SUCCESS));
-            isError = false;
-
+            logic.createCourseAndInstructor(account.googleId, newTopicId, newTopicName, newCourseTimeZone);
         } catch (EntityAlreadyExistsException e) {
             setStatusForException(e, Const.StatusMessages.COURSE_EXISTS);
         } catch (InvalidParametersException e) {

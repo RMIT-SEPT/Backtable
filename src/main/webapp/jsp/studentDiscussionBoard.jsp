@@ -18,12 +18,12 @@
  
  
  
-  <c:if test="${!data.usingAjax}">
+  <%-- <c:if test="${!data.usingAjax}">
     <tsd:topic topicIdToShow="${data.topicIdToShow}"
         topicNameToShow="${data.topicNameToShow}"
         googleId="${data.account.googleId}"
         sessionToken="${data.sessionToken}"/>
-       <%--  <course:loadCoursesTableByAjaxForm /> --%>
+        <course:loadCoursesTableByAjaxForm />
   </c:if>
 
 
@@ -49,22 +49,10 @@
       </c:if>
     </c:if>
   </div>
+ --%>
+ 
+ 
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
  

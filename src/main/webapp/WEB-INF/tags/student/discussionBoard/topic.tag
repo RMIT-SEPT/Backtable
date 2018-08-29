@@ -4,12 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ attribute name="topic" type="teammates.common.datatransfer.attributes.TopicAttributes" required="true" %>
 <%@ tag import="teammates.common.util.Const" %>
-<%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
+<%-- <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ attribute name="googleId" required="true" %>
 <%@ attribute name="topicIdToShow" required="true" %>
 <%@ attribute name="topicNameToShow" required="true" %>
 <%@ attribute name="sessionToken" required="true" %>
-
+ --%>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -22,7 +22,7 @@
 
 
 
-<div class="panel panel-primary">
+<%-- <div class="panel panel-primary">
   <div class="panel-body fill-plain">
     <form method="get" action="<%=Const.ActionURIs.DISCUSSION_TOPIC_ADD%>" name="discussion_topic_add" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
@@ -59,3 +59,4 @@
     </form>
   </div>
 </div>
+ --%>
