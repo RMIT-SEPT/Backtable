@@ -81,6 +81,7 @@ public class FieldValidator {
      */
     public static final String COURSE_ID_FIELD_NAME = "course ID";
     public static final int COURSE_ID_MAX_LENGTH = 40;
+    public static final int TOPIC_DESC_MAX_LENGTH = 40;
 
     public static final String SESSION_START_TIME_FIELD_NAME = "start time";
     public static final String SESSION_END_TIME_FIELD_NAME = "end time";

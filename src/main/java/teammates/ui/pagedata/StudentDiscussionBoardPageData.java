@@ -2,6 +2,7 @@ package teammates.ui.pagedata;
 
 import teammates.common.util.Const;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import teammates.common.datatransfer.TopicDetailsBundle;
@@ -34,8 +35,9 @@ public class StudentDiscussionBoardPageData extends PageData {
   public List<TopicDetailsBundle> topics;
   private boolean isUsingAjax;
   private ActiveTopicsTable activeTopics;
-  private String topicIdToShow;
   private String topicNameToShow;
+  private String topicDescToShow;
+  //private TopicDetailsBundle t1 = new TopicDetailsBundle(new TopicAttributes());
   
   
   
@@ -54,10 +56,13 @@ public class StudentDiscussionBoardPageData extends PageData {
 }
   
   
+  
+  
   public void createFalseData() {
     this.topics = new ArrayList<TopicDetailsBundle>();
-    this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the id", "this is a test topic desc", "Luke Sewart")));
-    this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the id2", "this is a test topic desc2", "Luke Sewart2")));
+    this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the name", "this is a test topic desc")));
+    this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the name2", "this is a test topic desc2")));
+    
     System.out.println("This is printing");
   }
   
@@ -69,10 +74,10 @@ public class StudentDiscussionBoardPageData extends PageData {
           init(activeTopicsParam, "", "");
       }
 
-      public void init(List<TopicAttributes> activeTopicsParam, String topicIdToShowParam, String topicNameToShowParam) {
+      public void init(List<TopicAttributes> activeTopicsParam, String topicNameToShowParam, String topicDescToShowParam) {
           this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
-          this.topicIdToShow = topicIdToShowParam;
           this.topicNameToShow = topicNameToShowParam;
+          this.topicDescToShow = topicDescToShowParam;
       }
 
       public void setUsingAjax(boolean isUsingAjax) {
@@ -83,8 +88,8 @@ public class StudentDiscussionBoardPageData extends PageData {
           return this.isUsingAjax;
       }
 
-      public String getTopicIdToShow() {
-          return topicIdToShow;
+      public String getTopicDescToShow() {
+          return topicDescToShow;
       }
 
       public String getTopicNameToShow() {
@@ -113,7 +118,7 @@ public class StudentDiscussionBoardPageData extends PageData {
                                                      Const.Tooltips.COURSE_ENROLL, !hasModifyPermission);
 */
               ElementTag viewButton = createButton("View", "btn btn-default btn-xs t_course_view" + idx, "",
-                                                   getDiscussionBoardDetailsLink(topic.getId()),
+                                                   getDiscussionBoardDetailsLink(topic.getName()),
                                                    Const.Tooltips.TOPIC_DETAILS, false);
 
               /*ElementTag editButton = createButton("Edit", "btn btn-default btn-xs t_course_edit" + idx, "",
@@ -138,12 +143,12 @@ public class StudentDiscussionBoardPageData extends PageData {
               //actionsParam.add(archiveButton);
               //actionsParam.add(deleteButton);
 
-              ActiveTopicsTableRow row = new ActiveTopicsTableRow(SanitizationHelper.sanitizeForHtml(topic.getId()),
-                                                                    SanitizationHelper.sanitizeForHtml(topic.getName()),
-                                                                    topic.getCreatedAtDateString(),
+              ActiveTopicsTableRow row = new ActiveTopicsTableRow(SanitizationHelper.sanitizeForHtml(topic.getName()),
+                                                                    SanitizationHelper.sanitizeForHtml(topic.getDesc()),
+                                                                    
                                                                     topic.getCreatedAtDateStamp(),
-                                                                    topic.getCreatedAtFullDateTimeString(),
-                                                                    this.getDiscussionBoardDetailsLink(topic.getId()),
+                                                                    
+                                                                    this.getDiscussionBoardDetailsLink(topic.getName()),
                                                                     actionsParam);
               activeTopics.getRows().add(row);
           }

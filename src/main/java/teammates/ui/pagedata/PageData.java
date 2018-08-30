@@ -298,9 +298,9 @@ public class PageData {
         return link;
     }
     
-    public String getDiscussionBoardDetailsLink(String topicId) {
+    public String getDiscussionBoardDetailsLink(String topicName) {
         String link = Const.ActionURIs.STUDENT_REPLIES_BOARD_PAGE;
-        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
         link = addUserIdToUrl(link);
         return link;
     }

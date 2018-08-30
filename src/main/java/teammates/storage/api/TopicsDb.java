@@ -72,14 +72,13 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
               throw new InvalidParametersException(topicToUpdate.getInvalidityInfo());
           }
 
-          Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getId());
+          Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getName());
 
           if (topicEntityToUpdate == null) {
               throw new EntityDoesNotExistException(ERROR_UPDATE_NON_EXISTENT_TOPIC);
           }
 
-          topicEntityToUpdate.setName(topicToUpdate.getName());
-          topicEntityToUpdate.setTimeZone(topicToUpdate.getTimeZone().getId());
+         
 
           saveEntity(topicEntityToUpdate, topicToUpdate);
       }
@@ -90,20 +89,13 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
        * <br> Preconditions:
        * <br> * {@code topicId} is not null.
        */
-      public void deleteTopic(String topicId) {
-          Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicId);
-
-          // only the topicId is important here, everything else are placeholders
-          deleteEntity(TopicAttributes
-                  .builder(topicId, "Non-existent topic", Const.DEFAULT_TIME_ZONE)
-                  .build());
-      }
+   
 
      
 
       @Override
       protected Topic getEntity(TopicAttributes attributes) {
-          return getTopicEntity(attributes.getId());
+          return getTopicEntity(attributes.getName());
       }
 
 
@@ -123,23 +115,14 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       @Override
       protected TopicAttributes makeAttributes(Topic entity) {
           Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
-
-          ZoneId topicTimeZone;
-          try {
-              topicTimeZone = ZoneId.of(entity.getTimeZone());
-          } catch (DateTimeException e) {
-              log.severe("Timezone '" + entity.getTimeZone() + "' of topic'" + entity.getUniqueId()
-                      + "' is not supported. UTC will be used instead.");
-              topicTimeZone = Const.DEFAULT_TIME_ZONE;
-          }
-          return TopicAttributes.builder(entity.getUniqueId(), entity.getName(), topicTimeZone)
+        
+          return TopicAttributes.builder(entity.getName(), entity.getName())
                   .withCreatedAt(entity.getCreatedAt()).build();
       }
-
     
       @Override
       protected QueryKeys<Topic> getEntityQueryKeys(TopicAttributes attributes) {
-          Key<Topic> keyToFind = Key.create(Topic.class, attributes.getId());
+          Key<Topic> keyToFind = Key.create(Topic.class, attributes.getName());
           return load().filterKey(keyToFind).keys();
       }
       

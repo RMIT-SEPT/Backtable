@@ -622,9 +622,9 @@ public final class Const {
 
     public static class ParamsNames {
 
-        public static final String TOPIC_ID = "topicid";
+        public static final String TOPIC_DESC = "topicdesc";
         public static final String TOPIC_NAME = "topicname";
-        public static final String TOPIC_TIME_ZONE = "topictimezone";
+       
 
         public static final String IS_USING_AJAX = "isusingAjax";
         public static final String IS_STUDENT_REJOINING = "isstudentrejoining";
@@ -1087,8 +1087,6 @@ public final class Const {
         
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
         public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";    
-       // public static final String DISCUSSION_TOPIC_ADD = "/page/discussionTopicAdd";
-       
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
         
 

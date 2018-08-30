@@ -36,10 +36,10 @@ public class TopicsLogic {
       // prevent initialization
   }
 
-  public void createTopic(String id, String desc, ZoneId zone) 
+  public void createTopic(String id, String desc) 
       throws InvalidParametersException, EntityAlreadyExistsException
   {
-    TopicAttributes topicToAdd = new TopicAttributes(id, desc, zone);
+    TopicAttributes topicToAdd = new TopicAttributes(id, desc);
     topicsDb.createEntity(topicToAdd);
     System.out.println("Topic entity has been created...");
   }
@@ -98,7 +98,7 @@ public class TopicsLogic {
       // Check that all topicIds queried returned a topic.
       if (topicIdList.size() > topicList.size()) {
           for (TopicAttributes ca : topicList) {
-              topicIdList.remove(ca.getId());
+              topicIdList.remove(ca.getName());
           }
           log.severe("Topic(s) was deleted but the instructor still exists: " + System.lineSeparator()
                   + topicIdList.toString());

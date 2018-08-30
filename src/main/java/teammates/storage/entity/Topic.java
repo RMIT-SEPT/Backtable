@@ -17,29 +17,17 @@ import teammates.common.util.TimeHelper;
 @Index
 public class Topic extends BaseEntity {
 
-    @Id
-    private String id;
-
     private String name;
-
-    // TODO: change to `java.time.Instant` once we have upgraded to Objectify 6
+    private String desc;
     private Date createdAt;
+    
 
-    private String timeZone;
+   
 
-    @SuppressWarnings("unused")
-    private Topic() {
-        // required by Objectify
-    }
-
-    public Topic(String topicId, String topicName, String topicTimeZone, Instant createdAt) {
-        this.setUniqueId(topicId);
-        this.setName(topicName);
-        if (topicTimeZone == null) {
-            this.setTimeZone(Const.DEFAULT_TIME_ZONE.getId());
-        } else {
-            this.setTimeZone(topicTimeZone);
-        }
+    public Topic(String name, String desc, Instant createdAt) {
+       // this.setUniqueId(topic);
+        this.setName(name);
+        this.setDesc(desc);
         if (createdAt == null) {
             this.setCreatedAt(Instant.now());
         } else {
@@ -47,14 +35,25 @@ public class Topic extends BaseEntity {
         }
     }
 
-    public String getUniqueId() {
+   
+    private void setDesc(String desc) {
+        this.desc = desc;
+        
+    }
+
+    
+    private String getDesc() 
+    {
+        return desc;
+    }
+    /*public String getUniqueId() {
         return id;
     }
 
     public void setUniqueId(String uniqueId) {
         this.id = uniqueId.trim();
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -71,11 +70,5 @@ public class Topic extends BaseEntity {
         this.createdAt = TimeHelper.convertInstantToDate(createdAt);
     }
 
-    public String getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
-    }
+   
 }

@@ -32,13 +32,13 @@ public class StudentDiscussionBoardPageAction extends Action {
         
         account.studentProfile = logic.getStudentProfile(account.googleId);
         
-       /*String newTopicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
+        /*String newTopicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, newTopicId);
         String newTopicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, newTopicName);
         String newTopicTimeZone = getRequestParamValue(Const.ParamsNames.TOPIC_TIME_ZONE);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_TIME_ZONE, newTopicTimeZone);*/
-
+        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_TIME_ZONE, newTopicTimeZone);
+*/
         /* Check if user has the right to execute the action */
       //  gateKeeper.verifyInstructorPrivileges(account);
 
@@ -47,14 +47,14 @@ public class StudentDiscussionBoardPageAction extends Action {
         data.createFalseData();
 
         
-       // createTopic(newTopicId, newTopicName, newTopicTimeZone);
+      // createTopic(newTopicId, newTopicName, newTopicTimeZone);
         
         //Map<String, StudentAttributes> studentTopics = new HashMap<>();
-        //List<TopicAttributes> activeTopics = new ArrayList<>();
+           // List<TopicAttributes> activeTopics = new ArrayList<>();
         //List<TopicAttributes> archivedTopics = new ArrayList<>();
         
-        String topicIdToShowParam = "";
-        String topicNameToShowParam = "";
+        /*String topicIdToShowParam = "";
+        String topicNameToShowParam = "";*/
         
         //data.init(activeTopics, topicIdToShowParam, topicNameToShowParam);
         
