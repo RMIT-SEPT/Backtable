@@ -10,10 +10,10 @@
 </c:set>
 <ts:studentPage title="Discussion Board" jsIncludes="${jsIncludes}">
 
- <c:forEach items="${data.topics}" var= "details">
+ <%-- <c:forEach items="${data.topics}" var= "details">
     <tsd:topic topic="${details.topic}">
     </tsd:topic>
- </c:forEach>
+ </c:forEach> --%>
  
  <!-- discussion board table -->
  
@@ -25,7 +25,6 @@
           <th>Topic Name</th>
           <th>Topic Description</th>
           <th>Created At</th>
-          <th>Time Zone</th>
         </tr>
       </thead>
       <c:forEach items="${data.topics}" var="details">
