@@ -40,6 +40,8 @@ public class InstructorAttributes extends EntityAttributes<Instructor> {
     public boolean isDisplayedToStudents;
     public InstructorPrivileges privileges;
 
+    public String topicId;
+
     /**
      * Return new builder instance with default values for optional fields.
      *
