@@ -3,13 +3,18 @@ package teammates.logic.core;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+
+import teammates.common.datatransfer.InstructorPrivileges;
+import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
+import teammates.common.exception.TeammatesException;
 import teammates.common.util.Assumption;
+import teammates.common.util.Const;
 import teammates.common.util.Logger;
 import teammates.storage.api.TopicsDb;
 
@@ -113,5 +118,29 @@ public class TopicsLogic {
   public static TopicsLogic inst() {
       return instance;
   }
+  
+  
+  
+  
+  public void createTopicForDiscussionBoard(String googleId, String topicName, String topicDesc)          
+          throws InvalidParametersException, EntityAlreadyExistsException {
+
+AccountAttributes topicCreator = accountsLogic.getAccount(googleId);
+Assumption.assertNotNull("Trying to create a course for a non-existent account :" + googleId,
+ topicCreator);
+
+createTopic(topicName, topicDesc);
+
+/* Create the initial instructor for the course */
+
+//AccountAttributes account = AccountAttributes.builder().build();
+
+}
+
+  
+  
+  
+  
+  
 
 }

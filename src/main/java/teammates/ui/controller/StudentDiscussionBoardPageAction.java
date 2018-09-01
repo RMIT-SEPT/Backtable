@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import teammates.common.datatransfer.attributes.CourseAttributes;
-import teammates.common.datatransfer.attributes.InstructorAttributes;
-import teammates.common.datatransfer.attributes.StudentAttributes;
-import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
@@ -26,28 +21,29 @@ import teammates.ui.pagedata.StudentDiscussionBoardPageData;
  */
 public class StudentDiscussionBoardPageAction extends Action { 
     private static final Logger log = Logger.getLogger();
+    StudentDiscussionBoardPageData data;
     
     @Override
     public ActionResult execute() {
         
         account.studentProfile = logic.getStudentProfile(account.googleId);
         
-        /*String newTopicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, newTopicId);
+        /*System.out.println("made it to new topic name");
         String newTopicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, newTopicName);
-        String newTopicTimeZone = getRequestParamValue(Const.ParamsNames.TOPIC_TIME_ZONE);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_TIME_ZONE, newTopicTimeZone);
-*/
+        String newTopicDesc = getRequestParamValue(Const.ParamsNames.TOPIC_DESC);
+        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_DESC, newTopicDesc);*/
+        
+
         /* Check if user has the right to execute the action */
       //  gateKeeper.verifyInstructorPrivileges(account);
 
         /* Create a new course in the database */
-        StudentDiscussionBoardPageData data = new StudentDiscussionBoardPageData(account, sessionToken);
+        data = new StudentDiscussionBoardPageData(account, sessionToken);
         data.createFalseData();
 
-        
-      // createTopic(newTopicId, newTopicName, newTopicTimeZone);
+        System.out.println("made it to create topic");
+        //createTopic(newTopicName, newTopicDesc);
         
         //Map<String, StudentAttributes> studentTopics = new HashMap<>();
            // List<TopicAttributes> activeTopics = new ArrayList<>();
@@ -58,21 +54,20 @@ public class StudentDiscussionBoardPageAction extends Action {
         
         //data.init(activeTopics, topicIdToShowParam, topicNameToShowParam);
         
-        System.out.println("made it this far");
+        System.out.println("made it to view discussion board uri");
         
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
         
         
+        
     }
 
-      
-
-
-       
     
-    private void createTopic(String newTopicId, String newTopicName, String newCourseTimeZone) {
+    private void createTopic(String newTopicName, String newTopicDesc) {
         try {
-            logic.createCourseAndInstructor(account.googleId, newTopicId, newTopicName, newCourseTimeZone);
+            logic.createDiscussionBoardTopic(data.account.googleId, newTopicName, newTopicDesc);
+            statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
+            isError = false;
         } catch (EntityAlreadyExistsException e) {
             setStatusForException(e, Const.StatusMessages.COURSE_EXISTS);
         } catch (InvalidParametersException e) {
