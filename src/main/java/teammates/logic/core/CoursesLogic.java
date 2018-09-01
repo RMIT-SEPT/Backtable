@@ -73,6 +73,8 @@ public final class CoursesLogic {
         coursesDb.createEntity(courseToAdd);
     }
 
+    
+    
     /**
      * Creates a Course object and an Instructor object for the Course.
      */

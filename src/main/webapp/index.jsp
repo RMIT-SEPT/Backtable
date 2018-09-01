@@ -9,7 +9,8 @@
   <div id="browserMessage" style="display: none;"></div>
   <br>
   <main>
-    <h1 class="h2 color-orange text-center">
+   <%--  <h1 class="h2 color-orange text-center"> --%>
+   <h1 class= "testing-colour-change"> 
       Student peer evaluations/feedback, shareable instructor comments, and more...
     </h1>
     <div class="row">

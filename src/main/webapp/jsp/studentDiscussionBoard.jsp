@@ -10,12 +10,10 @@
 </c:set>
 <ts:studentPage title="Discussion Board" jsIncludes="${jsIncludes}">
 
- <c:forEach items="${data.topics}" var= "details">
+ <%-- <c:forEach items="${data.topics}" var= "details">
     <tsd:topic topic="${details.topic}">
     </tsd:topic>
- </c:forEach>
- 
- 
+ </c:forEach> --%>
  
  <!-- discussion board table -->
  
@@ -24,20 +22,17 @@
     <c:when test="${not empty data.topics}">
       <thead>
         <tr>
-          <th>Topic ID</th>
           <th>Topic Name</th>
           <th>Topic Description</th>
-          <th class="button_sortenddate button-sort-none toggle-sort"
-              data-toggle-sort-comparator="sortDate"
-              data-toggle-sort-extractor="dateStampExtractor">Date<span class="icon-sort unsorted"></span></th>
+          <th>Created At</th>
         </tr>
       </thead>
       <c:forEach items="${data.topics}" var="details">
         <tr class="home_evaluations_row" id="evaluation">
-          <td>${details.topic.id}</td>
           <td>${details.topic.name}</td>
           <td>${details.topic.desc}</td> 
-          <td data-date-stamp="${sessionRow.endTimeIso8601Utc}">${sessionRow.endTime}</td>
+          
+          
         </tr>
       </c:forEach>
     </c:when>
@@ -56,38 +51,8 @@
  
  
  
-<!-- form to create new topic -->
- 
- <div class="well well-plain">
-  <div>
-    <label class="label-control">Add New Topic</label>
-  </div>
-  <br>
-  <div>
-    <label class="label-control">Topic ID:</label>
-    <input class="form-control" type="text" name="topicId" id="topicId" value="${topic.id}">
-  </div>
-  <br>
-  <div>
-    <label class="label-control">Topic Name: </label>
-    <input class="form-control" type="text" name="topicName" id="topicName" value="${topic.name}">
-  </div>
-  <br>
-  <div>
-    <label class="label-control">Topic Description: </label>
-    <input class="form-control" type="text" name="topicDesc" id="topicDesc" value="${topic.desc}">
-  </div>
-  <br>
-
-  <div>
-  <input type = "submit" value = "Submit"/>
-    <!-- <button class="btn btn-primary addInstructorFormControl addInstructorBtn" id="btnAddInstructor">Add Topic</button> -->
-  </div>
-</div>
 
  
- 
-
  
  
 
@@ -97,6 +62,49 @@
       There are currently no responses for you for this feedback session.
     </div>
   </c:if>
+  
+  
+  
+  
+  
+  
+   
+  <c:if test="${!data.usingAjax}">
+    <tsd:addTopicForm topicNameToShow="${data.topicNameToShow}"
+        topicDescToShow="${data.topicDescToShow}"
+        googleId="${data.account.googleId}"
+        sessionToken="${data.sessionToken}"/>
+        <course:loadCoursesTableByAjaxForm />
+  </c:if>   
+
+
+  <%-- <div id="coursesList" class="align-center">
+    <c:if test="${data.usingAjax}">
+      <course:activeCoursesTable activeTopics="${data.activeTopics}"/>
+      <br>
+      <br>
+      <c:if test="${empty data.activeTopics.rows}">
+        No records found. <br>
+        <br>
+      </c:if>
+      <br>
+      <br>
+
+      <c:if test="${not empty data.archivedCourses.rows}">
+        <course:archivedCoursesTable archivedCourses="${data.archivedCourses}"
+            activeCourses="${data.activeCourses}"/>
+        <br>
+        <br>
+        <br>
+        <br>
+      </c:if>
+    </c:if>
+  </div> --%>
+  
+  
+  
+  
+  
   
   
   

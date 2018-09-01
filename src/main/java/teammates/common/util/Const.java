@@ -223,6 +223,8 @@ public final class Const {
 
         public static final String COURSE_ENROLL = "Enroll student into the course";
         public static final String COURSE_DETAILS = "View, edit and send invitation emails to the students in the course";
+        public static final String TOPIC_DETAILS = "View Discussion Board Topics";
+
         public static final String COURSE_EDIT = "Edit Course information and instructor list";
         public static final String COURSE_DELETE = "Delete the course and its corresponding students and sessions";
         public static final String COURSE_ARCHIVE =
@@ -442,6 +444,9 @@ public final class Const {
         public static final String SEARCH_STUDENT = "Search for student's information, e.g. name, email";
 
         public static final String ACTION_NOT_ALLOWED = "You do not have the permissions to access this feature";
+        
+        
+        
     }
 
     public static class FeedbackQuestion {
@@ -616,6 +621,10 @@ public final class Const {
     }
 
     public static class ParamsNames {
+
+        public static final String TOPIC_DESC = "topicdesc";
+        public static final String TOPIC_NAME = "topicname";
+       
 
         public static final String IS_USING_AJAX = "isusingAjax";
         public static final String IS_STUDENT_REJOINING = "isstudentrejoining";
@@ -1073,8 +1082,13 @@ public final class Const {
 
         public static final String BACKDOOR = "/backdoor";
 
+       
+        
+        
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
-        public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";
+        public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";    
+        public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
+        
 
     }
 

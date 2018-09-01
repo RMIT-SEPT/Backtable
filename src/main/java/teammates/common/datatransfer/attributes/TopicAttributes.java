@@ -1,39 +1,50 @@
 package teammates.common.datatransfer.attributes;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
+import teammates.common.datatransfer.attributes.CourseAttributes.Builder;
+import teammates.common.util.Assumption;
 import teammates.common.util.JsonUtils;
 import teammates.common.util.SanitizationHelper;
+import teammates.common.util.TimeHelper;
 import teammates.storage.entity.Course;
 import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
   
-  public Instant createdAt;
-  public String id;
+  public String name;
   public String desc;
-  public String studentName;
+ 
+  public Instant createdAt;
   
-  public TopicAttributes(String id, String desc, String studentName) {
-    this.id = SanitizationHelper.sanitizeTitle(id);
-    this.desc = SanitizationHelper.sanitizeTitle(desc);
-    this.studentName = SanitizationHelper.sanitizeTitle(studentName);
-    this.createdAt = Instant.now();
-}
+  public TopicAttributes(String name, String desc) {
+      this.name = SanitizationHelper.sanitizeTitle(name);
+      this.desc = SanitizationHelper.sanitizeTitle(desc);
+      this.createdAt = Instant.now();
+  }
   
-   public String getId() {
-     System.out.println("get id has been called = " + id);
-     return id;
-   }
+ 
+
+
+public static Builder builder(String name, String desc) {
+      return new Builder(name, desc);
+  }
+  
+  
+  
+   public String getName() {
+      return name;
+    }
+  
+   
    public String getDesc() {
      return desc;
    }
-   public String getName() {
-     return studentName;
- }
    
+ 
 
   @Override
   public List<String> getInvalidityInfo() {
@@ -43,8 +54,7 @@ public class TopicAttributes extends EntityAttributes<Topic> {
 
   @Override
   public Topic toEntity() {
-    // TODO Auto-generated method stub
-    return new Topic(getId(), getDesc(), getName(), createdAt);
+      return new Topic(getName(), getDesc(), createdAt);
   }
 
   @Override
@@ -76,4 +86,50 @@ public class TopicAttributes extends EntityAttributes<Topic> {
     // TODO Auto-generated method stub
     
   }
+  
+
+  public String getCreatedAtDateStamp() {
+      return TimeHelper.formatDateTimeToIso8601Utc(createdAt);
+  }
+  
+  
+
+  
+  
+  
+
+public static class Builder {
+    private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
+    private final TopicAttributes topicAttributes;
+
+    public Builder(String name, String desc) {
+        validateRequiredFields(name, desc);
+        topicAttributes = new TopicAttributes(name, desc);
+    }
+
+    public Builder withCreatedAt(Instant createdAt) {
+        if (createdAt != null) {
+            topicAttributes.createdAt = createdAt;
+        }
+
+        return this;
+    }
+    
+    
+
+    public TopicAttributes build() {
+        return topicAttributes;
+    }
+
+    private void validateRequiredFields(Object... objects) {
+        for (Object object : objects) {
+            Assumption.assertNotNull(REQUIRED_FIELD_CANNOT_BE_NULL, object);
+        }
+    }    
 }
+
+
+
+
+}
+

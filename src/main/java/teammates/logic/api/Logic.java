@@ -50,6 +50,7 @@ import teammates.logic.core.FeedbackSessionsLogic;
 import teammates.logic.core.InstructorsLogic;
 import teammates.logic.core.ProfilesLogic;
 import teammates.logic.core.StudentsLogic;
+import teammates.logic.core.TopicsLogic;
 
 /**
  * Provides the business logic for production usage of the system.
@@ -62,6 +63,7 @@ public class Logic {
     protected static final StudentsLogic studentsLogic = StudentsLogic.inst();
     protected static final InstructorsLogic instructorsLogic = InstructorsLogic.inst();
     protected static final CoursesLogic coursesLogic = CoursesLogic.inst();
+    protected static final TopicsLogic topicsLogic = TopicsLogic.inst();
     protected static final FeedbackSessionsLogic feedbackSessionsLogic = FeedbackSessionsLogic.inst();
     protected static final FeedbackQuestionsLogic feedbackQuestionsLogic = FeedbackQuestionsLogic.inst();
     protected static final FeedbackResponsesLogic feedbackResponsesLogic = FeedbackResponsesLogic.inst();
@@ -2198,5 +2200,18 @@ public class Logic {
         Assumption.assertNotNull(teamName);
         return studentsLogic.getSectionForTeam(courseId, teamName);
     }
+
+    
+    public void createDiscussionBoardTopic(String googleId, String newTopicName, String newTopicDesc) 
+            throws EntityAlreadyExistsException, InvalidParametersException{
+        Assumption.assertNotNull(googleId);
+        Assumption.assertNotNull(newTopicName);
+        Assumption.assertNotNull(newTopicDesc);
+        
+       topicsLogic.createTopicForDiscussionBoard(googleId, newTopicName, newTopicDesc);
+
+        
+    }
+    
 
 }

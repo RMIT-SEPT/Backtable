@@ -30,6 +30,8 @@ public class StudentAttributes extends EntityAttributes<CourseStudent> {
     public String team;
     public String section;
     public String key;
+    public String topicId;
+    public String topic;
 
     public transient StudentUpdateStatus updateStatus;
 
@@ -39,6 +41,8 @@ public class StudentAttributes extends EntityAttributes<CourseStudent> {
      */
     private transient Instant createdAt;
     private transient Instant updatedAt;
+   
+   
 
     StudentAttributes() {
         googleId = "";
