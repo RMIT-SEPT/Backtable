@@ -19,7 +19,7 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
     return studentName;
   }
   
-  RepliesAttributes(String desc, String studentName)
+  public RepliesAttributes(String desc, String studentName)
   {
     this.desc = desc;
     this.studentName = studentName;

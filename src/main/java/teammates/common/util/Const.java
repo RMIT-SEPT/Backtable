@@ -1244,6 +1244,7 @@ public final class Const {
 
         public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/jsp/studentDiscussionBoard.jsp";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/jsp/instructorDiscussionBoard.jsp";
+        public static final String STUDENT_REPLIES_BOARD_PAGE="/jsp/studentRepliesBoard.jsp";
     }
 
     /* These are status messages that may be shown to the user */
