@@ -34,9 +34,10 @@ public class StudentDiscussionBoardPageUiTest extends BaseUiTestCase {
   private void testContent() throws Exception {
     // assumes it is run after NavLinks Test
     // (ie already logged in as studentWithEmptyProfile
-
     //  ______TS("Typical case: empty profile values");
-    // Test doesn't run due to java.lang.RuntimeException: org.w3c.dom.DOMException: NAMESPACE_ERR: An attempt is made to create or change an object in a way which is incorrect with regard to namespaces.
+    // Test doesn't run due to java.lang.RuntimeException: org.w3c.dom.DOMException:
+    // NAMESPACE_ERR: An attempt is made to create or change an object in a way which
+    // is incorrect with regard to namespaces.
     // discussionBoardPage.verifyHtml("/studentDiscussionBoardPageDefault.html");
 
     // Test the discussion board test data content
@@ -60,5 +61,4 @@ public class StudentDiscussionBoardPageUiTest extends BaseUiTestCase {
                                  .withUserId(testData.accounts.get(studentId).googleId);
       return loginAdminToPage(profileUrl, StudentDiscussionBoardPage.class);
   }
-
 }

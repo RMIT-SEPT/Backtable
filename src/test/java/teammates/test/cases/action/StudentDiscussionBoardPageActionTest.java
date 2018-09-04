@@ -20,7 +20,7 @@ public class StudentDiscussionBoardPageActionTest extends BaseActionTest {
     @Override
     @Test
     public void testExecuteAndPostProcess() {
-      AccountAttributes student = typicalBundle.accounts.get("student1InUnregisteredCourse");
+      AccountAttributes student = typicalBundle.accounts.get("student1InCourse1");
       testActionSuccess(student, "Typical case");
     }
 
