@@ -106,7 +106,7 @@ public abstract class AppPage {
     @FindBy(id = "studentHelpLink")
     private WebElement studentHelpTab;
 
-    @FindBy(id = "studentDiscussionBoardLInk")
+    @FindBy(id = "studentDiscussionBoardLink")
     private WebElement studentDiscussionBoardTab;
 
     @FindBy(id = "btnLogout")
