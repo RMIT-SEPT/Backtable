@@ -7,6 +7,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/student/discussionBoard" prefix="tsd" %>
 <%@ page import="teammates.common.util.Const" %>
 <c:set var="jsIncludes">
+<script type="text/javascript" src="/js/discussionBoard.js"></script>
 </c:set>
 <ts:studentPage title="Discussion Board" jsIncludes="${jsIncludes}">
 
@@ -28,11 +29,9 @@
         </tr>
       </thead>
       <c:forEach items="${data.topics}" var="details">
-        <tr class="home_evaluations_row" id="evaluation">
+        <tr class="clickable-row" id="topic" data-href="${data.repliesBoardLink}" }>
           <td>${details.topic.name}</td>
           <td>${details.topic.desc}</td> 
-          
-          
         </tr>
       </c:forEach>
     </c:when>

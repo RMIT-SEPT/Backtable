@@ -214,6 +214,11 @@ public class PageData {
     /**
      * Returns The relative path to the student profile page. Defaults to whether the student is unregistered.
      */
+    public String getRepliesBoardLink() {
+      String link = Const.ActionURIs.STUDENT_REPLIES_BOARD_PAGE;
+      return link;
+    }
+    
     public String getStudentProfileLink() {
         return getStudentProfileLink(isUnregisteredStudent());
     }
