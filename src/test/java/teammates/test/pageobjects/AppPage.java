@@ -106,6 +106,9 @@ public abstract class AppPage {
     @FindBy(id = "studentHelpLink")
     private WebElement studentHelpTab;
 
+    @FindBy(id = "studentDiscussionBoardLInk")
+    private WebElement studentDiscussionBoardTab;
+
     @FindBy(id = "btnLogout")
     private WebElement logoutButton;
 
@@ -562,6 +565,16 @@ public abstract class AppPage {
         waitForPageToLoad();
         switchToNewWindow();
         return changePageType(StudentHelpPage.class);
+    }
+
+    /**
+     * Equivalent of clicking the 'Discussion Boad' tab on the top menu of the page.
+     * @return the loaded page
+     */
+    public StudentDiscussionBoardPage loadDiscussionBoardTab() {
+      click(studentDiscussionBoardTab);
+      waitForPageToLoad();
+      return changePageType(StudentDiscussionBoardPage.class);
     }
 
     /**
