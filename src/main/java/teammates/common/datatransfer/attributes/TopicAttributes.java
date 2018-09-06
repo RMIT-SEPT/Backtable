@@ -6,9 +6,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import teammates.common.datatransfer.attributes.CourseAttributes.Builder;
 import teammates.common.util.*;
-import teammates.storage.entity.Course;
 import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
