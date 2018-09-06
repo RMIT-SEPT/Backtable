@@ -22,7 +22,6 @@ public class StudentDiscussionBoardPage extends AppPage {
     @FindBy(id = "btnAddCourse")
     private WebElement submitButton;
 
-
     public StudentDiscussionBoardPage(Browser browser) {
         super(browser);
     }
@@ -31,7 +30,7 @@ public class StudentDiscussionBoardPage extends AppPage {
     protected boolean containsExpectedPageContents() {
         return getPageSource().contains("<h1>Discussion Board</h1>");
     }
-    
+
     public boolean containsTestTopic() {
         return getPageSource().contains("href=\"/page/studentRepliesBoard?topicname=A1Help");
     }

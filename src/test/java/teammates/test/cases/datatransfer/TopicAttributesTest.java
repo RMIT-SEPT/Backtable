@@ -43,5 +43,4 @@ public class TopicAttributesTest extends BaseTestCase {
         assertEquals("Non-null value expected", e.getMessage());
       }
     }
-
 }

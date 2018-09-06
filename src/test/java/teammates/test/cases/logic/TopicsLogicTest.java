@@ -50,5 +50,4 @@ public class TopicsLogicTest extends BaseLogicTest {
       topicsLogic.deleteTopicCascade(topicAttributes.getName());
       verifyAbsentInDatastore(topicAttributes);
     }
-
 }
