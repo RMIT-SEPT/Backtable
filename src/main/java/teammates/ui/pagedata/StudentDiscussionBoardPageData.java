@@ -19,28 +19,28 @@ import teammates.ui.template.*;
 
 /**
  * This is the PageData object for the 'Discussion Board Topics' page.
- */  
+ */
 
 
 public class StudentDiscussionBoardPageData extends PageData {
-  
-  //***********************ATTRIBUTES*************************************//  
+
+  //***********************ATTRIBUTES*************************************//
 
   private boolean isUsingAjax;
   private ActiveTopicsTable activeTopics;
   private String topicNameToShow;
   private String topicDescToShow;
   //private TopicDetailsBundle t1 = new TopicDetailsBundle(new TopicAttributes());
-  
-  
-  
-  //***********************CONSTRUCTOR*************************************//  
 
-  
+
+
+  //***********************CONSTRUCTOR*************************************//
+
+
   public StudentDiscussionBoardPageData(AccountAttributes account, String sessionToken) {
     super(account, sessionToken);
   }
-  
+
 //
 //  public void init(List<TopicDetailsBundle> topics, StudentAttributes student) {
 //
@@ -50,19 +50,19 @@ public class StudentDiscussionBoardPageData extends PageData {
 //      this.student = student;
 //
 //}
-  
-  
-  
-  
+
+
+
+
         public void createFalseData() {
 
             System.out.println("This is printing");
         }
-  
+
 //        public List<TopicDetailsBundle> getTopics(){
 //    return this.topics;
 //  }
-  
+
       public void init(List<TopicAttributes> activeTopicsParam) {
 
         this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
@@ -174,18 +174,3 @@ public class StudentDiscussionBoardPageData extends PageData {
           return button;
       }
   }
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-

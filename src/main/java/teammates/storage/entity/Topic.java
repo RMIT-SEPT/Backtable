@@ -39,7 +39,7 @@ public class Topic extends BaseEntity {
     }
 
     
-    private String getDesc() 
+    public String getDesc() 
     {
         return desc;
     }

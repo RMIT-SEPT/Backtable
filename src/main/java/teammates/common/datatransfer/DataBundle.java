@@ -14,6 +14,7 @@ import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.StudentProfileAttributes;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.storage.entity.BaseEntity;
 
 /**
@@ -31,6 +32,7 @@ public class DataBundle {
     public Map<String, FeedbackResponseCommentAttributes> feedbackResponseComments = new LinkedHashMap<>();
     public Map<String, StudentProfileAttributes> profiles = new LinkedHashMap<>();
     public Map<String, AdminEmailAttributes> adminEmails = new LinkedHashMap<>();
+    public Map<String, TopicAttributes> topics = new LinkedHashMap<>();
 
     /**
      * Sanitize each attribute in the dataBundle for saving.
@@ -46,6 +48,7 @@ public class DataBundle {
         sanitizeMapForSaving(feedbackResponseComments);
         sanitizeMapForSaving(profiles);
         sanitizeMapForSaving(adminEmails);
+        sanitizeMapForSaving(topics);
     }
 
     /**

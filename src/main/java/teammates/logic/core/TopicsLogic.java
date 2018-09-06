@@ -37,8 +37,8 @@ public class TopicsLogic {
       // prevent initialization
   }
 
-  private TopicAttributes validateAndCreateTopicAttributes(String name, String desc)throws InvalidParametersException{
-      Assumption.assertNotNull("empty ",name);
+  public TopicAttributes validateAndCreateTopicAttributes(String name, String desc)throws InvalidParametersException{
+      Assumption.assertNotNull("Non-null value expected", name);
       return TopicAttributes.builder(name,desc).build();
   }
   public void createTopic(String name, String desc)
@@ -145,5 +145,10 @@ public class TopicsLogic {
 
     public void deleteTopicCascade(String topicName) {
         topicsDb.deleteTopic(topicName);
+    }
+
+    // Get topic for testing
+    public TopicAttributes getTopic(String topicName) {
+       return topicsDb.getTopic(topicName);
     }
 }

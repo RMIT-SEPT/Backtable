@@ -17,6 +17,7 @@ import teammates.common.datatransfer.attributes.FeedbackResponseCommentAttribute
 import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.TeammatesException;
 import teammates.common.util.Const;
 import teammates.common.util.GoogleCloudStorageHelper;
@@ -63,6 +64,11 @@ public class BaseComponentTestCase extends BaseTestCaseWithDatastoreAccess {
     @Override
     protected CourseAttributes getCourse(CourseAttributes course) {
         return backDoorLogic.getCourse(course.getId());
+    }
+    
+    @Override
+    protected TopicAttributes getTopic(TopicAttributes topic) {
+        return backDoorLogic.getTopic(topic.getName());
     }
 
     @Override
@@ -122,5 +128,6 @@ public class BaseComponentTestCase extends BaseTestCaseWithDatastoreAccess {
             return Const.StatusCodes.BACKDOOR_STATUS_FAILURE + ": " + TeammatesException.toStringWithStackTrace(e);
         }
     }
+
 
 }

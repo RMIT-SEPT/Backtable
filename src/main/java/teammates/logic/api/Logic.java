@@ -534,6 +534,12 @@ public class Logic {
 
         return coursesLogic.getCourse(courseId);
     }
+    
+    public TopicAttributes getTopic(String topicName) {
+        Assumption.assertNotNull(topicName);
+        
+        return topicsLogic.getTopic(topicName);
+    }
 
     /**
      * Returns a detailed version of course data. <br>

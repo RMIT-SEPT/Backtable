@@ -25,6 +25,7 @@ import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.StudentProfileAttributes;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
@@ -602,4 +603,6 @@ public class BackDoorLogic extends Logic {
     public void deleteGroupListFile(String groupListFileKey) {
         GoogleCloudStorageHelper.deleteFile(new BlobKey(groupListFileKey));
     }
+
+    
 }

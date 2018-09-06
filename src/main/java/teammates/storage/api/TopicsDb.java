@@ -99,7 +99,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       }
 
 
-      private Topic getTopicEntity(String topicId) {
+      public Topic getTopicEntity(String topicId) {
           return load().id(topicId).now();
       }
 
@@ -116,7 +116,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       protected TopicAttributes makeAttributes(Topic entity) {
           Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
         
-          return TopicAttributes.builder(entity.getName(), entity.getName())
+          return TopicAttributes.builder(entity.getName(), entity.getDesc())
                   .build();
       }
     

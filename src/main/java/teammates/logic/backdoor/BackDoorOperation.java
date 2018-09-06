@@ -14,6 +14,9 @@ public enum BackDoorOperation {
     /** Operation type: deleting a course from the datastore. */
     OPERATION_DELETE_COURSE,
 
+    /** Operation type: deleting a topic from the datastore. */
+    OPERATION_DELETE_TOPIC,
+
     /** Operation type: deleting a feedback question from the datastore. */
     OPERATION_DELETE_FEEDBACK_QUESTION,
 
@@ -49,6 +52,9 @@ public enum BackDoorOperation {
 
     /** Operation type: getting a course data from the datastore as JSON. */
     OPERATION_GET_COURSE_AS_JSON,
+
+    /** Operation type: getting a topic data from the datastore as JSON. */
+    OPERATION_GET_TOPIC_AS_JSON,
 
     /** Operation type: getting the encrypted registration key for an instructor in the datastore. */
     OPERATION_GET_ENCRYPTED_KEY_FOR_INSTRUCTOR,
@@ -117,6 +123,7 @@ public enum BackDoorOperation {
     public static final String PARAMETER_BACKDOOR_KEY = "PARAMETER_BACKDOOR_KEY";
     public static final String PARAMETER_BACKDOOR_OPERATION = "PARAMETER_BACKDOOR_OPERATION";
     public static final String PARAMETER_COURSE_ID = "PARAMETER_COURSE_ID";
+    public static final String PARAMETER_TOPIC_NAME = "PARAMETER_TOPIC_NAME";
     public static final String PARAMETER_DATABUNDLE_JSON = "PARAMETER_DATABUNDLE_JSON";
     public static final String PARAMETER_FEEDBACK_QUESTION_ID = "PARAMETER_FEEDBACK_QUESTION_ID";
     public static final String PARAMETER_FEEDBACK_QUESTION_NUMBER = "PARAMETER_FEEDBACK_QUESTION_NUMBER";

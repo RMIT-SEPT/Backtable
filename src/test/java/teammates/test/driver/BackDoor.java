@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import teammates.common.datatransfer.DataBundle;
 import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.CourseAttributes;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseAttributes;
 import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
@@ -203,6 +204,12 @@ public final class BackDoor {
         return restoreDataBundle(dataBundle);
     }
 
+    public static String createTopic(TopicAttributes topic) {
+        DataBundle dataBundle = new DataBundle();
+        dataBundle.topics.put("dummy-key", topic);
+        return restoreDataBundle(dataBundle);
+    }
+
     /**
      * Gets a course data from the datastore.
      */
@@ -211,6 +218,13 @@ public final class BackDoor {
         params.put(BackDoorOperation.PARAMETER_COURSE_ID, courseId);
         String courseJsonString = makePostRequest(params);
         return JsonUtils.fromJson(courseJsonString, CourseAttributes.class);
+    }
+
+    public static TopicAttributes getTopic(String topicName) {
+      Map<String, String> params = createParamMap(BackDoorOperation.OPERATION_GET_TOPIC_AS_JSON);
+      params.put(BackDoorOperation.PARAMETER_TOPIC_NAME, topicName);
+      String topicJsonString = makePostRequest(params);
+      return JsonUtils.fromJson(topicJsonString, TopicAttributes.class);
     }
 
     /**
@@ -228,6 +242,12 @@ public final class BackDoor {
     public static String deleteCourse(String courseId) {
         Map<String, String> params = createParamMap(BackDoorOperation.OPERATION_DELETE_COURSE);
         params.put(BackDoorOperation.PARAMETER_COURSE_ID, courseId);
+        return makePostRequest(params);
+    }
+
+    public static String deleteTopic(String topicName) {
+        Map<String, String> params = createParamMap(BackDoorOperation.OPERATION_DELETE_TOPIC);
+        params.put(BackDoorOperation.PARAMETER_TOPIC_NAME, topicName);
         return makePostRequest(params);
     }
 

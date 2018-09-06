@@ -13,6 +13,7 @@ import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.StudentProfileAttributes;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.JsonUtils;
 import teammates.common.util.StringHelper;
@@ -78,6 +79,9 @@ public abstract class BaseTestCaseWithDatastoreAccess extends BaseTestCaseWithOb
 
         } else if (expected instanceof StudentAttributes) {
             return getStudent((StudentAttributes) expected);
+            
+        } else if (expected instanceof TopicAttributes) {
+            return getTopic((TopicAttributes) expected);
 
         } else {
             throw new RuntimeException("Unknown entity type!");
@@ -118,6 +122,11 @@ public abstract class BaseTestCaseWithDatastoreAccess extends BaseTestCaseWithOb
             CourseAttributes actualCourse = (CourseAttributes) actual;
             equalizeIrrelevantData(expectedCourse, actualCourse);
             assertEquals(JsonUtils.toJson(expectedCourse), JsonUtils.toJson(actualCourse));
+
+        } else if (expected instanceof TopicAttributes) {
+            TopicAttributes expectedTopic = (TopicAttributes) expected;
+            TopicAttributes actualTopic = (TopicAttributes) actual;
+            assertEquals(JsonUtils.toJson(expectedTopic), JsonUtils.toJson(actualTopic));
 
         } else if (expected instanceof FeedbackQuestionAttributes) {
             FeedbackQuestionAttributes expectedFq = (FeedbackQuestionAttributes) expected;
@@ -179,6 +188,8 @@ public abstract class BaseTestCaseWithDatastoreAccess extends BaseTestCaseWithOb
     }
 
     protected abstract CourseAttributes getCourse(CourseAttributes course);
+    
+    protected abstract TopicAttributes getTopic(TopicAttributes topic);
 
     private void equalizeIrrelevantData(CourseAttributes expected, CourseAttributes actual) {
         // Ignore time field as it is stamped at the time of creation in testing

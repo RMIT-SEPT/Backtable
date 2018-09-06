@@ -9,6 +9,7 @@ import teammates.common.datatransfer.attributes.FeedbackResponseCommentAttribute
 import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.retry.MaximumRetriesExceededException;
 import teammates.common.util.retry.RetryableTaskReturns;
@@ -44,6 +45,15 @@ public abstract class BaseTestCaseWithBackDoorApiAccess extends BaseTestCaseWith
     @Override
     protected CourseAttributes getCourse(CourseAttributes course) {
         return getCourse(course.getId());
+    }
+    
+    protected TopicAttributes getTopic(String topicName) {
+        return BackDoor.getTopic(topicName);
+    }
+    
+    @Override
+    protected TopicAttributes getTopic(TopicAttributes topic) {
+        return getTopic(topic.getName());
     }
 
     protected CourseAttributes getCourseWithRetry(final String courseId) throws MaximumRetriesExceededException {
