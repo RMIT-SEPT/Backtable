@@ -11,15 +11,15 @@
 <%@ attribute name="sessionToken" required="true" %> --%>
 
 
-<h2>Active Topic</h2>
+<h2>Active Topics</h2>
 <table class="table table-bordered table-striped" id="tableActiveCourses">
   <thead class="fill-primary">
   <tr>
-    <th id="button_sortcourseid" class="button-sort-none toggle-sort">
-      Name<span class="icon-sort unsorted"></span>
+    <th id="button_sortcourseid">
+      Name
     </th>
-    <th id="button_sortcoursename" class="button-sort-none toggle-sort">
-     Desc<span class="icon-sort unsorted"></span>
+    <th id="button_sortcoursename">
+     Description
     </th>
 
     <th class="align-center no-print">
