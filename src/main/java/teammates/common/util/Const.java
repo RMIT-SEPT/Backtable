@@ -444,9 +444,9 @@ public final class Const {
         public static final String SEARCH_STUDENT = "Search for student's information, e.g. name, email";
 
         public static final String ACTION_NOT_ALLOWED = "You do not have the permissions to access this feature";
-        
-        
-        
+
+
+        public static final String TOPIC_DELETE = "Delete this topic";
     }
 
     public static class FeedbackQuestion {
@@ -1086,7 +1086,9 @@ public final class Const {
         
         
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
-        public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";    
+        public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";
+        public static final String STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/studentDiscussionBoardAddTopic";
+        public static final String STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/studentDiscussionBoardDeleteTopic";
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
         
 
@@ -1294,6 +1296,8 @@ public final class Const {
                         + "</li>"
                     + "</ol>"
                 + "</div>";
+
+        public static final String TOPIC_DELETED =  "The topic %s has been deleted.";
 
         public static final String COURSE_ADDED =
                 "The course has been added. Click <a href=\"${courseEnrollLink}\">here</a> to add students to the course "

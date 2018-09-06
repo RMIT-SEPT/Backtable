@@ -108,7 +108,7 @@ public class CoursesDb extends EntitiesDb<Course, CourseAttributes> {
      * <br> Preconditions:
      * <br> * {@code courseId} is not null.
      */
-    public void deleteCourse(String courseId) {
+       public void deleteCourse(String courseId) {
         Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, courseId);
 
         // only the courseId is important here, everything else are placeholders

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import teammates.common.datatransfer.TopicDetailsBundle;
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
@@ -40,9 +43,13 @@ public class StudentDiscussionBoardPageAction extends Action {
 
         /* Create a new course in the database */
         data = new StudentDiscussionBoardPageData(account, sessionToken);
-        data.createFalseData();
+        List<TopicAttributes> allTopics = logic.getAllTopics();
 
-        System.out.println("made it to create topic");
+        List<TopicAttributes> activeTopics = new ArrayList<>();
+        List<TopicAttributes> archivedTopics = new ArrayList<>();
+
+        data.init(allTopics);
+
         //createTopic(newTopicName, newTopicDesc);
         
         //Map<String, StudentAttributes> studentTopics = new HashMap<>();
@@ -53,8 +60,7 @@ public class StudentDiscussionBoardPageAction extends Action {
         String topicNameToShowParam = "";*/
         
         //data.init(activeTopics, topicIdToShowParam, topicNameToShowParam);
-        
-        System.out.println("made it to view discussion board uri");
+
         
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
         
@@ -62,20 +68,5 @@ public class StudentDiscussionBoardPageAction extends Action {
         
     }
 
-    
-    private void createTopic(String newTopicName, String newTopicDesc) {
-        try {
-            logic.createDiscussionBoardTopic(data.account.googleId, newTopicName, newTopicDesc);
-            statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
-            isError = false;
-        } catch (EntityAlreadyExistsException e) {
-            setStatusForException(e, Const.StatusMessages.COURSE_EXISTS);
-        } catch (InvalidParametersException e) {
-            setStatusForException(e);
-        }
-    }
 
-
-    
-    
 }

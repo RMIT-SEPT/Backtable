@@ -3,43 +3,25 @@ package teammates.ui.template;
 import java.util.List;
 
 public class ActiveTopicsTableRow {
-    private String topicId;
-    private String topicName;
-    private String createdAtDateString;
-    private String createdAtDateStamp;
-    private String createdAtFullDateTimeString;
+    private String name;
+    private String desc;
     private String href;
     private List<ElementTag> actions;
 
-    public ActiveTopicsTableRow(String topicIdParam, String topicNameParam,
-                                 String createdAtDateStringParam, String createdAtDateStampParam,
+    public ActiveTopicsTableRow(String name, String desc,
                                  List<ElementTag> actionsParam) {
-        this.topicId = topicIdParam;
-        this.topicName = topicNameParam;
-        this.createdAtDateString = createdAtDateStringParam;
-        this.createdAtDateStamp = createdAtDateStampParam;
+        this.name = name;
+        this.desc = desc;
         this.href = href;
         this.actions = actionsParam;
     }
 
-    public String getTopicId() {
-        return topicId;
+    public String getName() {
+        return name;
     }
 
-    public String getTopicName() {
-        return topicName;
-    }
-
-    public String getCreatedAtDateString() {
-        return createdAtDateString;
-    }
-
-    public String getCreatedAtDateStamp() {
-        return createdAtDateStamp;
-    }
-
-    public String getCreatedAtFullDateTimeString() {
-        return createdAtFullDateTimeString;
+    public String getDesc() {
+        return desc;
     }
 
     public String getHref() {

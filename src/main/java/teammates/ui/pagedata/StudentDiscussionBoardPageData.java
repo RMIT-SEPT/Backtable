@@ -14,14 +14,8 @@ import teammates.common.datatransfer.attributes.CourseAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.SanitizationHelper;
-import teammates.ui.template.ActiveCoursesTable;
-import teammates.ui.template.ActiveCoursesTableRow;
-import teammates.ui.template.ActiveTopicsTable;
-import teammates.ui.template.ActiveTopicsTableRow;
-import teammates.ui.template.ArchivedCoursesTable;
-import teammates.ui.template.ArchivedCoursesTableRow;
-import teammates.ui.template.ElementTag;
-
+import teammates.ui.template.*;
+
 
 /**
  * This is the PageData object for the 'Discussion Board Topics' page.
@@ -31,8 +25,7 @@ import teammates.ui.template.ElementTag;
 public class StudentDiscussionBoardPageData extends PageData {
   
   //***********************ATTRIBUTES*************************************//  
-    
-  public List<TopicDetailsBundle> topics;
+
   private boolean isUsingAjax;
   private ActiveTopicsTable activeTopics;
   private String topicNameToShow;
@@ -48,30 +41,34 @@ public class StudentDiscussionBoardPageData extends PageData {
     super(account, sessionToken);
   }
   
+//
+//  public void init(List<TopicDetailsBundle> topics, StudentAttributes student) {
+//
+//      this.topics = topics;
+//      this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the name", "this is a test topic desc")));
+//      this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the name2", "this is a test topic desc2")));
+//      this.student = student;
+//
+//}
   
-  public void init(List<TopicDetailsBundle> topics, StudentAttributes student) {
-      this.student = student;
-      this.topics = topics;
-      
-}
   
   
   
+        public void createFalseData() {
+
+            System.out.println("This is printing");
+        }
   
-  public void createFalseData() {
-    this.topics = new ArrayList<TopicDetailsBundle>();
-    this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the name", "this is a test topic desc")));
-    this.topics.add(new TopicDetailsBundle(new TopicAttributes("this is the name2", "this is a test topic desc2")));
-    
-    System.out.println("This is printing");
-  }
-  
-  public List<TopicDetailsBundle> getTopics(){
-    return this.topics;
-  }
+//        public List<TopicDetailsBundle> getTopics(){
+//    return this.topics;
+//  }
   
       public void init(List<TopicAttributes> activeTopicsParam) {
-          init(activeTopicsParam, "", "");
+
+        this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
+
+
+          System.out.println("This is printing");
       }
 
       public void init(List<TopicAttributes> activeTopicsParam, String topicNameToShowParam, String topicDescToShowParam) {
@@ -113,13 +110,14 @@ public class StudentDiscussionBoardPageData extends PageData {
 
               /*Boolean hasModifyPermission = instructorsForCourses.get(course.getId()).isAllowedForPrivilege(
                                                      Const.ParamsNames.INSTRUCTOR_PERMISSION_MODIFY_STUDENT);*/
-              /*ElementTag addButton = createButton("Enroll", "btn btn-default btn-xs t_course_enroll" + idx, "",
-                                                     getInstructorCourseEnrollLink(topic.getId()),
-                                                     Const.Tooltips.COURSE_ENROLL, !hasModifyPermission);
-*/
-              ElementTag viewButton = createButton("View", "btn btn-default btn-xs t_course_view" + idx, "",
+
+
+              ElementTag viewButton = createButton("View", "btn btn-default btn-xs topic_view" + idx, "",
                                                    getDiscussionBoardDetailsLink(topic.getName()),
                                                    Const.Tooltips.TOPIC_DETAILS, false);
+              ElementTag deleteButton = createButton("Delete", "btn btn-default btn-xs topic_delete" + idx, "",
+                      getDiscussionBoardDeleteLink(topic.getName()),
+                      Const.Tooltips.TOPIC_DELETE, false);
 
               /*ElementTag editButton = createButton("Edit", "btn btn-default btn-xs t_course_edit" + idx, "",
                                                    getInstructorCourseEditLink(topic.getId()),
@@ -137,19 +135,13 @@ public class StudentDiscussionBoardPageData extends PageData {
                                                      !hasDeletePermission);
               deleteButton.setAttribute("data-course-id", course.getId());*/
 
-              //actionsParam.add(enrollButton);
+              actionsParam.add(deleteButton);
               actionsParam.add(viewButton);
               //actionsParam.add(editButton);
               //actionsParam.add(archiveButton);
               //actionsParam.add(deleteButton);
 
-              ActiveTopicsTableRow row = new ActiveTopicsTableRow(SanitizationHelper.sanitizeForHtml(topic.getName()),
-                                                                    SanitizationHelper.sanitizeForHtml(topic.getDesc()),
-                                                                    
-                                                                    topic.getCreatedAtDateStamp(),
-                                                                    
-                                                                    this.getDiscussionBoardDetailsLink(topic.getName()),
-                                                                    actionsParam);
+              ActiveTopicsTableRow row = new ActiveTopicsTableRow(sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
               activeTopics.getRows().add(row);
           }
 

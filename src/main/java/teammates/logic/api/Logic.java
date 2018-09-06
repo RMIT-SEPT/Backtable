@@ -7,31 +7,8 @@ import java.util.Map;
 
 import com.google.appengine.api.blobstore.BlobKey;
 
-import teammates.common.datatransfer.CourseDetailsBundle;
-import teammates.common.datatransfer.CourseEnrollmentResult;
-import teammates.common.datatransfer.CourseRoster;
-import teammates.common.datatransfer.CourseSummaryBundle;
-import teammates.common.datatransfer.FeedbackResponseCommentSearchResultBundle;
-import teammates.common.datatransfer.FeedbackSessionDetailsBundle;
-import teammates.common.datatransfer.FeedbackSessionQuestionsBundle;
-import teammates.common.datatransfer.FeedbackSessionResponseStatus;
-import teammates.common.datatransfer.FeedbackSessionResultsBundle;
-import teammates.common.datatransfer.InstructorPrivileges;
-import teammates.common.datatransfer.InstructorSearchResultBundle;
-import teammates.common.datatransfer.SectionDetailsBundle;
-import teammates.common.datatransfer.StudentEnrollDetails;
-import teammates.common.datatransfer.StudentSearchResultBundle;
-import teammates.common.datatransfer.TeamDetailsBundle;
-import teammates.common.datatransfer.attributes.AccountAttributes;
-import teammates.common.datatransfer.attributes.AdminEmailAttributes;
-import teammates.common.datatransfer.attributes.CourseAttributes;
-import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
-import teammates.common.datatransfer.attributes.FeedbackResponseAttributes;
-import teammates.common.datatransfer.attributes.FeedbackResponseCommentAttributes;
-import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
-import teammates.common.datatransfer.attributes.InstructorAttributes;
-import teammates.common.datatransfer.attributes.StudentAttributes;
-import teammates.common.datatransfer.attributes.StudentProfileAttributes;
+import teammates.common.datatransfer.*;
+import teammates.common.datatransfer.attributes.*;
 import teammates.common.exception.EnrollException;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.EntityDoesNotExistException;
@@ -678,6 +655,7 @@ public class Logic {
         return coursesLogic.getCoursesForInstructor(instructorList);
     }
 
+
     /**
      * Updates the details of a course.
      *
@@ -719,6 +697,15 @@ public class Logic {
     public void deleteCourse(String courseId) {
         Assumption.assertNotNull(courseId);
         coursesLogic.deleteCourseCascade(courseId);
+    }
+
+    public void deleteTopic(String topicName){
+        Assumption.assertNotNull(topicName);
+        topicsLogic.deleteTopicCascade(topicName);
+    }
+
+    public List<TopicAttributes> getAllTopics(){
+        return topicsLogic.getAllTopic();
     }
 
     /**
@@ -2202,13 +2189,11 @@ public class Logic {
     }
 
     
-    public void createDiscussionBoardTopic(String googleId, String newTopicName, String newTopicDesc) 
-            throws EntityAlreadyExistsException, InvalidParametersException{
-        Assumption.assertNotNull(googleId);
+    public void createDiscussionBoardTopic( String newTopicName, String newTopicDesc) throws InvalidParametersException, EntityAlreadyExistsException {
         Assumption.assertNotNull(newTopicName);
         Assumption.assertNotNull(newTopicDesc);
         
-       topicsLogic.createTopicForDiscussionBoard(googleId, newTopicName, newTopicDesc);
+       topicsLogic.createTopicForDiscussionBoard(newTopicName, newTopicDesc);
 
         
     }

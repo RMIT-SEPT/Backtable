@@ -3,13 +3,11 @@ package teammates.common.datatransfer.attributes;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import teammates.common.datatransfer.attributes.CourseAttributes.Builder;
-import teammates.common.util.Assumption;
-import teammates.common.util.JsonUtils;
-import teammates.common.util.SanitizationHelper;
-import teammates.common.util.TimeHelper;
+import teammates.common.util.*;
 import teammates.storage.entity.Course;
 import teammates.storage.entity.Topic;
 
@@ -17,16 +15,10 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   
   public String name;
   public String desc;
-
-
- 
-  public Instant createdAt;
-
   
   public TopicAttributes(String name, String desc) {
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
-      this.createdAt = Instant.now();
   }
   
 
@@ -50,14 +42,18 @@ public static Builder builder(String name, String desc) {
  
 
   @Override
-  public List<String> getInvalidityInfo() {
-    // TODO Auto-generated method stub
-    return null;
+  public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
+      List<String> errors = new ArrayList<>();
+      addNonEmptyError(validator.getInvalidityInfoForCourseId(getName()), errors);
+
+      addNonEmptyError(validator.getInvalidityInfoForCourseName(getDesc()), errors);
+
+      return errors;
   }
 
   @Override
   public Topic toEntity() {
-      return new Topic(getName(), getDesc(), createdAt);
+      return new Topic(getName(), getDesc());
   }
 
   @Override
@@ -89,13 +85,7 @@ public static Builder builder(String name, String desc) {
     // TODO Auto-generated method stub
     
   }
-  
 
-  public String getCreatedAtDateStamp() {
-      return TimeHelper.formatDateTimeToIso8601Utc(createdAt);
-  }
-  
-  
 
   
   
@@ -110,13 +100,6 @@ public static class Builder {
         topicAttributes = new TopicAttributes(name, desc);
     }
 
-    public Builder withCreatedAt(Instant createdAt) {
-        if (createdAt != null) {
-            topicAttributes.createdAt = createdAt;
-        }
-
-        return this;
-    }
     
     
 

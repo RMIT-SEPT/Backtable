@@ -309,6 +309,12 @@ public class PageData {
         link = addUserIdToUrl(link);
         return link;
     }
+    public String getDiscussionBoardDeleteLink(String topicName) {
+        String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = addUserIdToUrl(link);
+        return link;
+    }
     
 
     public String getInstructorCourseEditLink(String courseId) {

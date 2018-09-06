@@ -117,7 +117,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
           Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
         
           return TopicAttributes.builder(entity.getName(), entity.getName())
-                  .withCreatedAt(entity.getCreatedAt()).build();
+                  .build();
       }
     
       @Override
@@ -126,7 +126,20 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
           return load().filterKey(keyToFind).keys();
       }
       
-      
-      
-      
-  }
+      public List<TopicAttributes> getAllTopics(){
+          return makeAttributes(load().list());
+      }
+
+
+    public void deleteTopic(String topicName) {
+
+            Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicName);
+
+            // only the courseId is important here, everything else are placeholders
+            deleteEntity(TopicAttributes
+                    .builder(topicName, "Non-existent course")
+                    .build());
+
+
+    }
+}

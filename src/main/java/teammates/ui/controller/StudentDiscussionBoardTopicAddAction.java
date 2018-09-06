@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
@@ -25,7 +27,7 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
     
     @Override
     public ActionResult execute() {
-        
+
         account.studentProfile = logic.getStudentProfile(account.googleId);
         
         System.out.println("made it to new topic name");
@@ -33,18 +35,23 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, newTopicName);
         String newTopicDesc = getRequestParamValue(Const.ParamsNames.TOPIC_DESC);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_DESC, newTopicDesc);
-        
 
+
+        System.out.println(newTopicName + "    " + newTopicDesc);
         /* Check if user has the right to execute the action */
       //  gateKeeper.verifyInstructorPrivileges(account);
 
         /* Create a new course in the database */
         data = new StudentDiscussionBoardPageData(account, sessionToken);
-        data.createFalseData();
 
         System.out.println("made it to create topic");
         createTopic(newTopicName, newTopicDesc);
-        
+
+        List<TopicAttributes> allTopics = logic.getAllTopics();
+
+        data.init(allTopics);
+
+
         //Map<String, StudentAttributes> studentTopics = new HashMap<>();
            // List<TopicAttributes> activeTopics = new ArrayList<>();
         //List<TopicAttributes> archivedTopics = new ArrayList<>();
@@ -55,7 +62,6 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
         //data.init(activeTopics, topicIdToShowParam, topicNameToShowParam);
         
         System.out.println("made it to view discussion board uri");
-        
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
         
         
@@ -65,9 +71,10 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
     
     private void createTopic(String newTopicName, String newTopicDesc) {
         try {
-            logic.createDiscussionBoardTopic(data.account.googleId, newTopicName, newTopicDesc);
+            logic.createDiscussionBoardTopic( newTopicName, newTopicDesc);
             statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
             isError = false;
+            System.out.println("asdiofoiaf i'm done");
         } catch (EntityAlreadyExistsException e) {
             setStatusForException(e, Const.StatusMessages.COURSE_EXISTS);
         } catch (InvalidParametersException e) {

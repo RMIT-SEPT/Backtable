@@ -14,7 +14,7 @@
 
 
 <div class="well well-plain">
-<form method="get" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_PAGE%>" name="discussion_topic_add" class="form form-horizontal">
+<form method="get" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE%>" name="discussion_topic_add" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.SESSION_TOKEN%>" value="${sessionToken}">
       <input type="hidden" name="<%=Const.ParamsNames.USER_ID%>" value="${googleId}">

@@ -5,16 +5,7 @@ import javax.servlet.ServletContextListener;
 
 import com.googlecode.objectify.ObjectifyService;
 
-import teammates.storage.entity.Account;
-import teammates.storage.entity.AdminEmail;
-import teammates.storage.entity.Course;
-import teammates.storage.entity.CourseStudent;
-import teammates.storage.entity.FeedbackQuestion;
-import teammates.storage.entity.FeedbackResponse;
-import teammates.storage.entity.FeedbackResponseComment;
-import teammates.storage.entity.FeedbackSession;
-import teammates.storage.entity.Instructor;
-import teammates.storage.entity.StudentProfile;
+import teammates.storage.entity.*;
 
 /**
  * Setup in web.xml to register Objectify at application startup.
@@ -35,6 +26,7 @@ public class OfyHelper implements ServletContextListener {
         ObjectifyService.register(FeedbackSession.class);
         ObjectifyService.register(Instructor.class);
         ObjectifyService.register(StudentProfile.class);
+        ObjectifyService.register(Topic.class);
     }
 
     @Override

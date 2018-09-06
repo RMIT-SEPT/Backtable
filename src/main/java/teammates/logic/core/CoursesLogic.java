@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.mockito.internal.matchers.Null;
 import teammates.common.datatransfer.CourseDetailsBundle;
 import teammates.common.datatransfer.CourseSummaryBundle;
 import teammates.common.datatransfer.FeedbackSessionDetailsBundle;
@@ -69,8 +70,9 @@ public final class CoursesLogic {
     public void createCourse(String courseId, String courseName, String courseTimeZone)
             throws InvalidParametersException, EntityAlreadyExistsException {
 
-        CourseAttributes courseToAdd = validateAndCreateCourseAttributes(courseId, courseName, courseTimeZone);
-        coursesDb.createEntity(courseToAdd);
+            CourseAttributes courseToAdd = validateAndCreateCourseAttributes(courseId, courseName, courseTimeZone);
+            coursesDb.createEntity(courseToAdd);
+
     }
 
     

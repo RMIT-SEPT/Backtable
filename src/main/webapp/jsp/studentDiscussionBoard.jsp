@@ -15,25 +15,13 @@
     <tsd:topic topic="${details.topic}">
     </tsd:topic>
  </c:forEach> --%>
- 
+
  <!-- discussion board table -->
- 
+
  <table class="table-responsive table table-striped table-bordered margin-0">
   <c:choose>
-    <c:when test="${not empty data.topics}">
-      <thead>
-        <tr>
-          <th>Topic Name</th>
-          <th>Topic Description</th>
-          <th>Created At</th>
-        </tr>
-      </thead>
-      <c:forEach items="${data.topics}" var="details">
-        <tr class="clickable-row" id="topic" data-href="${data.repliesBoardLink}" }>
-          <td>${details.topic.name}</td>
-          <td>${details.topic.desc}</td> 
-        </tr>
-      </c:forEach>
+    <c:when test="${not empty data.activeTopics}">
+      <tsd:topic activeTopic="${data.activeTopics}"/>
     </c:when>
     <c:otherwise>
       <tr>
@@ -47,34 +35,17 @@
 
 
 <br/>
- 
- 
- 
-
- 
- 
- 
 
 
-  <c:if test="${empty data.topics}">
-    <div class="col-sm-12" style="color: red">
-      There are currently no responses for you for this feedback session.
-    </div>
-  </c:if>
-  
-  
-  
-  
-  
-  
-   
+
   <c:if test="${!data.usingAjax}">
     <tsd:addTopicForm topicNameToShow="${data.topicNameToShow}"
-        topicDescToShow="${data.topicDescToShow}"
-        googleId="${data.account.googleId}"
-        sessionToken="${data.sessionToken}"/>
-        <course:loadCoursesTableByAjaxForm />
-  </c:if>   
+                      topicDescToShow="${data.topicDescToShow}"
+                      googleId="${data.account.googleId}"
+                      sessionToken="${data.sessionToken}"/>
+    <course:loadCoursesTableByAjaxForm />
+  </c:if>
+
 
 
   <%-- <div id="coursesList" class="align-center">
@@ -99,14 +70,14 @@
       </c:if>
     </c:if>
   </div> --%>
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   <t:bodyFooter />
 <%-- above code taken from studentHome... --%>
 </ts:studentPage>

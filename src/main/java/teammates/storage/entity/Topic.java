@@ -17,22 +17,19 @@ import teammates.common.util.TimeHelper;
 @Index
 public class Topic extends BaseEntity {
 
+    @Id
     private String name;
     private String desc;
-    private Date createdAt;
-    
 
-   
+    @SuppressWarnings("unused")
+   private Topic(){
+       // required by Objectify
+   }
 
-    public Topic(String name, String desc, Instant createdAt) {
+    public Topic(String name, String desc) {
        // this.setUniqueId(topic);
         this.setName(name);
         this.setDesc(desc);
-        if (createdAt == null) {
-            this.setCreatedAt(Instant.now());
-        } else {
-            this.setCreatedAt(createdAt);
-        }
     }
 
    
@@ -61,14 +58,5 @@ public class Topic extends BaseEntity {
     public void setName(String name) {
         this.name = name.trim();
     }
-
-    public Instant getCreatedAt() {
-        return TimeHelper.convertDateToInstant(this.createdAt);
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = TimeHelper.convertInstantToDate(createdAt);
-    }
-
    
 }
