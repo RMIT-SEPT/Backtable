@@ -18,6 +18,12 @@
 
  <!-- discussion board table -->
 
+<c:choose>
+   <c:when test="${data.getTopicRows==0}">
+     <H1> There are no topics. </h1>
+   </c:when>
+</c:choose>
+
  <table class="table-responsive table table-striped table-bordered margin-0">
   <c:choose>
     <c:when test="${not empty data.activeTopics}">
@@ -25,9 +31,9 @@
     </c:when>
     <c:otherwise>
       <tr>
-        <th class="align-center bold color_white">
+        <td class="align-center bold">
           Currently, there are no topics in this discussion board.
-        </th>
+        </td>
       </tr>
     </c:otherwise>
   </c:choose>

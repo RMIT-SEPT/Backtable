@@ -19,28 +19,29 @@ import teammates.ui.template.*;
 
 /**
  * This is the PageData object for the 'Discussion Board Topics' page.
- */  
+ */
 
 
 public class StudentDiscussionBoardPageData extends PageData {
-  
-  //***********************ATTRIBUTES*************************************//  
+
+  //***********************ATTRIBUTES*************************************//
 
   private boolean isUsingAjax;
   private ActiveTopicsTable activeTopics;
+  private int topicRows;
   private String topicNameToShow;
   private String topicDescToShow;
   //private TopicDetailsBundle t1 = new TopicDetailsBundle(new TopicAttributes());
-  
-  
-  
-  //***********************CONSTRUCTOR*************************************//  
 
-  
+
+
+  //***********************CONSTRUCTOR*************************************//
+
+
   public StudentDiscussionBoardPageData(AccountAttributes account, String sessionToken) {
     super(account, sessionToken);
   }
-  
+
 //
 //  public void init(List<TopicDetailsBundle> topics, StudentAttributes student) {
 //
@@ -50,19 +51,19 @@ public class StudentDiscussionBoardPageData extends PageData {
 //      this.student = student;
 //
 //}
-  
-  
-  
-  
+
+
+
+
         public void createFalseData() {
 
             System.out.println("This is printing");
         }
-  
+
 //        public List<TopicDetailsBundle> getTopics(){
 //    return this.topics;
 //  }
-  
+
       public void init(List<TopicAttributes> activeTopicsParam) {
 
         this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
@@ -97,9 +98,14 @@ public class StudentDiscussionBoardPageData extends PageData {
           return activeTopics;
       }
 
+      public int getTopicRows() {
+        return topicRows;
+      }
 
       private ActiveTopicsTable convertToActiveTopicsTable(List<TopicAttributes> topics) {
           ActiveTopicsTable activeTopics = new ActiveTopicsTable();
+
+          topicRows = topics.size();
 
           int idx = -1;
 
@@ -112,10 +118,10 @@ public class StudentDiscussionBoardPageData extends PageData {
                                                      Const.ParamsNames.INSTRUCTOR_PERMISSION_MODIFY_STUDENT);*/
 
 
-              ElementTag viewButton = createButton("View", "btn btn-default btn-xs topic_view" + idx, "",
+              ElementTag viewButton = createButton("View Replies", "btn btn-default topic_view" + idx, "",
                                                    getDiscussionBoardDetailsLink(topic.getName()),
                                                    Const.Tooltips.TOPIC_DETAILS, false);
-              ElementTag deleteButton = createButton("Delete", "btn btn-default btn-xs topic_delete" + idx, "",
+              ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete" + idx, "",
                       getDiscussionBoardDeleteLink(topic.getName()),
                       Const.Tooltips.TOPIC_DELETE, false);
 
@@ -135,8 +141,8 @@ public class StudentDiscussionBoardPageData extends PageData {
                                                      !hasDeletePermission);
               deleteButton.setAttribute("data-course-id", course.getId());*/
 
-              actionsParam.add(deleteButton);
               actionsParam.add(viewButton);
+              actionsParam.add(deleteButton);
               //actionsParam.add(editButton);
               //actionsParam.add(archiveButton);
               //actionsParam.add(deleteButton);
@@ -174,18 +180,3 @@ public class StudentDiscussionBoardPageData extends PageData {
           return button;
       }
   }
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
