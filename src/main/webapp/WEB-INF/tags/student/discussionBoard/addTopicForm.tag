@@ -2,18 +2,17 @@
 <%@ tag description="Add New Topic Panel of Discussion Board Page" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%-- <%@ attribute name="topic" type="teammates.common.datatransfer.attributes.TopicAttributes" required="true" %>
- --%>
  
 <%@ tag import="teammates.common.util.Const" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ attribute name="googleId" required="true" %>
-<%@ attribute name="topicNameToShow" required="true" %>
-<%@ attribute name="topicDescToShow" required="true" %> 
 <%@ attribute name="sessionToken" required="true" %>
 
 
 <div class="well well-plain">
+  <%-- The form will redirect to STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE which is map to StudentDiscussionBoardTopicAddPageData Action --%>
+
+    <%-- These input are sent to StudentDiscussionBoardTopicAddPageData to create a new Topic --%>
 <form method="get" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE%>" name="discussion_topic_add" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.SESSION_TOKEN%>" value="${sessionToken}">
