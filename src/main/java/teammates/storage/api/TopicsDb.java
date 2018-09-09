@@ -23,122 +23,136 @@ import teammates.storage.entity.Topic;
 
 public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
-  
+    /**
+     * This function will help to access to the database which only take the instance of "Topic" class
+     *
+     */
   @Override
-  protected LoadType<Topic> load() {
+    protected LoadType<Topic> load() {
     return ofy().load().type(Topic.class);
-  }
+    }
 
-      public static final String ERROR_UPDATE_NON_EXISTENT_TOPIC = "Trying to update a Topic that doesn't exist: ";
+    public static final String ERROR_UPDATE_NON_EXISTENT_TOPIC = "Trying to update a Topic that doesn't exist: ";
 
-      public void createTopics(Collection<TopicAttributes> topicsToAdd) throws InvalidParametersException {
-          List<TopicAttributes> topicsToUpdate = createEntities(topicsToAdd);
-          for (TopicAttributes topic : topicsToUpdate) {
-              try {
-                  updateTopic(topic);
-              } catch (EntityDoesNotExistException e) {
-                  // This situation is not tested as replicating such a situation is
-                  // difficult during testing
-                  Assumption.fail("Entity found be already existing and not existing simultaneously");
-              }
-          }
-      }
 
-      /**
-       * Preconditions: <br>
-       * * All parameters are non-null.
-       * @return Null if not found.
-       */
-      public TopicAttributes getTopic(String topicId) {
-          Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicId);
 
-          return makeAttributesOrNull(getTopicEntity(topicId));
-      }
 
-      public List<TopicAttributes> getTopics(List<String> topicIds) {
-          Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicIds);
+    /**
+    * Preconditions: <br>
+    * * All parameters are non-null.
+    * @return Null if not found.
+    */
 
-          return makeAttributes(getTopicEntities(topicIds));
-      }
+    /**
+     * Return a topic based of the topicId
+     * @param topicId Name of the topic
+     */
+    public TopicAttributes getTopic(String topicId) {
+      Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicId);
+      return makeAttributesOrNull(getTopicEntity(topicId));
+    }
 
+    /**
+     * Return list of topics based of the list of topicIds
+     * @param topicIds List of topics' name
+     */
+
+    public List<TopicAttributes> getTopics(List<String> topicIds) {
+      Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicIds);
+
+      return makeAttributes(getTopicEntities(topicIds));
+    }
+    /**
+     * Unused method for now.
+     */
       
-      public void updateTopic(TopicAttributes topicToUpdate) throws InvalidParametersException,
-                                                                       EntityDoesNotExistException {
-          Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicToUpdate);
+    public void updateTopic(TopicAttributes topicToUpdate) throws InvalidParametersException,
+                                                                   EntityDoesNotExistException {
+      Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicToUpdate);
 
-          topicToUpdate.sanitizeForSaving();
+      topicToUpdate.sanitizeForSaving();
 
-          if (!topicToUpdate.isValid()) {
-              throw new InvalidParametersException(topicToUpdate.getInvalidityInfo());
-          }
+      if (!topicToUpdate.isValid()) {
+          throw new InvalidParametersException(topicToUpdate.getInvalidityInfo());
+      }
+      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getName());
 
-          Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getName());
+      if (topicEntityToUpdate == null) {
+          throw new EntityDoesNotExistException(ERROR_UPDATE_NON_EXISTENT_TOPIC);
+      }
+      saveEntity(topicEntityToUpdate, topicToUpdate);
+    }
 
-          if (topicEntityToUpdate == null) {
-              throw new EntityDoesNotExistException(ERROR_UPDATE_NON_EXISTENT_TOPIC);
-          }
+    /**
+     * Return a Topic which retrieved from database
+     * @param attributes a topic attribute  will be converted to Topic
+     */
+    @Override
+    protected Topic getEntity(TopicAttributes attributes) {
+      return getTopicEntity(attributes.getName());
+    }
 
-         
 
-          saveEntity(topicEntityToUpdate, topicToUpdate);
+    /**
+     * Return a Topic which retrieved from database
+     * @param topicId name of the Topic
+     */
+    public Topic getTopicEntity(String topicId) {
+      return load().id(topicId).now();
+    }
+
+    private List<Topic> getTopicEntities(List<String> topicIds) {
+      if (topicIds.isEmpty()) {
+          return new ArrayList<>();
       }
 
-      /**
-       * Note: This is a non-cascade delete.<br>
-       *   <br> Fails silently if there is no such object.
-       * <br> Preconditions:
-       * <br> * {@code topicId} is not null.
-       */
-   
+      return new ArrayList<>(
+              load().ids(topicIds).values());
+    }
 
-     
+    /**
+     *
+     * Convert the object from Topic into TopicAttribute
+     * @param entity name of the Topic
+     * @return TopicAttributes
+     */
+    @Override
+    protected TopicAttributes makeAttributes(Topic entity) {
+      Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
 
-      @Override
-      protected Topic getEntity(TopicAttributes attributes) {
-          return getTopicEntity(attributes.getName());
-      }
+      return TopicAttributes.builder(entity.getName(), entity.getDesc())
+              .build();
+    }
 
-
-      public Topic getTopicEntity(String topicId) {
-          return load().id(topicId).now();
-      }
-
-      private List<Topic> getTopicEntities(List<String> topicIds) {
-          if (topicIds.isEmpty()) {
-              return new ArrayList<>();
-          }
-
-          return new ArrayList<>(
-                  load().ids(topicIds).values());
-      }
-
-      @Override
-      protected TopicAttributes makeAttributes(Topic entity) {
-          Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
-        
-          return TopicAttributes.builder(entity.getName(), entity.getDesc())
-                  .build();
-      }
-    
-      @Override
-      protected QueryKeys<Topic> getEntityQueryKeys(TopicAttributes attributes) {
-          Key<Topic> keyToFind = Key.create(Topic.class, attributes.getName());
-          return load().filterKey(keyToFind).keys();
-      }
-      
-      public List<TopicAttributes> getAllTopics(){
-          return makeAttributes(load().list());
-      }
+    @Override
+    protected QueryKeys<Topic> getEntityQueryKeys(TopicAttributes attributes) {
+      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getName());
+      return load().filterKey(keyToFind).keys();
+    }
 
 
+    /**
+     * Retrieve all topics stored in the database
+     * @return List<TopicAttributes>
+     */
+
+    public List<TopicAttributes> getAllTopics(){
+      return makeAttributes(load().list());
+    }
+
+
+    /**
+     * Remove the topic in the databased based on the topicID
+     * @param  topicName it's an id of the object in the database
+     */
     public void deleteTopic(String topicName) {
 
-            Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicName);
+        Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicName);
 
-            // only the courseId is important here, everything else are placeholders
-            deleteEntity(TopicAttributes
-                    .builder(topicName, "Non-existent course")
-                    .build());
+        // only the courseId is important here, everything else are placeholders
+        deleteEntity(TopicAttributes
+                .builder(topicName, "Non-existent course")
+                .build());
 
 
     }

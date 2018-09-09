@@ -6,20 +6,23 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import teammates.common.util.*;
+import teammates.common.util.Assumption;
+import teammates.common.util.FieldValidator;
+import teammates.common.util.JsonUtils;
+import teammates.common.util.SanitizationHelper;
 import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
   
   public String name;
   public String desc;
-  
+  public List<RepliesAttributes> replies;
   public TopicAttributes(String name, String desc) {
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
   }
   
-
+/*Builder is used as a constructor to initiate instance of TopicAttribute*/
 public static Builder builder(String name, String desc) {
       return new Builder(name, desc);
 
