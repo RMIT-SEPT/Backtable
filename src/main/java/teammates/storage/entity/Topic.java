@@ -11,12 +11,15 @@ import teammates.common.util.Const;
 import teammates.common.util.TimeHelper;
 
 /**
- * Represents a course entity.
+ * Represents a topic entity.
  */
 @Entity
 @Index
 public class Topic extends BaseEntity {
 
+    /**
+     * It is a must to set the @Id for the entity, thus GAE can use it to access database
+     */
     @Id
     private String name;
     private String desc;
