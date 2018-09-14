@@ -45,6 +45,9 @@ public static Builder builder(String topicID, String name, String desc) {
      return desc;
    }
    
+   public List<RepliesAttributes> getReplies(){
+       return replies;
+   }
  
 
   @Override
