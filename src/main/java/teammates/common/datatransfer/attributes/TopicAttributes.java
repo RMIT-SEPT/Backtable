@@ -16,7 +16,8 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   
   public String name;
   public String desc;
-  public List<RepliesAttributes> replies;
+
+  public List<RepliesAttributes> replies = new ArrayList<>();
   public TopicAttributes(String name, String desc) {
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
@@ -40,6 +41,9 @@ public static Builder builder(String name, String desc) {
      return desc;
    }
    
+   public List<RepliesAttributes> getReplies(){
+       return replies;
+   }
  
 
   @Override
