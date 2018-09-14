@@ -32,7 +32,13 @@ public class StudentDiscussionBoardPageData extends PageData {
         super(account, sessionToken);
     }
 
-
+    public String getName() {
+        return topicNameToShow;
+    }
+    
+    public String getDesc() {
+        return topicDescToShow;
+    }
 
     public void init(List<TopicAttributes> activeTopicsParam) {
         this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);

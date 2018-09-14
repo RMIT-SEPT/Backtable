@@ -18,11 +18,11 @@ public class StudentRepliesBoardPageAction extends Action {
     @Override
     protected ActionResult execute() {
         //getting topic name at the moment, whereas would be better to use topic id
-        String topicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, topicName);
+        String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
+        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
         account.studentProfile = logic.getStudentProfile(account.googleId);
         data = new StudentRepliesBoardPageData(account, sessionToken);
-        topic = logic.getTopic(topicName);
+        topic = logic.getTopic(topicId);
         data.init(topic);
         
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
