@@ -303,15 +303,17 @@ public class PageData {
         return link;
     }
     
-    public String getDiscussionBoardDetailsLink(String topicName) {
+    public String getDiscussionBoardDetailsLink(String topicName, String topicId) {
         String link = Const.ActionURIs.STUDENT_REPLIES_BOARD_PAGE;
         link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
         link = addUserIdToUrl(link);
         return link;
     }
-    public String getDiscussionBoardDeleteLink(String topicName) {
+    public String getDiscussionBoardDeleteLink(String topicName, String topicId) {
         String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
         link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID , topicId);
         link = addUserIdToUrl(link);
         return link;
     }

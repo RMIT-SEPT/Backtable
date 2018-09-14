@@ -705,9 +705,9 @@ public class Logic {
         coursesLogic.deleteCourseCascade(courseId);
     }
 
-    public void deleteTopic(String topicName){
-        Assumption.assertNotNull(topicName);
-        topicsLogic.deleteTopicCascade(topicName);
+    public void deleteTopic(String topicId){
+      //  Assumption.assertNotNull(topicName);
+        topicsLogic.deleteTopicCascade(topicId);
     }
 
     public List<TopicAttributes> getAllTopics(){
@@ -2195,11 +2195,12 @@ public class Logic {
     }
 
     
-    public void createDiscussionBoardTopic( String newTopicName, String newTopicDesc) throws InvalidParametersException, EntityAlreadyExistsException {
+    public void createDiscussionBoardTopic(String topicID, String newTopicName, String newTopicDesc) throws InvalidParametersException, EntityAlreadyExistsException {
+        Assumption.assertNotNull(topicID);
         Assumption.assertNotNull(newTopicName);
         Assumption.assertNotNull(newTopicDesc);
         
-       topicsLogic.createTopicForDiscussionBoard(newTopicName, newTopicDesc);
+       topicsLogic.createTopicForDiscussionBoard(topicID, newTopicName, newTopicDesc);
 
         
     }
