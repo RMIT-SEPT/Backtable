@@ -1,6 +1,7 @@
 package teammates.ui.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
@@ -23,6 +24,7 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
     @Override
     public ActionResult execute() {
 
+        String uniqueID = UUID.randomUUID().toString();
         account.studentProfile = logic.getStudentProfile(account.googleId);
         
        //Request the value from front-end for TopicAttribute initiation
@@ -37,7 +39,7 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
         data = new StudentDiscussionBoardPageData(account, sessionToken);
 
         //Initiate a TopicAttribute - the following behaviours of this function will help to store the data into database
-        createTopic(newTopicName, newTopicDesc);
+        createTopic(uniqueID, newTopicName, newTopicDesc);
 
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
@@ -45,10 +47,7 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
         //Redirect the page to Discussion board page.
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
         
-        
-        
     }
-
 
     /**
      * Create a topic and check if it already exists or not if yes, throw exception
@@ -57,9 +56,9 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
      *
      */
     
-    private void createTopic(String newTopicName, String newTopicDesc) {
+    private void createTopic(String uniqueID, String newTopicName, String newTopicDesc) {
         try {
-            logic.createDiscussionBoardTopic( newTopicName, newTopicDesc);
+            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc);
             statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
             isError = false;
         } catch (EntityAlreadyExistsException e) {

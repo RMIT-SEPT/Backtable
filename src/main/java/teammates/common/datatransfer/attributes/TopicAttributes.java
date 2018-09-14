@@ -14,22 +14,26 @@ import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
   
+  public String id;
   public String name;
   public String desc;
-
-  public List<RepliesAttributes> replies = new ArrayList<>();
-  public TopicAttributes(String name, String desc) {
+  public List<RepliesAttributes> replies;
+  public TopicAttributes(String topicID, String name, String desc) {
+      
+      this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
   }
   
 /*Builder is used as a constructor to initiate instance of TopicAttribute*/
-public static Builder builder(String name, String desc) {
-      return new Builder(name, desc);
+public static Builder builder(String topicID, String name, String desc) {
+      return new Builder(topicID, name, desc);
 
   }
   
-  
+  public String getId() {
+      return id;
+  }
  
    public String getName() {
       return name;
@@ -49,16 +53,15 @@ public static Builder builder(String name, String desc) {
   @Override
   public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
       List<String> errors = new ArrayList<>();
-      addNonEmptyError(validator.getInvalidityInfoForCourseId(getName()), errors);
-
-      addNonEmptyError(validator.getInvalidityInfoForCourseName(getDesc()), errors);
+      
+      addNonEmptyError(validator.getInvalidityInfoForCourseName(getName()), errors);
 
       return errors;
   }
 
   @Override
   public Topic toEntity() {
-      return new Topic(getName(), getDesc());
+      return new Topic(getId(), getName(), getDesc());
   }
 
   @Override
@@ -87,7 +90,7 @@ public static Builder builder(String name, String desc) {
 
   @Override
   public void sanitizeForSaving() {
-    // TODO Auto-generated method stub
+    
     
   }
 
@@ -100,9 +103,9 @@ public static class Builder {
     private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
     private final TopicAttributes topicAttributes;
 
-    public Builder(String name, String desc) {
-        validateRequiredFields(name, desc);
-        topicAttributes = new TopicAttributes(name, desc);
+    public Builder(String topicID, String name, String desc) {
+       // validateRequiredFields(name, desc);
+        topicAttributes = new TopicAttributes(topicID, name, desc);
     }
 
     

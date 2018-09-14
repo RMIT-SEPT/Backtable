@@ -624,6 +624,7 @@ public final class Const {
 
         public static final String TOPIC_DESC = "topicdesc";
         public static final String TOPIC_NAME = "topicname";
+        public static final String TOPIC_ID = "topicId";
        
 
         public static final String IS_USING_AJAX = "isusingAjax";

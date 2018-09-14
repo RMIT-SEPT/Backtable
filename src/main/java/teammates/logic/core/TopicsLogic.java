@@ -46,9 +46,9 @@ public class TopicsLogic {
      *
      */
 
-  public TopicAttributes validateAndCreateTopicAttributes(String name, String desc) throws InvalidParametersException{
+  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String name, String desc) throws InvalidParametersException{
       Assumption.assertNotNull("Non-null value expected", name);
-      return TopicAttributes.builder(name,desc).build();
+      return TopicAttributes.builder(topicID, name,desc).build();
   }
 
     /**
@@ -57,14 +57,12 @@ public class TopicsLogic {
      * via createEntity() function.
      *
      */
-  public void createTopic(String name, String desc)
+  public void createTopic(String topicID, String name, String desc)
       throws InvalidParametersException, EntityAlreadyExistsException {
 
-
-        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(name,desc);
-
+        System.out.println(name);
+        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc); 
         topicsDb.createEntity(topicToAdd);
-
     System.out.println("Topic entity has been created...");
   }
 
@@ -164,11 +162,11 @@ public class TopicsLogic {
   
   
   
-    public void createTopicForDiscussionBoard( String topicName, String topicDesc)
+    public void createTopicForDiscussionBoard(String topicID, String topicName, String topicDesc)
           throws InvalidParametersException, EntityAlreadyExistsException {
 
 
-    createTopic(topicName, topicDesc);
+    createTopic(topicID, topicName, topicDesc);
 
     /* Create the initial instructor for the course */
 

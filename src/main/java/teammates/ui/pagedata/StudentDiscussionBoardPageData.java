@@ -82,15 +82,15 @@ public class StudentDiscussionBoardPageData extends PageData {
           List<ElementTag> actionsParam = new ArrayList<>();
 
           ElementTag viewButton = createButton("View Replies", "btn btn-default topic_view" + idx, "",
-                                               getDiscussionBoardDetailsLink(topic.getName()),
+                                               getDiscussionBoardDetailsLink(topic.getName(), topic.getId()),
                                                Const.Tooltips.TOPIC_DETAILS, false);
           ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete" + idx, "",
-                  getDiscussionBoardDeleteLink(topic.getName()),
+                  getDiscussionBoardDeleteLink(topic.getName(), topic.getId()),
                   Const.Tooltips.TOPIC_DELETE, false);
           actionsParam.add(viewButton);
           actionsParam.add(deleteButton);
 
-          ActiveTopicsTableRow row = new ActiveTopicsTableRow(sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
+          ActiveTopicsTableRow row = new ActiveTopicsTableRow(topic.getId(), sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
           activeTopics.getRows().add(row);
         }
         return activeTopics;
