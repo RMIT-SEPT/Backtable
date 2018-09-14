@@ -5,23 +5,15 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/student" prefix="ts" %>
 <%@ taglib tagdir="/WEB-INF/tags/student/discussionBoard" prefix="tsd" %>
-<%@ page import="teammates.common.util.Const" %>
-<c:set var="jsIncludes">
-<script type="text/javascript" src="/js/discussionBoard.js"></script>
-</c:set>
-<ts:studentPage title="Discussion Board" jsIncludes="${jsIncludes}">
+<ts:studentPage title="Discussion Board" jsIncludes="">
 
- <%-- <c:forEach items="${data.topics}" var= "details">
-    <tsd:topic topic="${details.topic}">
-    </tsd:topic>
- </c:forEach> --%>
+  <%-- Check whether if there is any topic in database, if yes, display all of them --%>
 
- <!-- discussion board table -->
-
- <table class="table-responsive table table-striped table-bordered margin-0">
+  <table class="table-responsive table table-striped table-bordered margin-0">
   <c:choose>
     <c:when test="${not empty data.activeTopics}">
-      <tsd:topic activeTopic="${data.activeTopics}"/>
+      <tsd:topic activeTopic="${data.activeTopics}"/>  <%-- it will take Active Topic Table
+       value from the backend and pass to the tag "topic.tag" go to topic.tag to read more --%>
     </c:when>
     <c:otherwise>
       <tr>
@@ -33,51 +25,13 @@
   </c:choose>
 </table>
 
-
 <br/>
 
-
-
-  <c:if test="${!data.usingAjax}">
-    <tsd:addTopicForm topicNameToShow="${data.topicNameToShow}"
-                      topicDescToShow="${data.topicDescToShow}"
-                      googleId="${data.account.googleId}"
-                      sessionToken="${data.sessionToken}"/>
-    <course:loadCoursesTableByAjaxForm />
-  </c:if>
-
-
-
-  <%-- <div id="coursesList" class="align-center">
-    <c:if test="${data.usingAjax}">
-      <course:activeCoursesTable activeTopics="${data.activeTopics}"/>
-      <br>
-      <br>
-      <c:if test="${empty data.activeTopics.rows}">
-        No records found. <br>
-        <br>
-      </c:if>
-      <br>
-      <br>
-
-      <c:if test="${not empty data.archivedCourses.rows}">
-        <course:archivedCoursesTable archivedCourses="${data.archivedCourses}"
-            activeCourses="${data.activeCourses}"/>
-        <br>
-        <br>
-        <br>
-        <br>
-      </c:if>
-    </c:if>
-  </div> --%>
-
-
-
-
-
-
-
-
+  <%-- Form for creating Topics --%>
+  <%-- variables are unneccessary for now  --%>
+    <tsd:addTopicForm
+        googleId="${data.account.googleId}"
+        sessionToken="${data.sessionToken}"/>
   <t:bodyFooter />
 <%-- above code taken from studentHome... --%>
 </ts:studentPage>

@@ -19,7 +19,7 @@ public class TopicsLogic {
 
   private static TopicsLogic instance = new TopicsLogic();
 
-  /* Explanation: This class depends on TopicsDb class but no other *Db classes.
+  /** Explanation: This class depends on TopicsDb class but no other *Db classes.
    * That is because reading/writing entities from/to the datastore is the
    * responsibility of the matching *Logic class.
    * However, this class can talk to other *Logic classes. That is because
@@ -37,10 +37,26 @@ public class TopicsLogic {
       // prevent initialization
   }
 
-  public TopicAttributes validateAndCreateTopicAttributes(String name, String desc)throws InvalidParametersException{
+
+    /**
+     * This function is used to validate the parameters before initiate it to avoid errors.
+     * @param name the topic name
+     * @param desc the description of the topic
+     * @return TopicAttribute instance
+     *
+     */
+
+  public TopicAttributes validateAndCreateTopicAttributes(String name, String desc) throws InvalidParametersException{
       Assumption.assertNotNull("Non-null value expected", name);
       return TopicAttributes.builder(name,desc).build();
   }
+
+    /**
+     * After valid the parameters by validateAndCreateTopicAttributes()
+     * which will return an instance of TopicAttribute, it will store that object into the database
+     * via createEntity() function.
+     *
+     */
   public void createTopic(String name, String desc)
       throws InvalidParametersException, EntityAlreadyExistsException {
 
@@ -51,7 +67,30 @@ public class TopicsLogic {
 
     System.out.println("Topic entity has been created...");
   }
-  
+
+    /**
+     * Return a list of all Topic stored in the database
+     *
+     */
+    public List<TopicAttributes> getAllTopic() {
+        List<TopicAttributes> alltopics = topicsDb.getAllTopics();
+        return alltopics;
+    }
+
+    /**
+     * Remove the topic with this method to make sure there is no conflict in future
+     * All objects related to this topic will be cleaned.
+     *
+     */
+
+    public void deleteTopicCascade(String topicName) {
+        topicsDb.deleteTopic(topicName);
+    }
+
+    // Get topic for testing
+    public TopicAttributes getTopic(String topicName) {
+        return topicsDb.getTopic(topicName);
+    }
   
   /**
    * Returns a list of {@link TopicAttributes} for all topics a given student is enrolled in.
@@ -138,17 +177,4 @@ public class TopicsLogic {
     }
 
 
-    public List<TopicAttributes> getAllTopic() {
-      List<TopicAttributes> alltopics = topicsDb.getAllTopics();
-        return alltopics;
-    }
-
-    public void deleteTopicCascade(String topicName) {
-        topicsDb.deleteTopic(topicName);
-    }
-
-    // Get topic for testing
-    public TopicAttributes getTopic(String topicName) {
-       return topicsDb.getTopic(topicName);
-    }
 }

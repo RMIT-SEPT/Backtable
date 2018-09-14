@@ -3,13 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ attribute name="activeTopic" type="teammates.ui.template.ActiveTopicsTable" required="true" %>
-<%@ tag import="teammates.common.util.Const" %>
-<%-- <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
-<%@ attribute name="googleId" required="true" %>
-<%@ attribute name="topicIdToShow" required="true" %>
-<%@ attribute name="topicNameToShow" required="true" %>
-<%@ attribute name="sessionToken" required="true" %> --%>
-
 
 <h2>Active Topics</h2>
 <table class="table table-bordered table-striped" id="tableActiveCourses">
@@ -27,10 +20,12 @@
     </th>
   </tr>
   </thead>
+
+  <%-- Active topic table have table rows, loop all instances to display content --%>
   <c:forEach items="${activeTopic.rows}" var="topicrow" varStatus="i">
   <tr>
-    <td id="topicName${i.index}">${topicrow.name}</td>
-    <td id="coursename${i.index}">${topic.desc}</td>
+    <td id="topicName${i.index}" style="vertical-align: middle;">${topicrow.name}</td>
+    <td id="topicDesc${i.index}" style="vertical-align: middle;">${topicrow.desc}</td>
     <td class="align-center no-print">
       <c:forEach items="${topicrow.actions}" var="button">
         <a ${button.attributesToString}>
