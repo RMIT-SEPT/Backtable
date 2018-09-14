@@ -19,16 +19,15 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public String desc;
   public List<RepliesAttributes> replies;
   public TopicAttributes(String topicID, String name, String desc) {
-      
       this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
+      replies = new ArrayList<RepliesAttributes>();
   }
   
 /*Builder is used as a constructor to initiate instance of TopicAttribute*/
 public static Builder builder(String topicID, String name, String desc) {
       return new Builder(topicID, name, desc);
-
   }
   
   public String getId() {

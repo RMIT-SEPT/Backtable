@@ -32,11 +32,11 @@ public class StudentRepliesBoardPageData extends PageData {
   }
   
   public String getDesc() {
-      return topic.desc;
+      return topic.getDesc();
   }
   
   public String getName() {
-      return topic.name;
+      return topic.getName();
   }
   /*
   public void createFalseData() {
