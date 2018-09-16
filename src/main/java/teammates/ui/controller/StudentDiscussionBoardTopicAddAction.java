@@ -1,5 +1,6 @@
 package teammates.ui.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,7 +12,7 @@ import teammates.common.util.Const;
 import teammates.common.util.Logger;
 import teammates.common.util.StatusMessage;
 import teammates.common.util.StatusMessageColor;
-
+import teammates.storage.entity.Reply;
 import teammates.ui.pagedata.StudentDiscussionBoardPageData;
 
 /**
@@ -35,11 +36,11 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
 
 
         System.out.println(newTopicName + "    " + newTopicDesc);
-
+        
         data = new StudentDiscussionBoardPageData(account, sessionToken);
 
         //Initiate a TopicAttribute - the following behaviours of this function will help to store the data into database
-        createTopic(uniqueID, newTopicName, newTopicDesc);
+        createTopic(uniqueID, newTopicName, newTopicDesc, new ArrayList<Reply>());
 
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
@@ -56,9 +57,9 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
      *
      */
     
-    private void createTopic(String uniqueID, String newTopicName, String newTopicDesc) {
+    private void createTopic(String uniqueID, String newTopicName, String newTopicDesc, ArrayList<Reply> replies) {
         try {
-            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc);
+            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc, replies);
             statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
             isError = false;
         } catch (EntityAlreadyExistsException e) {

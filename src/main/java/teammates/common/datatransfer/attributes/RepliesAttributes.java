@@ -12,7 +12,6 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
   public Instant createdAt;
   private String desc;
   private String studentName;
-  public List<RepliesAttributes> replies = new ArrayList<>();
   
   public String getDesc() {
     return desc;

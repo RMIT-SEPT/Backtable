@@ -5,6 +5,7 @@ import java.util.List;
 
 import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
+import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
@@ -13,6 +14,7 @@ import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Logger;
 import teammates.storage.api.TopicsDb;
+import teammates.storage.entity.Reply;
 
 public class TopicsLogic {
   private static final Logger log = Logger.getLogger();
@@ -42,13 +44,13 @@ public class TopicsLogic {
      * This function is used to validate the parameters before initiate it to avoid errors.
      * @param name the topic name
      * @param desc the description of the topic
-     * @return TopicAttribute instance
+     * @return TopicAttribute instances
      *
      */
 
-  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String name, String desc) throws InvalidParametersException{
+  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String name, String desc, ArrayList<Reply> replies) throws InvalidParametersException{
       Assumption.assertNotNull("Non-null value expected", name);
-      return TopicAttributes.builder(topicID, name,desc).build();
+      return TopicAttributes.builder(topicID, name,desc, replies).build();
   }
 
     /**
@@ -57,12 +59,27 @@ public class TopicsLogic {
      * via createEntity() function.
      *
      */
-  public void createTopic(String topicID, String name, String desc)
+  public void createTopic(String topicID, String name, String desc, ArrayList<Reply> replies)
       throws InvalidParametersException, EntityAlreadyExistsException {
 
         System.out.println(name);
-        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc); 
+        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc, replies); 
+        
+        
+        topicToAdd.addReply(new RepliesAttributes("This is the description of test reply", "Luke Sewart"));
+        topicToAdd.addReply(new RepliesAttributes("This is the description of test reply2", "Luke Sewart2"));
+        
+        
+        List<RepliesAttributes> test = topicToAdd.getReplies();
         topicsDb.createEntity(topicToAdd);
+        TopicAttributes topicTest = topicsDb.getTopic(topicToAdd.getId());
+        List<RepliesAttributes> test2 = topicTest.getReplies();
+        for(RepliesAttributes reply1 : test2)
+        {
+          System.out.println("post storage:");
+          System.out.print(reply1.getDesc());
+        }
+        
     System.out.println("Topic entity has been created...");
   }
 
@@ -162,11 +179,11 @@ public class TopicsLogic {
   
   
   
-    public void createTopicForDiscussionBoard(String topicID, String topicName, String topicDesc)
+    public void createTopicForDiscussionBoard(String topicID, String topicName, String topicDesc, ArrayList<Reply> replies)
           throws InvalidParametersException, EntityAlreadyExistsException {
 
 
-    createTopic(topicID, topicName, topicDesc);
+    createTopic(topicID, topicName, topicDesc, replies);
 
     /* Create the initial instructor for the course */
 

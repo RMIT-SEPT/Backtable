@@ -1,5 +1,6 @@
 package teammates.ui.controller;
 
+import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
@@ -23,8 +24,8 @@ public class StudentRepliesBoardPageAction extends Action {
         account.studentProfile = logic.getStudentProfile(account.googleId);
         data = new StudentRepliesBoardPageData(account, sessionToken);
         topic = logic.getTopic(topicId);
+        System.out.println("made it to this point");
         data.init(topic);
-        
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
     }
 
