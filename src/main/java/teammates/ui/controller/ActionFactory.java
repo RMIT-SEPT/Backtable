@@ -134,6 +134,7 @@ public class ActionFactory {
         map(STUDENT_DISCUSSION_BOARD_PAGE, StudentDiscussionBoardPageAction.class);
         map(STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE, StudentDiscussionBoardTopicAddAction.class);
         map(STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE, StudentDiscussionBoardTopicDeleteAction.class);
+        map(STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE, StudentDiscussionBoardTopicEditPageAction.class);
         map(INSTRUCTOR_DISCUSSION_BOARD_PAGE, InstructorDiscussionBoardPageAction.class);
 
         map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
