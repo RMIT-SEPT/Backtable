@@ -1092,6 +1092,7 @@ public final class Const {
         public static final String STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/studentDiscussionBoardAddTopic";
         public static final String STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/studentDiscussionBoardDeleteTopic";
         public static final String STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/studentDiscussionBoardEditTopic";
+        public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/studentDiscussionBoardTopicEditSave";
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
 
 
