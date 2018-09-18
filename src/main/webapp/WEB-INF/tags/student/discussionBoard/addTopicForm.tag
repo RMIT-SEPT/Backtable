@@ -13,7 +13,7 @@
   <%-- The form will redirect to STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE which is map to StudentDiscussionBoardTopicAddPageData Action --%>
 
     <%-- These input are sent to StudentDiscussionBoardTopicAddPageData to create a new Topic --%>
-<form method="get" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE%>" name="discussion_topic_edd" class="form form-horizontal">
+<form method="get" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE%>" name="discussion_topic_add" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.SESSION_TOKEN%>" value="${sessionToken}">
       <input type="hidden" name="<%=Const.ParamsNames.USER_ID%>" value="${googleId}">
