@@ -120,13 +120,13 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     protected TopicAttributes makeAttributes(Topic entity) {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
 
-      return TopicAttributes.builder(entity.getName(), entity.getDesc())
+      return TopicAttributes.builder(entity.getId(), entity.getName(), entity.getDesc())
               .build();
     }
 
     @Override
     protected QueryKeys<Topic> getEntityQueryKeys(TopicAttributes attributes) {
-      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getName());
+      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getId());
       return load().filterKey(keyToFind).keys();
     }
 
@@ -145,13 +145,13 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
      * Remove the topic in the databased based on the topicID
      * @param  topicName it's an id of the object in the database
      */
-    public void deleteTopic(String topicName) {
+    public void deleteTopic(String topicID) {
 
-        Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicName);
+       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicID);
 
         // only the courseId is important here, everything else are placeholders
         deleteEntity(TopicAttributes
-                .builder(topicName, "Non-existent course")
+                .builder(topicID, "", "Non-existent course")
                 .build());
 
 

@@ -21,6 +21,7 @@ public class Topic extends BaseEntity {
      * It is a must to set the @Id for the entity, thus GAE can use it to access database
      */
     @Id
+    private String topicID;
     private String name;
     private String desc;
 
@@ -29,8 +30,8 @@ public class Topic extends BaseEntity {
        // required by Objectify
    }
 
-    public Topic(String name, String desc) {
-       // this.setUniqueId(topic);
+    public Topic(String id,String name, String desc) {
+        this.topicID = id;
         this.setName(name);
         this.setDesc(desc);
     }
@@ -46,6 +47,11 @@ public class Topic extends BaseEntity {
     {
         return desc;
     }
+    
+    public String getId() {
+        return topicID;
+    }
+    
     /*public String getUniqueId() {
         return id;
     }

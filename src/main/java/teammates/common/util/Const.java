@@ -625,8 +625,8 @@ public final class Const {
 
         public static final String TOPIC_DESC = "topicdesc";
         public static final String TOPIC_NAME = "topicname";
-        public static final String EDIT_TOPIC_NAME = "edittopicname";
-        public static final String EDIT_TOPIC_DESC = "edittopicdesc";
+        public static final String TOPIC_ID = "topicId";
+
 
         public static final String IS_USING_AJAX = "isusingAjax";
         public static final String IS_STUDENT_REJOINING = "isstudentrejoining";
@@ -1089,10 +1089,13 @@ public final class Const {
 
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
         public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/instructorDiscussionBoardAddTopic";
         public static final String STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/studentDiscussionBoardAddTopic";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/instructorDiscussionBoardDeleteTopic";
         public static final String STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/studentDiscussionBoardDeleteTopic";
         public static final String STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/studentDiscussionBoardEditTopic";
         public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/studentDiscussionBoardTopicEditSave";
+        public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/page/instructorRepliesBoard";
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
 
 
@@ -1252,6 +1255,7 @@ public final class Const {
         public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT = "/jsp/studentDiscussionBoardTopicEdit.jsp";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/jsp/instructorDiscussionBoard.jsp";
         public static final String STUDENT_REPLIES_BOARD_PAGE="/jsp/studentRepliesBoard.jsp";
+        public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/jsp/instructorRepliesBoard.jsp";
     }
 
     /* These are status messages that may be shown to the user */

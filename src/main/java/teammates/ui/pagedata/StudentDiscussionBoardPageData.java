@@ -32,7 +32,13 @@ public class StudentDiscussionBoardPageData extends PageData {
         super(account, sessionToken);
     }
 
+    public String getName() {
+        return topicNameToShow;
+    }
 
+    public String getDesc() {
+        return topicDescToShow;
+    }
 
     public void init(List<TopicAttributes> activeTopicsParam) {
         this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
@@ -82,19 +88,19 @@ public class StudentDiscussionBoardPageData extends PageData {
           List<ElementTag> actionsParam = new ArrayList<>();
 
           ElementTag viewButton = createButton("View Replies", "btn btn-default topic_view" + idx, "",
-                                               getDiscussionBoardDetailsLink(topic.getName()),
+                                               getDiscussionBoardDetailsLink(topic.getName(), topic.getId()),
                                                Const.Tooltips.TOPIC_DETAILS, false);
           ElementTag editButton = createButton("Edit Topic", "btn btn-warning topic_edit" + idx, "",
                                                getDiscussionBoardEditLink(topic.getName()),
                                                Const.Tooltips.TOPIC_EDIT, false);
           ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete" + idx, "",
-                                                 getDiscussionBoardDeleteLink(topic.getName()),
-                                                 Const.Tooltips.TOPIC_DELETE, false);
+                  getDiscussionBoardDeleteLink(topic.getName(), topic.getId()),
+                  Const.Tooltips.TOPIC_DELETE, false);
           actionsParam.add(viewButton);
           actionsParam.add(editButton);
           actionsParam.add(deleteButton);
 
-          ActiveTopicsTableRow row = new ActiveTopicsTableRow(sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
+          ActiveTopicsTableRow row = new ActiveTopicsTableRow(topic.getId(), sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
           activeTopics.getRows().add(row);
         }
         return activeTopics;
