@@ -7,6 +7,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ attribute name="googleId" required="true" %>
 <%@ attribute name="sessionToken" required="true" %>
+<%@ attribute name="topicId" required="true" %>
 <%@ attribute name="topicName" required="true" %>
 <%@ attribute name="topicDesc" required="true" %>
 
@@ -18,6 +19,7 @@
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.SESSION_TOKEN%>" value="${sessionToken}">
       <input type="hidden" name="<%=Const.ParamsNames.USER_ID%>" value="${googleId}">
+      <input type="hidden" name="<%=Const.ParamsNames.TOPIC_ID%>" value="${topicId}">
   <div>
     <label class="bold-label"  style="color:#3679B2; font-size:large;">Edit Topic</label>
   </div>

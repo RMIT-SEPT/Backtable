@@ -9,6 +9,7 @@
   <tsd:editTopicForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"
+      topicId="${data.topic.id}"
       topicName="${data.topic.name}"
       topicDesc="${data.topic.desc}"/>
 </ts:studentPage>

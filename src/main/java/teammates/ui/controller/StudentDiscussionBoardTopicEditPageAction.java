@@ -13,10 +13,13 @@ public class StudentDiscussionBoardTopicEditPageAction extends Action {
     @Override
     public ActionResult execute() {
 
-        String topicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, topicName);
+        String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
+        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
+        //
+        // String topicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
+        // Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, topicName);
 
-        TopicAttributes topic = logic.getTopic(topicName);
+        TopicAttributes topic = logic.getTopic(topicId);
 
         System.out.println("Editing Topic: " + topic.getName() + ", " + topic.getDesc());
 

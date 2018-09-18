@@ -61,7 +61,7 @@ public class TopicsLogic {
       throws InvalidParametersException, EntityAlreadyExistsException {
 
         System.out.println(name);
-        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc); 
+        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc);
         topicsDb.createEntity(topicToAdd);
     System.out.println("Topic entity has been created...");
   }
@@ -86,10 +86,10 @@ public class TopicsLogic {
     }
 
     // Get topic for testing
-    public TopicAttributes getTopic(String topicName) {
-        return topicsDb.getTopic(topicName);
+    public TopicAttributes getTopic(String topicId) {
+        return topicsDb.getTopic(topicId);
     }
-  
+
   /**
    * Returns a list of {@link TopicAttributes} for all topics a given student is enrolled in.
    *
@@ -109,27 +109,27 @@ public class TopicsLogic {
       return topicsDb.getTopics(topicIds);
     }
 
-  
-  
-  
+
+
+
 
     public List<TopicAttributes> getTopicsForInstructor(String googleId) {
       return getTopicsForInstructor(googleId, false);
     }
 
-  
-  
-  
+
+
+
     public List<TopicAttributes> getTopicsForInstructor(String googleId, boolean omitArchived) {
       List<InstructorAttributes> instructorList = instructorsLogic.getInstructorsForGoogleId(googleId, omitArchived);
       return getTopicsForInstructor(instructorList);
     }
 
- 
-  
-  
-  
-  
+
+
+
+
+
     public List<TopicAttributes> getTopicsForInstructor(List<InstructorAttributes> instructorList) {
         Assumption.assertNotNull("Supplied parameter was null", instructorList);
         List<String> topicIdList = new ArrayList<>();
@@ -152,16 +152,16 @@ public class TopicsLogic {
         return topicList;
     }
 
-  
-  
-  
+
+
+
     public static TopicsLogic inst() {
       return instance;
   }
-  
-  
-  
-  
+
+
+
+
     public void createTopicForDiscussionBoard(String topicID, String topicName, String topicDesc)
           throws InvalidParametersException, EntityAlreadyExistsException {
 
