@@ -37,6 +37,10 @@ public class TopicsLogic {
       // prevent initialization
   }
 
+  public static TopicsDb getTopicsDb() {
+    return topicsDb;
+  }
+
 
     /**
      * This function is used to validate the parameters before initiate it to avoid errors.
