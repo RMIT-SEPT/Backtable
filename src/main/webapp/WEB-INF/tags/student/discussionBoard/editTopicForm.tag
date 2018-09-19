@@ -44,7 +44,11 @@
   </div>
   <br>
  <div>
-     <input id="btnEditTopic" type="submit" class="btn btn-primary" value="Save Changes" tabindex="3">
+     <input id="btnEditTopic" type="submit" class="btn btn-success" value="Save Changes" tabindex="3">
+     <input id="resetEditTopic" type="reset" class="btn btn-warning" value="Reset Changes" tabindex="4">
+     <a href="${data.studentDiscussionBoardLink }">
+        <input id="cancelEditTopic" class="btn btn-danger" value="Cancel Changes" tabindex="5">
+     </a>
   </div>
 
   </form>
