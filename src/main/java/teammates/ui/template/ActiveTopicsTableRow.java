@@ -37,5 +37,9 @@ public class ActiveTopicsTableRow {
     public List<ElementTag> getActions() {
         return actions;
     }
+    public String getId()
+    {
+      return id;
+    }
 
 }

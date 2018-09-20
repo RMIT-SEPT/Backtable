@@ -3,11 +3,13 @@ package teammates.storage.entity;
 import java.time.Instant;
 import java.util.Date;
 
+import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import teammates.common.util.TimeHelper;
 
+@Entity
 public class Reply extends BaseEntity {
   @Id
   private String desc;
@@ -15,6 +17,11 @@ public class Reply extends BaseEntity {
   
   // TODO: change to `java.time.Instant` once we have upgraded to Objectify 6
   private Date createdAt;
+  
+  @SuppressWarnings("unused")
+  private Reply(){
+      // required by Objectify
+  }
   
   public Reply(String desc, String studentName, Instant createdAt) {
     this.setDesc(desc);

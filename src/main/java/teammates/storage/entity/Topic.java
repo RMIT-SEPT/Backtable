@@ -1,12 +1,15 @@
 package teammates.storage.entity;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
+import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.util.Const;
 import teammates.common.util.TimeHelper;
 
@@ -22,18 +25,21 @@ public class Topic extends BaseEntity {
      */
     @Id
     private String topicID;
+    
     private String name;
     private String desc;
-
+    private ArrayList<Reply> replies;
+    
     @SuppressWarnings("unused")
    private Topic(){
        // required by Objectify
    }
 
-    public Topic(String id,String name, String desc) {
+    public Topic(String id,String name, String desc, ArrayList<Reply> replies) {
         this.topicID = id;
         this.setName(name);
         this.setDesc(desc);
+        this.replies = replies;
     }
 
    
@@ -42,6 +48,9 @@ public class Topic extends BaseEntity {
         
     }
 
+    public ArrayList<Reply> getReplies(){
+      return replies;
+    }
     
     public String getDesc() 
     {

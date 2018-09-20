@@ -10,6 +10,7 @@ import teammates.common.util.Assumption;
 import teammates.common.util.FieldValidator;
 import teammates.common.util.JsonUtils;
 import teammates.common.util.SanitizationHelper;
+import teammates.storage.entity.Reply;
 import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
@@ -17,12 +18,12 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public String id;
   public String name;
   public String desc;
-  public List<RepliesAttributes> replies;
-  public TopicAttributes(String topicID, String name, String desc) {
+  public ArrayList<RepliesAttributes> replies;
+  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies) {
       this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
-      replies = new ArrayList<RepliesAttributes>();
+      this.replies = replies;
   }
 
   public TopicAttributes(String topicID, String name, String desc, List<RepliesAttributes> replies) {
@@ -33,8 +34,8 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   }
 
 /*Builder is used as a constructor to initiate instance of TopicAttribute*/
-public static Builder builder(String topicID, String name, String desc) {
-      return new Builder(topicID, name, desc);
+public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
+      return new Builder(topicID, name, desc, replies);
   }
 
   public String getId() {
@@ -49,8 +50,14 @@ public static Builder builder(String topicID, String name, String desc) {
      return desc;
    }
 
-   public List<RepliesAttributes> getReplies(){
+   
+   public ArrayList<RepliesAttributes> getReplies(){
        return replies;
+   }
+ 
+   public void addReply(RepliesAttributes reply)
+   {
+     replies.add(reply);
    }
 
 
@@ -65,7 +72,12 @@ public static Builder builder(String topicID, String name, String desc) {
 
   @Override
   public Topic toEntity() {
-      return new Topic(getId(), getName(), getDesc());
+    ArrayList<Reply> repliesEntity = new ArrayList<Reply>();
+    for(RepliesAttributes replyAtt: getReplies())
+    {
+      repliesEntity.add(replyAtt.toEntity());
+    }
+      return new Topic(getId(), getName(), getDesc(), repliesEntity);
   }
 
   @Override
@@ -98,6 +110,19 @@ public static Builder builder(String topicID, String name, String desc) {
 
   }
 
+  public static ArrayList<RepliesAttributes> getRepliesAtt(ArrayList<Reply> replies)
+  {
+    if(replies != null)
+    {
+      ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
+      for(Reply reply:replies)
+      {
+        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName()));
+      }      
+      return repliesAtt;
+    }
+    return null;
+  }
 
 
 
@@ -107,9 +132,11 @@ public static class Builder {
     private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
     private final TopicAttributes topicAttributes;
 
-    public Builder(String topicID, String name, String desc) {
+    public Builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
        // validateRequiredFields(name, desc);
-        topicAttributes = new TopicAttributes(topicID, name, desc);
+        ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
+        
+        topicAttributes = new TopicAttributes(topicID, name, desc, repliesAtt);
     }
 
 
