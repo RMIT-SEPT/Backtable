@@ -27,9 +27,9 @@
   <div>
     <label class="label-control">Topic Name:</label>
     <input class="form-control" type="text"
-              name="<%=Const.ParamsNames.TOPIC_NAME%>" id="<%=Const.ParamsNames.TOPIC_NAME%>"
-              value="${topicName}" data-toggle="tooltip" data-placement="top"
-              tabindex="1"/>
+           name="<%=Const.ParamsNames.TOPIC_NAME%>" id="<%=Const.ParamsNames.TOPIC_NAME%>"
+           value="${topicName}" data-toggle="tooltip" data-placement="top"
+           tabindex="1"/>
   </div>
   <br>
   <div>
