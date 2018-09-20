@@ -3,6 +3,7 @@
  */
 package teammates.ui.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import teammates.common.util.Const;
 import teammates.common.util.Logger;
 import teammates.common.util.StatusMessage;
 import teammates.common.util.StatusMessageColor;
+import teammates.storage.entity.Reply;
 import teammates.ui.pagedata.InstructorDiscussionBoardPageData;
 
 /**
@@ -54,7 +56,7 @@ public class InstructorDiscussionBoardTopicAddAction extends Action{
     
     private void createTopic(String uniqueID, String newTopicName, String newTopicDesc) {
         try {
-            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc);
+            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc, new ArrayList<Reply>());
             statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
             isError = false;
         } catch (EntityAlreadyExistsException e) {

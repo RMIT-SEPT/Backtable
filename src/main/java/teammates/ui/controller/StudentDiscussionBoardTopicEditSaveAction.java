@@ -1,5 +1,6 @@
 package teammates.ui.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import teammates.common.exception.EntityDoesNotExistException;
@@ -24,7 +25,7 @@ public class StudentDiscussionBoardTopicEditSaveAction extends Action {
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, editedTopicName);
         String editedTopicDesc = getRequestParamValue(Const.ParamsNames.TOPIC_DESC);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_DESC, editedTopicDesc);
-        List<RepliesAttributes> replies = logic.getTopic(topicId).getReplies();
+        ArrayList<RepliesAttributes> replies = logic.getTopic(topicId).getReplies();
 
         System.out.println(topicId + ", " + editedTopicName + ", " + editedTopicDesc);
 

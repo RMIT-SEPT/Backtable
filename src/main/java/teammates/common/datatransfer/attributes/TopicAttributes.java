@@ -19,14 +19,8 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public String name;
   public String desc;
   public ArrayList<RepliesAttributes> replies;
-  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies) {
-      this.id = SanitizationHelper.sanitizeTitle(topicID);
-      this.name = SanitizationHelper.sanitizeTitle(name);
-      this.desc = SanitizationHelper.sanitizeTitle(desc);
-      this.replies = replies;
-  }
 
-  public TopicAttributes(String topicID, String name, String desc, List<RepliesAttributes> replies) {
+  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies) {
       this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
