@@ -93,9 +93,10 @@ public class StudentDiscussionBoardPageData extends PageData {
           ElementTag editButton = createButton("Edit Topic", "btn btn-warning topic_edit" + idx, "",
                                                getDiscussionBoardEditLink(topic.getName(), topic.getId()),
                                                Const.Tooltips.TOPIC_EDIT, false);
-          ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete" + idx, "",
+          ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete_ topic_delete" + idx, "",
                   getDiscussionBoardDeleteLink(topic.getName(), topic.getId()),
                   Const.Tooltips.TOPIC_DELETE, false);
+          deleteButton.setAttribute("data-topicname", topic.getName());
           actionsParam.add(viewButton);
           actionsParam.add(editButton);
           actionsParam.add(deleteButton);
