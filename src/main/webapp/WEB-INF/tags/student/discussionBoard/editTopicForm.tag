@@ -35,12 +35,10 @@
   <div>
     <label class="label-control">Topic Description: </label>
      <textarea style="max-width:100%; max-height:30%;"
-              class="form-control" cols="20" rows="10"
-              name="<%=Const.ParamsNames.TOPIC_DESC%>" id="<%=Const.ParamsNames.TOPIC_DESC%>"
-              value="${topicDesc}" data-toggle="tooltip" data-placement="top"
-              tabindex=2>
-      ${topicDesc}
-    </textarea>
+               class="form-control" cols="20" rows="10"
+               name="<%=Const.ParamsNames.TOPIC_DESC%>" id="<%=Const.ParamsNames.TOPIC_DESC%>"
+               value="${topicDesc}" data-toggle="tooltip" data-placement="top"
+               tabindex=2>${topicDesc}</textarea>
   </div>
   <br>
  <div>

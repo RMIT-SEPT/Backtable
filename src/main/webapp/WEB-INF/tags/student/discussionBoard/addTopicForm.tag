@@ -27,7 +27,7 @@
               name="<%=Const.ParamsNames.TOPIC_NAME%>" id="<%=Const.ParamsNames.TOPIC_NAME%>"
               value="${topicNameToShow}" data-toggle="tooltip" data-placement="top"
               title="Enter the identifier of the topic, e.g.1234-2018Semester1."
-              tabindex="1" placeholder="e.g. 1234-2018Semester1" >
+              tabindex="1" placeholder="e.g. 1234-2018Semester1"/>
   </div>
   <br>
   <div>
@@ -37,9 +37,7 @@
               name="<%=Const.ParamsNames.TOPIC_DESC%>" id="<%=Const.ParamsNames.TOPIC_DESC%>"
               value="${topicDescToShow}" data-toggle="tooltip" data-placement="top"
               title="Enter the name of the topic, e.g. Assignment 1 Advice."
-              tabindex=2 placeholder="e.g. Assignment 1 Advice"
-              />
-          </textarea>
+              tabindex=2 placeholder="e.g. Assignment 1 Advice"></textarea>
   </div>
   <br>
  <div>
