@@ -39,6 +39,10 @@ public class TopicsLogic {
       // prevent initialization
   }
 
+  public static TopicsDb getTopicsDb() {
+    return topicsDb;
+  }
+
 
     /**
      * This function is used to validate the parameters before initiate it to avoid errors.
@@ -71,6 +75,7 @@ public class TopicsLogic {
         
         
         List<RepliesAttributes> test = topicToAdd.getReplies();
+
         topicsDb.createEntity(topicToAdd);
         TopicAttributes topicTest = topicsDb.getTopic(topicToAdd.getId());
         List<RepliesAttributes> test2 = topicTest.getReplies();
@@ -106,10 +111,10 @@ public class TopicsLogic {
     }
 
     // Get topic for testing
-    public TopicAttributes getTopic(String topicName) {
-        return topicsDb.getTopic(topicName);
+    public TopicAttributes getTopic(String topicId) {
+        return topicsDb.getTopic(topicId);
     }
-  
+
   /**
    * Returns a list of {@link TopicAttributes} for all topics a given student is enrolled in.
    *
@@ -129,27 +134,27 @@ public class TopicsLogic {
       return topicsDb.getTopics(topicIds);
     }
 
-  
-  
-  
+
+
+
 
     public List<TopicAttributes> getTopicsForInstructor(String googleId) {
       return getTopicsForInstructor(googleId, false);
     }
 
-  
-  
-  
+
+
+
     public List<TopicAttributes> getTopicsForInstructor(String googleId, boolean omitArchived) {
       List<InstructorAttributes> instructorList = instructorsLogic.getInstructorsForGoogleId(googleId, omitArchived);
       return getTopicsForInstructor(instructorList);
     }
 
- 
-  
-  
-  
-  
+
+
+
+
+
     public List<TopicAttributes> getTopicsForInstructor(List<InstructorAttributes> instructorList) {
         Assumption.assertNotNull("Supplied parameter was null", instructorList);
         List<String> topicIdList = new ArrayList<>();
@@ -172,17 +177,14 @@ public class TopicsLogic {
         return topicList;
     }
 
-  
-  
-  
+
+
+
     public static TopicsLogic inst() {
       return instance;
-  }
-  
-  
-  
-  
+    }
     public void createTopicForDiscussionBoard(String topicID, String topicName, String topicDesc, ArrayList<Reply> replies)
+
           throws InvalidParametersException, EntityAlreadyExistsException {
 
 

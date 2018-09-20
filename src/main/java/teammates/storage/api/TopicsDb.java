@@ -77,7 +77,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     /**
      * Unused method for now.
      */
-      
+
     public void updateTopic(TopicAttributes topicToUpdate) throws InvalidParametersException,
                                                                    EntityDoesNotExistException {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicToUpdate);

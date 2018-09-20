@@ -14,7 +14,7 @@ import teammates.storage.entity.Reply;
 import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
-  
+
   public String id;
   public String name;
   public String desc;
@@ -25,25 +25,31 @@ public class TopicAttributes extends EntityAttributes<Topic> {
       this.desc = SanitizationHelper.sanitizeTitle(desc);
       this.replies = replies;
   }
-  
+
+  public TopicAttributes(String topicID, String name, String desc, List<RepliesAttributes> replies) {
+      this.id = SanitizationHelper.sanitizeTitle(topicID);
+      this.name = SanitizationHelper.sanitizeTitle(name);
+      this.desc = SanitizationHelper.sanitizeTitle(desc);
+      this.replies = replies;
+  }
+
 /*Builder is used as a constructor to initiate instance of TopicAttribute*/
 public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
       return new Builder(topicID, name, desc, replies);
   }
-  
+
   public String getId() {
       return id;
   }
- 
+
    public String getName() {
       return name;
     }
-  
-   
 
    public String getDesc() {
      return desc;
    }
+
    
    public ArrayList<RepliesAttributes> getReplies(){
        return replies;
@@ -54,10 +60,11 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
      replies.add(reply);
    }
 
+
   @Override
   public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
       List<String> errors = new ArrayList<>();
-      
+
       addNonEmptyError(validator.getInvalidityInfoForCourseName(getName()), errors);
 
       return errors;
@@ -99,8 +106,8 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
 
   @Override
   public void sanitizeForSaving() {
-    
-    
+
+
   }
 
   public static ArrayList<RepliesAttributes> getRepliesAtt(ArrayList<Reply> replies)
@@ -117,9 +124,9 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
     return null;
   }
 
-  
-  
-  
+
+
+
 
 public static class Builder {
     private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
@@ -132,8 +139,8 @@ public static class Builder {
         topicAttributes = new TopicAttributes(topicID, name, desc, repliesAtt);
     }
 
-    
-    
+
+
 
     public TopicAttributes build() {
         return topicAttributes;
@@ -143,7 +150,7 @@ public static class Builder {
         for (Object object : objects) {
             Assumption.assertNotNull(REQUIRED_FIELD_CANNOT_BE_NULL, object);
         }
-    }    
+    }
 }
 
 }

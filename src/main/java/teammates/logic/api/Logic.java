@@ -536,11 +536,11 @@ public class Logic {
 
         return coursesLogic.getCourse(courseId);
     }
-    
-    public TopicAttributes getTopic(String topicName) {
-        Assumption.assertNotNull(topicName);
-        
-        return topicsLogic.getTopic(topicName);
+
+    public TopicAttributes getTopic(String topicId) {
+        Assumption.assertNotNull(topicId);
+
+        return topicsLogic.getTopic(topicId);
     }
 
     /**
@@ -2195,7 +2195,6 @@ public class Logic {
         Assumption.assertNotNull(teamName);
         return studentsLogic.getSectionForTeam(courseId, teamName);
     }
-
     
     public void createDiscussionBoardTopic(String topicID, String newTopicName, String newTopicDesc, ArrayList<Reply> replies) throws InvalidParametersException, EntityAlreadyExistsException {
         Assumption.assertNotNull(topicID);
@@ -2204,8 +2203,9 @@ public class Logic {
         
        topicsLogic.createTopicForDiscussionBoard(topicID, newTopicName, newTopicDesc, replies);
 
-        
+
+
     }
-    
+
 
 }
