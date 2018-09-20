@@ -79,6 +79,9 @@ public class TopicsLogic {
           System.out.println("post storage:");
           System.out.print(reply1.getDesc());
         }
+        topicTest.addReply(new RepliesAttributes("New description of reply 3", "Luke Sewart"));
+        topicsDb.saveEntity(topicTest.toEntity());
+        
         
     System.out.println("Topic entity has been created...");
   }
