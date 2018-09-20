@@ -15,7 +15,7 @@ function bindDeleteButtons() {
 
         console.log("Deleting " + topicName);
 
-        const messageText = `Are you want to delete the topic ${topicName}?`;
+        const messageText = `Are you sure you want to delete the topic ${topicName}?`;
 
         const okCallback = function () {
             window.location = $button.attr('href');
