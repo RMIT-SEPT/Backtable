@@ -142,6 +142,7 @@ public class ActionFactory {
         
         map(INSTRUCTOR_REPLIES_BOARD_PAGE, InstructorRepliesBoardPageAction.class);
         map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
+        map(STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE,StudentRepliesBoardAddReplyPageAction.class);
         map(ERROR_FEEDBACK_SUBMIT, ErrorUserReportLogAction.class);
     }
 

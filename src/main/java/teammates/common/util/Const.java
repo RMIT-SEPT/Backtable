@@ -626,6 +626,7 @@ public final class Const {
         public static final String TOPIC_DESC = "topicdesc";
         public static final String TOPIC_NAME = "topicname";
         public static final String TOPIC_ID = "topicId";
+        public static final String REPLY_DESC = "replyDesc";
 
 
         public static final String IS_USING_AJAX = "isusingAjax";
@@ -1097,6 +1098,7 @@ public final class Const {
         public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/studentDiscussionBoardTopicEditSave";
         public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/page/instructorRepliesBoard";
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
+        public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE = "/page/studentRepliesBoardAddReply";
 
 
     }
@@ -1255,6 +1257,7 @@ public final class Const {
         public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT = "/jsp/studentDiscussionBoardTopicEdit.jsp";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/jsp/instructorDiscussionBoard.jsp";
         public static final String STUDENT_REPLIES_BOARD_PAGE="/jsp/studentRepliesBoard.jsp";
+        public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE ="/jsp/studentRepliesBoard.jsp";
         public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/jsp/instructorRepliesBoard.jsp";
     }
 
