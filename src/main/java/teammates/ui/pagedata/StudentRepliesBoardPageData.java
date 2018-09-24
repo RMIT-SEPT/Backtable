@@ -38,22 +38,14 @@ public class StudentRepliesBoardPageData extends PageData {
   public String getName() {
       return topic.getName();
   }
-  /*
-  public void createFalseData() {
-    this.replies = new ArrayList<RepliesAttributes>();
-    this.replies.add(new RepliesAttributes("this is the desc1 for reply", "Luke Sewart1"));
-    this.replies.add(new RepliesAttributes("this is the desc2 for reply", "Luke Sewart2"));
-    System.out.println("This is printing");
-  }
-  
-  public TopicDetailsBundle getTopicDetails(){
-    return this.topic;
-  }
-  
-  public List<RepliesAttributes> getReplies(){
-    return this.replies;
-  }
- 
-  */
+
+    public String getID() {
+        return topic.getId();
+    }
+
+
+    public TopicAttributes getTopic() {
+        return topic;
+    }
 
 }

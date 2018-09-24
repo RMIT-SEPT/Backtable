@@ -5,6 +5,8 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/student" prefix="ts" %>
 <%@ taglib tagdir="/WEB-INF/tags/student/discussionBoard" prefix="tsd" %>
+
+<%@ taglib tagdir="/WEB-INF/tags/student/ReplyBoard" prefix="tsr" %>
 <%@ page import="teammates.common.util.Const" %>
 <c:set var="jsIncludes">
   
@@ -18,11 +20,12 @@
 </c:forEach>
  
  
-   <c:if test="${empty data.replies}">
-    <div class="col-sm-12" style="color: red">
-      There are currently no responses for you for this feedback session.
-    </div>
-  </c:if>
+<c:if test="${empty data.replies}">
+<div class="col-sm-12" style="color: red">
+  There are currently no responses for you for this feedback session.
+</div>
+</c:if>
+    <tsr:replyForm topicID="${data.topic.id}"/>
   
   
   

@@ -73,6 +73,12 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
     }
       return new Topic(getId(), getName(), getDesc(), repliesEntity);
   }
+  public void print(){
+      for (RepliesAttributes reply:replies) {
+
+          System.out.println(reply.getDesc());
+      }
+  }
 
   @Override
   public String getIdentificationString() {

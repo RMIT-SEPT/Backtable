@@ -2208,4 +2208,7 @@ public class Logic {
     }
 
 
+    public void updateTopic(TopicAttributes topic) throws InvalidParametersException, EntityDoesNotExistException {
+        topicsLogic.updateTopic(topic);
+    }
 }

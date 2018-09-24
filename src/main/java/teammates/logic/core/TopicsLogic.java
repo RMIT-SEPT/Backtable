@@ -197,4 +197,7 @@ public class TopicsLogic {
     }
 
 
+    public void updateTopic(TopicAttributes topic) throws InvalidParametersException, EntityDoesNotExistException {
+        topicsDb.saveEntity(topic.toEntity());
+    }
 }

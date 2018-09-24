@@ -87,7 +87,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       if (!topicToUpdate.isValid()) {
           throw new InvalidParametersException(topicToUpdate.getInvalidityInfo());
       }
-      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getName());
+      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getId());
 
       if (topicEntityToUpdate == null) {
           throw new EntityDoesNotExistException(ERROR_UPDATE_NON_EXISTENT_TOPIC);
@@ -155,7 +155,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
     /**
      * Remove the topic in the databased based on the topicID
-     * @param  topicName it's an id of the object in the database
+     * @param  topicID it's an id of the object in the database
      */
     public void deleteTopic(String topicID) {
 

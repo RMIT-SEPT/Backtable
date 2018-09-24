@@ -1,15 +1,13 @@
 <%@ tag description="Add New Reply Panel of ReplyBoard Page" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ tag import="teammates.common.util.Const" %>
-<%@ attribute name="googleId" required="true" %>
-<%@ attribute name="sessionToken" required="true" %>
-<%@ attribute name="subTopicID" required="true" %>
+<%@ attribute name="topicID" required="true" %>
 
 
 <div class="panel panel-primary">
     <div class="panel-body fill-plain">
         <form method="get" action="<%=Const.ActionURIs.STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE%>" name="form_addreply" class="form form-horizontal">
-            <input type="hidden" id="<%=Const.ParamsNames.SUB_TOPIC_ID%>" name="<%=Const.ParamsNames.SUB_TOPIC_ID%>" value="${subTopicID}">
+            <input type="hidden" id="<%=Const.ParamsNames.TOPIC_ID%>" name="<%=Const.ParamsNames.TOPIC_ID%>" value="${topicID}">
 
             <div class="form-group">
                 <label class="col-sm-3 control-label">Reply:</label>
