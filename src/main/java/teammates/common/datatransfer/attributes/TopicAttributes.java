@@ -10,51 +10,74 @@ import teammates.common.util.Assumption;
 import teammates.common.util.FieldValidator;
 import teammates.common.util.JsonUtils;
 import teammates.common.util.SanitizationHelper;
+import teammates.storage.entity.Reply;
 import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
-  
+
+  public String id;
   public String name;
   public String desc;
-  public List<RepliesAttributes> replies;
-  public TopicAttributes(String name, String desc) {
+  public ArrayList<RepliesAttributes> replies;
+
+  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies) {
+      this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
+      this.replies = replies;
   }
-  
-/*Builder is used as a constructor to initiate instance of TopicAttribute*/
-public static Builder builder(String name, String desc) {
-      return new Builder(name, desc);
 
+/*Builder is used as a constructor to initiate instance of TopicAttribute*/
+public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
+      return new Builder(topicID, name, desc, replies);
   }
-  
-  
- 
+
+  public String getId() {
+      return id;
+  }
+
    public String getName() {
       return name;
     }
-  
-   
 
    public String getDesc() {
      return desc;
    }
+
    
+   public ArrayList<RepliesAttributes> getReplies(){
+       return replies;
+   }
  
+   public void addReply(RepliesAttributes reply)
+   {
+     replies.add(reply);
+   }
+
 
   @Override
   public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
       List<String> errors = new ArrayList<>();
-      addNonEmptyError(validator.getInvalidityInfoForCourseId(getName()), errors);
 
-      addNonEmptyError(validator.getInvalidityInfoForCourseName(getDesc()), errors);
+      addNonEmptyError(validator.getInvalidityInfoForCourseName(getName()), errors);
 
       return errors;
   }
 
   @Override
   public Topic toEntity() {
-      return new Topic(getName(), getDesc());
+    ArrayList<Reply> repliesEntity = new ArrayList<Reply>();
+    for(RepliesAttributes replyAtt: getReplies())
+    {
+      repliesEntity.add(replyAtt.toEntity());
+    }
+      return new Topic(getId(), getName(), getDesc(), repliesEntity);
+  }
+  public void print(){
+      for (RepliesAttributes reply:replies) {
+
+          System.out.println(reply.getDesc());
+      }
   }
 
   @Override
@@ -83,26 +106,41 @@ public static Builder builder(String name, String desc) {
 
   @Override
   public void sanitizeForSaving() {
-    // TODO Auto-generated method stub
-    
+
+
+  }
+
+  public static ArrayList<RepliesAttributes> getRepliesAtt(ArrayList<Reply> replies)
+  {
+    if(replies != null)
+    {
+      ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
+      for(Reply reply:replies)
+      {
+        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName()));
+      }      
+      return repliesAtt;
+    }
+    return null;
   }
 
 
-  
-  
-  
+
+
 
 public static class Builder {
     private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
     private final TopicAttributes topicAttributes;
 
-    public Builder(String name, String desc) {
-        validateRequiredFields(name, desc);
-        topicAttributes = new TopicAttributes(name, desc);
+    public Builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
+       // validateRequiredFields(name, desc);
+        ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
+        
+        topicAttributes = new TopicAttributes(topicID, name, desc, repliesAtt);
     }
 
-    
-    
+
+
 
     public TopicAttributes build() {
         return topicAttributes;
@@ -112,7 +150,7 @@ public static class Builder {
         for (Object object : objects) {
             Assumption.assertNotNull(REQUIRED_FIELD_CANNOT_BE_NULL, object);
         }
-    }    
+    }
 }
 
 }

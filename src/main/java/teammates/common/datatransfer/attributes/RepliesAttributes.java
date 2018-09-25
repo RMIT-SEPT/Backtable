@@ -1,6 +1,7 @@
 package teammates.common.datatransfer.attributes;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import teammates.storage.entity.Reply;

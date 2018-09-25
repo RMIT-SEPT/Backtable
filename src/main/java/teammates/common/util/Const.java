@@ -226,6 +226,7 @@ public final class Const {
         public static final String TOPIC_DETAILS = "View Discussion Board Topics";
 
         public static final String COURSE_EDIT = "Edit Course information and instructor list";
+        public static final String TOPIC_EDIT = "Edit Topic name and description";
         public static final String COURSE_DELETE = "Delete the course and its corresponding students and sessions";
         public static final String COURSE_ARCHIVE =
                 "Archive the course so that it will not be shown in the home page any more "
@@ -624,7 +625,9 @@ public final class Const {
 
         public static final String TOPIC_DESC = "topicdesc";
         public static final String TOPIC_NAME = "topicname";
-       
+        public static final String TOPIC_ID = "topicId";
+        public static final String REPLY_DESC = "replyDesc";
+
 
         public static final String IS_USING_AJAX = "isusingAjax";
         public static final String IS_STUDENT_REJOINING = "isstudentrejoining";
@@ -1082,15 +1085,21 @@ public final class Const {
 
         public static final String BACKDOOR = "/backdoor";
 
-       
-        
-        
+
+
+
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
         public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/instructorDiscussionBoardAddTopic";
         public static final String STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/studentDiscussionBoardAddTopic";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/instructorDiscussionBoardDeleteTopic";
         public static final String STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/studentDiscussionBoardDeleteTopic";
+        public static final String STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/studentDiscussionBoardEditTopic";
+        public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/studentDiscussionBoardTopicEditSave";
+        public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/page/instructorRepliesBoard";
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
-        
+        public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE = "/page/studentRepliesBoardAddReply";
+
 
     }
 
@@ -1245,8 +1254,11 @@ public final class Const {
         public static final String TIMEZONE = "/test/timezone.jsp";
 
         public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/jsp/studentDiscussionBoard.jsp";
+        public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT = "/jsp/studentDiscussionBoardTopicEdit.jsp";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/jsp/instructorDiscussionBoard.jsp";
         public static final String STUDENT_REPLIES_BOARD_PAGE="/jsp/studentRepliesBoard.jsp";
+        public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE ="/jsp/studentRepliesBoard.jsp";
+        public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/jsp/instructorRepliesBoard.jsp";
     }
 
     /* These are status messages that may be shown to the user */

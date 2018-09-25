@@ -1,3 +1,4 @@
+
 package teammates.ui.pagedata;
 
 import teammates.common.util.Const;
@@ -15,37 +16,29 @@ import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 
-public class StudentRepliesBoardPageData extends PageData {
-   
-  public TopicAttributes topic;
-  
-  public StudentRepliesBoardPageData(AccountAttributes account, String sessionToken) {
-    super(account, sessionToken);
-  }
-  
-  public void init(TopicAttributes topic) {
-      this.topic = topic;
-}
-  
-  public List<RepliesAttributes> getReplies() {
-      return topic.replies;
-  }
-  
-  public String getDesc() {
-      return topic.getDesc();
-  }
-  
-  public String getName() {
-      return topic.getName();
-  }
+public class StudentRepliesBoardAddReplyPage extends PageData {
 
-    public String getID() {
-        return topic.getId();
+    public TopicAttributes topic;
+
+    public StudentRepliesBoardAddReplyPage(AccountAttributes account, String sessionToken) {
+        super(account, sessionToken);
     }
 
-
-    public TopicAttributes getTopic() {
-        return topic;
+    public void init(TopicAttributes topic) {
+        this.topic = topic;
     }
+
+    public List<RepliesAttributes> getReplies() {
+        return topic.replies;
+    }
+
+    public String getDesc() {
+        return topic.getDesc();
+    }
+
+    public String getName() {
+        return topic.getName();
+    }
+
 
 }

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package teammates.ui.controller;
 
 import java.util.ArrayList;
@@ -6,6 +9,7 @@ import java.util.UUID;
 
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
+import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
@@ -13,20 +17,21 @@ import teammates.common.util.Logger;
 import teammates.common.util.StatusMessage;
 import teammates.common.util.StatusMessageColor;
 import teammates.storage.entity.Reply;
-import teammates.ui.pagedata.StudentDiscussionBoardPageData;
+import teammates.ui.pagedata.InstructorDiscussionBoardPageData;
 
 /**
- * Action: Student create a topic.
+ * @author Christina
+ *
  */
-public class StudentDiscussionBoardTopicAddAction extends Action { 
+public class InstructorDiscussionBoardTopicAddAction extends Action{
+
     private static final Logger log = Logger.getLogger();
-    StudentDiscussionBoardPageData data;
+    InstructorDiscussionBoardPageData data;
+   
     
     @Override
-    public ActionResult execute() {
-
+    protected ActionResult execute() throws EntityDoesNotExistException {
         String uniqueID = UUID.randomUUID().toString();
-        account.studentProfile = logic.getStudentProfile(account.googleId);
         
        //Request the value from front-end for TopicAttribute initiation
         String newTopicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
@@ -36,30 +41,22 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
 
 
         System.out.println(newTopicName + "    " + newTopicDesc);
-        
-        data = new StudentDiscussionBoardPageData(account, sessionToken);
+
+        data = new InstructorDiscussionBoardPageData(account, sessionToken);
 
         //Initiate a TopicAttribute - the following behaviours of this function will help to store the data into database
-        createTopic(uniqueID, newTopicName, newTopicDesc, new ArrayList<Reply>());
+        createTopic(uniqueID, newTopicName, newTopicDesc);
 
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
         data.init(allTopics);
         //Redirect the page to Discussion board page.
-        return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
-        
+        return createShowPageResult(Const.ViewURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE, data);
     }
-
-    /**
-     * Create a topic and check if it already exists or not if yes, throw exception
-     * @param newTopicName name should be unique
-     * @param newTopicDesc
-     *
-     */
     
-    private void createTopic(String uniqueID, String newTopicName, String newTopicDesc, ArrayList<Reply> replies) {
+    private void createTopic(String uniqueID, String newTopicName, String newTopicDesc) {
         try {
-            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc, replies);
+            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc, new ArrayList<Reply>());
             statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
             isError = false;
         } catch (EntityAlreadyExistsException e) {
@@ -69,7 +66,4 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
         }
     }
 
-
-    
-    
 }
