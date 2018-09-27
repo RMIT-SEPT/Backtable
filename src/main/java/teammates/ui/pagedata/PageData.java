@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.mailjet.client.resource.Contact;
+
 import teammates.common.datatransfer.CourseRoster;
 import teammates.common.datatransfer.FeedbackParticipantType;
 import teammates.common.datatransfer.attributes.AccountAttributes;
@@ -317,7 +319,15 @@ public class PageData {
         link = addUserIdToUrl(link);
         return link;
     }
-
+    
+    public String getReplyBoardEditLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLIES_EDIT_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        return link;
+    }
+   
 
     public String getInstructorDiscussionBoardDetailsLink(String topicName, String topicId) {
         String link = Const.ActionURIs.INSTRUCTOR_REPLIES_BOARD_PAGE;

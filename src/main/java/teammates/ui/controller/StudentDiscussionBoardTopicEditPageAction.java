@@ -17,7 +17,7 @@ import teammates.common.datatransfer.attributes.TopicAttributes;
          TopicAttributes topic = logic.getTopic(topicId);
          System.out.println("Editing Topic: " + topic.getName() + ", " + topic.getDesc());
          StudentDiscussionBoardTopicEditPageData data =
-                new StudentDiscussionBoardTopicEditPageData(account, sessionToken, topic);
+                new StudentDiscussionBoardTopicEditPageData(account, sessionToken, topic, topic.getCount());
          return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_TOPIC_EDIT, data);
      }
  }

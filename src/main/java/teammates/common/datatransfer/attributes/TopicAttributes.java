@@ -18,18 +18,20 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public String id;
   public String name;
   public String desc;
+  public Integer count;
   public ArrayList<RepliesAttributes> replies;
 
-  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies) {
+  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count) {
       this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.name = SanitizationHelper.sanitizeTitle(name);
       this.desc = SanitizationHelper.sanitizeTitle(desc);
       this.replies = replies;
+      this.count = count;
   }
 
 /*Builder is used as a constructor to initiate instance of TopicAttribute*/
-public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
-      return new Builder(topicID, name, desc, replies);
+public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count) {
+      return new Builder(topicID, name, desc, replies, count);
   }
 
   public String getId() {
@@ -43,7 +45,9 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
    public String getDesc() {
      return desc;
    }
-
+   public Integer getCount()    {
+       return count;
+   }
    
    public ArrayList<RepliesAttributes> getReplies(){
        return replies;
@@ -51,7 +55,18 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
  
    public void addReply(RepliesAttributes reply)
    {
+     if(replies == null)
+     {
+         replies = new ArrayList<RepliesAttributes>();
+     }
      replies.add(reply);
+     count++;
+     
+   }
+   
+   public void setReplies(ArrayList<RepliesAttributes> replies)
+   {
+       this.replies = replies;
    }
 
 
@@ -67,11 +82,14 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
   @Override
   public Topic toEntity() {
     ArrayList<Reply> repliesEntity = new ArrayList<Reply>();
-    for(RepliesAttributes replyAtt: getReplies())
+    if(getReplies() != null)
     {
-      repliesEntity.add(replyAtt.toEntity());
+        for(RepliesAttributes replyAtt: getReplies())
+        {
+          repliesEntity.add(replyAtt.toEntity());
+        }
     }
-      return new Topic(getId(), getName(), getDesc(), repliesEntity);
+    return new Topic(getId(), getName(), getDesc(), repliesEntity, count);
   }
   public void print(){
       for (RepliesAttributes reply:replies) {
@@ -117,7 +135,7 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
       ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
       for(Reply reply:replies)
       {
-        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName()));
+        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId()));
       }      
       return repliesAtt;
     }
@@ -132,11 +150,11 @@ public static class Builder {
     private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
     private final TopicAttributes topicAttributes;
 
-    public Builder(String topicID, String name, String desc, ArrayList<Reply> replies) {
+    public Builder(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count) {
        // validateRequiredFields(name, desc);
         ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
         
-        topicAttributes = new TopicAttributes(topicID, name, desc, repliesAtt);
+        topicAttributes = new TopicAttributes(topicID, name, desc, repliesAtt, count);
     }
 
 

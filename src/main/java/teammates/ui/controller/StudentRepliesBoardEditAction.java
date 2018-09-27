@@ -5,14 +5,15 @@ import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
 import teammates.common.util.Logger;
+import teammates.ui.pagedata.StudentRepliesBoardEditPageData;
 import teammates.ui.pagedata.StudentRepliesBoardPageData;
 
 /**
  * Action: showing the profile page for a student in a course.
  */
-public class StudentRepliesBoardPageAction extends Action {
+public class StudentRepliesBoardEditAction extends Action {
 
-    StudentRepliesBoardPageData data;
+    StudentRepliesBoardEditPageData data;
     TopicAttributes topic;
     private static final Logger log = Logger.getLogger();
 
@@ -22,12 +23,19 @@ public class StudentRepliesBoardPageAction extends Action {
         String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
         
-        account.studentProfile = logic.getStudentProfile(account.googleId);
-        data = new StudentRepliesBoardPageData(account, sessionToken);
-        topic = logic.getTopic(topicId);
-        data.init(topic);
+        String replyId = getRequestParamValue(Const.ParamsNames.REPLY_ID);
+        Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_ID,  replyId);
         
-        return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
+        account.studentProfile = logic.getStudentProfile(account.googleId);
+        
+        
+        data = new StudentRepliesBoardEditPageData(account, sessionToken);
+        
+        topic = logic.getTopic(topicId);
+        
+        data.init(topic, getReplyWithId(topic.getReplies(), Integer.parseInt(replyId)));
+        
+        return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_EDIT_PAGE, data);
     }
 
 }
