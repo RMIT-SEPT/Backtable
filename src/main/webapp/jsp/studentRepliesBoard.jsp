@@ -9,9 +9,9 @@
 <%@ taglib tagdir="/WEB-INF/tags/student/ReplyBoard" prefix="tsr" %>
 <%@ page import="teammates.common.util.Const" %>
 <c:set var="jsIncludes">
-  
 </c:set>
 <ts:studentPage title="Replies Board" jsIncludes="${jsIncludes}" >
+
 <tsd:topicDetails name="${data.name}" desc="${data.desc}" />
 
 <c:forEach items="${data.replies}" var= "reply">
@@ -25,6 +25,8 @@
   There are currently no responses for you for this feedback session.
 </div>
 </c:if>
+
+<br><br>
     <tsr:replyForm topicID="${data.topic.id}"/>
   
   

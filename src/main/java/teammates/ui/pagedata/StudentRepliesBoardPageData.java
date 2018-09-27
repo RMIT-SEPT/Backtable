@@ -35,6 +35,7 @@ public class StudentRepliesBoardPageData extends PageData {
           replies = new ArrayList<RepliesDiv>();
           convertReplies(topic.getReplies());
       }
+
   }
   
   public ArrayList<RepliesDiv> getReplies()
@@ -62,7 +63,7 @@ public class StudentRepliesBoardPageData extends PageData {
     private void convertReplies(List<RepliesAttributes> replies) {
 
         int idx = -1;
-
+        
         for (RepliesAttributes reply : replies) {
           idx++;
 
