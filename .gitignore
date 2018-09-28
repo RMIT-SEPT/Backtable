@@ -1,7 +1,3 @@
 /.gradle/
 
-src/test/java/teammates/test/cases/browsertests/StudentDiscussionBoardPageUiTest.java
-
-src/test/java/teammates/test/cases/datatransfer/TopicAttributesTest.java
-
-src/test/java/teammates/test/cases/logic/TopicsLogicTest.java
+src/test/java/teammates/test/cases/**/
