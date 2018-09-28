@@ -38,7 +38,7 @@ before_script:
 
   - ./gradlew createConfigs testClasses
   - ./gradlew downloadStaticAnalysisTools
-  - ./gradlew lint --continue
+
   - npm install
   - npm run lint
 
