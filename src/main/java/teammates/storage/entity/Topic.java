@@ -25,7 +25,7 @@ public class Topic extends BaseEntity {
      */
     @Id
     private String topicID;
-    
+    private Integer count;
     private String name;
     private String desc;
     private ArrayList<Reply> replies;
@@ -35,13 +35,18 @@ public class Topic extends BaseEntity {
        // required by Objectify
    }
 
-    public Topic(String id,String name, String desc, ArrayList<Reply> replies) {
+    public Topic(String id,String name, String desc, ArrayList<Reply> replies, Integer count) {
         this.topicID = id;
         this.setName(name);
         this.setDesc(desc);
         this.replies = replies;
+        this.count = count;
     }
-
+    
+    public Integer getCount()
+    {
+        return count;
+    }
    
     private void setDesc(String desc) {
         this.desc = desc;

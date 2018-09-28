@@ -52,9 +52,9 @@ public class TopicsLogic {
      *
      */
 
-  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String name, String desc, ArrayList<Reply> replies) throws InvalidParametersException{
+  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count) throws InvalidParametersException{
       Assumption.assertNotNull("Non-null value expected", name);
-      return TopicAttributes.builder(topicID, name,desc, replies).build();
+      return TopicAttributes.builder(topicID, name,desc, replies, count).build();
   }
 
     /**
@@ -63,31 +63,12 @@ public class TopicsLogic {
      * via createEntity() function.
      *
      */
-  public void createTopic(String topicID, String name, String desc, ArrayList<Reply> replies)
+  public void createTopic(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count)
       throws InvalidParametersException, EntityAlreadyExistsException {
 
         System.out.println(name);
-        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc, replies); 
-        
-        
-        topicToAdd.addReply(new RepliesAttributes("This is the description of test reply", "Luke Sewart"));
-        topicToAdd.addReply(new RepliesAttributes("This is the description of test reply2", "Luke Sewart2"));
-        
-        
-        List<RepliesAttributes> test = topicToAdd.getReplies();
-
-        topicsDb.createEntity(topicToAdd);
-        TopicAttributes topicTest = topicsDb.getTopic(topicToAdd.getId());
-        List<RepliesAttributes> test2 = topicTest.getReplies();
-        for(RepliesAttributes reply1 : test2)
-        {
-          System.out.println("post storage:");
-          System.out.print(reply1.getDesc());
-        }
-        topicTest.addReply(new RepliesAttributes("New description of reply 3", "Luke Sewart"));
-        topicsDb.saveEntity(topicTest.toEntity());
-        
-        
+        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc, replies, count); 
+        topicsDb.createEntity(topicToAdd);       
     System.out.println("Topic entity has been created...");
   }
 
@@ -188,7 +169,7 @@ public class TopicsLogic {
           throws InvalidParametersException, EntityAlreadyExistsException {
 
 
-    createTopic(topicID, topicName, topicDesc, replies);
+    createTopic(topicID, topicName, topicDesc, replies, 0);
 
     /* Create the initial instructor for the course */
 

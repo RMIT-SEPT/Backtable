@@ -26,14 +26,12 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
     protected ActionResult execute() {
         //getting topic name at the moment, whereas would be better to use topic id
         String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
-
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
         String replyDesc = getRequestParamValue(Const.ParamsNames.REPLY_DESC);
         Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_DESC, replyDesc);
-
         topic = logic.getTopic(topicId);
-        String replyID = UUID.randomUUID().toString();
-        RepliesAttributes newReply = new RepliesAttributes(replyDesc,replyID);
+        
+        RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount());
         topic.addReply(newReply);
         try {
             logic.updateTopic(topic);
@@ -42,8 +40,9 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
         } catch (EntityDoesNotExistException e) {
             e.printStackTrace();
         }
+        
         data = new StudentRepliesBoardPageData(account, sessionToken);
-        System.out.println("made it to this point");
+        System.out.println(account.getName());
         data.init(topic);
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
     }
