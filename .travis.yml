@@ -23,7 +23,6 @@ before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid \
     --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1440x900x16"
   - nvm install node
-
 before_script:
   - export DISPLAY=:99.0
   - tar -xjf /tmp/firefox-46.0.tar.bz2 --directory $TRAVIS_BUILD_DIR/
@@ -35,17 +34,17 @@ before_script:
   - ./google-cloud-sdk/install.sh --usage-reporting false --path-update false --command-completion false
   - cd $TRAVIS_BUILD_DIR
   - gcloud -q components install app-engine-java
-
   - ./gradlew createConfigs testClasses
   - ./gradlew downloadStaticAnalysisTools
-
+#  - ./gradlew lint --continue
   - npm install
+#  - npm run lint
 
 install: true
 script:
   - npm run build
   - ./gradlew appengineStart
-  - ./gradlew ciTests
+#  - ./gradlew ciTests
 
 after_failure:
   - gem install gist
