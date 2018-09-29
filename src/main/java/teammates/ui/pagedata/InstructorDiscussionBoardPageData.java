@@ -82,11 +82,16 @@ public class InstructorDiscussionBoardPageData extends PageData {
           ElementTag viewButton = createButton("View Replies", "btn btn-default topic_view" + idx, "",
                                                getInstructorDiscussionBoardDetailsLink(topic.getName(), topic.getId()),
                                                Const.Tooltips.TOPIC_DETAILS, false);
+          ElementTag editButton = createButton("Edit Topic", "btn btn-warning topic_edit" + idx, "",
+                  getInstructorDiscussionBoardEditLink(topic.getName(), topic.getId()),
+                  Const.Tooltips.TOPIC_EDIT, false);
           ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete" + idx, "",
                   getInstructorDiscussionBoardDeleteLink(topic.getName(), topic.getId()),
                   Const.Tooltips.TOPIC_DELETE, false);
           actionsParam.add(viewButton);
+          actionsParam.add(editButton);
           actionsParam.add(deleteButton);
+          
 
           ActiveTopicsTableRow row = new ActiveTopicsTableRow(topic.getId(), sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
           activeTopics.getRows().add(row);

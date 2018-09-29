@@ -1103,6 +1103,8 @@ public final class Const {
         public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE = "/page/studentRepliesBoardAddReply";
         public static final String STUDENT_REPLIES_EDIT_PAGE ="/page/studentRepliesBoardEditReply";
         public static final String STUDENT_REPLIES_BOARD_EDIT_SAVE = "/page/studentRepliesBoardEditSave";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/instructDiscussionBoardEditTopic";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/instructorDiscussionBoardTopicEditSave";
 
 
     }
@@ -1264,6 +1266,7 @@ public final class Const {
         public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE ="/jsp/studentRepliesBoard.jsp";
         public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/jsp/instructorRepliesBoard.jsp";
         public static final String STUDENT_REPLIES_EDIT_PAGE ="/jsp/studentRepliesBoardEdit.jsp";
+        public static final String INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT="/jsp/instructorDiscussionBoardTopicEdit.jsp";
     }
 
     /* These are status messages that may be shown to the user */
