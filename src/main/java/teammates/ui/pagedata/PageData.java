@@ -351,6 +351,13 @@ public class PageData {
         link = addUserIdToUrl(link);
         return link;
     }
+    public String getInstructorDiscussionBoardEditLink(String topicName, String topicId) {
+        String link = Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
 
     public String getInstructorCourseEditLink(String courseId) {
         String link = Const.ActionURIs.INSTRUCTOR_COURSE_EDIT_PAGE;

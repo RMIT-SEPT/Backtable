@@ -139,6 +139,7 @@ public class ActionFactory {
         map(INSTRUCTOR_DISCUSSION_BOARD_PAGE, InstructorDiscussionBoardPageAction.class);
         map(INSTRUCTOR_DISCUSSION_BOARD_ADD_TOPIC_PAGE, InstructorDiscussionBoardTopicAddAction.class);
         map(INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE, InstructorDiscussionBoardTopicDeleteAction.class);
+        map(INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE, InstructorDiscussionBoardTopicEditPageAction.class);
         
         map(INSTRUCTOR_REPLIES_BOARD_PAGE, InstructorRepliesBoardPageAction.class);
         map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
