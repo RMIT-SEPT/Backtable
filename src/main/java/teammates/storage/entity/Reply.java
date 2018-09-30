@@ -15,6 +15,7 @@ public class Reply extends BaseEntity {
   private String desc;
   private String studentName;
   private Integer id;
+  private String dateTime;
   
   // TODO: change to `java.time.Instant` once we have upgraded to Objectify 6
   private Date createdAt;
@@ -24,10 +25,11 @@ public class Reply extends BaseEntity {
       // required by Objectify
   }
   
-  public Reply(String desc, String studentName, Integer id) {
+  public Reply(String desc, String studentName, Integer id, String dateTime) {
     this.setDesc(desc);
     this.setStudentName(studentName);
     this.setId(id);
+    this.setDateTime(dateTime);
 }
   public String getDesc() {
     return desc;
@@ -38,6 +40,13 @@ public class Reply extends BaseEntity {
   public Integer getId()
   {
       return id;
+  }
+  public String getDateTime()
+  {
+    return dateTime;
+  }
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
   public void setId(Integer id)
   {

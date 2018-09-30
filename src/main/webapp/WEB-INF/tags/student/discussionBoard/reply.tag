@@ -6,7 +6,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">  
-    <b><c:out value="${reply.name}"  /></b> posted at (TimeStamp will go here):</br>        
+    <b><c:out value="${reply.name}"  /></b> ${reply.dateTime}:</br>        
       <div class="panel-body">
         <c:out value="${reply.desc}"   /></br>    
      </div> 

@@ -135,7 +135,7 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
       ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
       for(Reply reply:replies)
       {
-        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId()));
+        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime()));
       }      
       return repliesAtt;
     }

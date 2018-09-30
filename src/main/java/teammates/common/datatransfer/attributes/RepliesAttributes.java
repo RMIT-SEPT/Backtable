@@ -13,6 +13,7 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
   private String desc;
   private String studentName;
   public Integer id;
+  private String dateTime;
   
   public String getDesc() {
     return desc;
@@ -21,11 +22,12 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
     return studentName;
   }
   
-  public RepliesAttributes(String desc, String studentName, Integer count)
+  public RepliesAttributes(String desc, String studentName, Integer count, String dateTime)
   {
     this.desc = desc;
     this.studentName = studentName;
     this.id = count;
+    this.dateTime = dateTime;
   }
   @Override
   public List<String> getInvalidityInfo() {
@@ -38,6 +40,10 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
       return id;
   }
   
+  public String getDateTime() {
+    return dateTime;
+  }
+  
   public void setDesc(String desc)
   {
       this.desc = desc;
@@ -46,7 +52,7 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
   @Override
   public Reply toEntity() {
     // TODO Auto-generated method stub
-    return new Reply(getDesc(), getStudent(), getId());
+    return new Reply(getDesc(), getStudent(), getId(), getDateTime());
   }
 
   @Override
