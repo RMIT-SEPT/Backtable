@@ -40,7 +40,7 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy EEE MMM dd hh:mm");
         dateTime = formatter.format(today);
         System.out.println(dateTime);
-        RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount(), dateTime);
+        RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount(), dateTime,0,0);
         topic.addReply(newReply);
         try {
             logic.updateTopic(topic);

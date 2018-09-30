@@ -327,6 +327,20 @@ public class PageData {
         link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
         return link;
     }
+    public String getReplyUpVoteLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLIES_LIKE_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        return link;
+    }
+    public String getReplyDownVoteLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLIES_DISLIKE_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        return link;
+    }
    
 
     public String getInstructorDiscussionBoardDetailsLink(String topicName, String topicId) {

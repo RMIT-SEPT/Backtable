@@ -225,6 +225,8 @@ public final class Const {
         public static final String COURSE_DETAILS = "View, edit and send invitation emails to the students in the course";
         public static final String TOPIC_DETAILS = "View Discussion Board Topics";
         public static final String REPLY_EDIT = "Edit Reply";
+        public static final String REPLY_UP_VOTE = " Like";
+        public static final String REPLY_DOWN_VOTE = " Dislike";
 
         public static final String COURSE_EDIT = "Edit Course information and instructor list";
         public static final String TOPIC_EDIT = "Edit Topic name and description";
@@ -1102,6 +1104,10 @@ public final class Const {
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
         public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE = "/page/studentRepliesBoardAddReply";
         public static final String STUDENT_REPLIES_EDIT_PAGE ="/page/studentRepliesBoardEditReply";
+
+        public static final String STUDENT_REPLIES_LIKE_PAGE ="/page/studentRepliesBoardLikeReply";
+
+        public static final String STUDENT_REPLIES_DISLIKE_PAGE ="/page/studentRepliesBoardDislikeReply";
         public static final String STUDENT_REPLIES_BOARD_EDIT_SAVE = "/page/studentRepliesBoardEditSave";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/instructDiscussionBoardEditTopic";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/instructorDiscussionBoardTopicEditSave";
