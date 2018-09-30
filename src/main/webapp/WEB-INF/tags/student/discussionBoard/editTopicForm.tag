@@ -38,7 +38,7 @@
       <div class="form-group">
         <label class="col-sm-3 control-label">Topic Name:</label>
         <div class="col-sm-3">
-          <input class="form-control" type="text"
+          <input class="form-control toggle_inputs_" type="text"
             name="<%=Const.ParamsNames.TOPIC_NAME%>" id="<%=Const.ParamsNames.TOPIC_NAME%>"
             value="${topicName}" data-toggle="tooltip" data-placement="top"
             tabindex="1" disabled/>
@@ -49,7 +49,7 @@
         <label class="col-sm-3 control-label">Topic Description:</label>
         <div class="col-sm-9">
           <textarea style="max-width:100%; max-height:30%;"
-            class="form-control" cols="20" rows="10"
+            class="form-control toggle_inputs_" cols="20" rows="10"
             name="<%=Const.ParamsNames.TOPIC_DESC%>" id="<%=Const.ParamsNames.TOPIC_DESC%>"
             value="${topicDesc}" data-toggle="tooltip" data-placement="top"
             tabindex=2 disabled>${topicDesc}</textarea>
@@ -58,10 +58,12 @@
 
       <div class="form-group">
         <div class=" col-sm-12 align-center">
-          <input type="submit" class="btn btn-primary" id="btnEditTopic" name="btnEditTopic"
-              style="display:none;" value="Save Changes">
+          <input type="submit" class="btn btn-primary" id="btnSaveTopic" name="btnSaveTopic"
+            style="display:none;" value="Save Changes">
         </div>
       </div>
+
+      <input type="hidden" name="<%=Const.ParamsNames.USER_ID%>" value="${data.account.googleId}">
     </form>
   </div>
 </div>

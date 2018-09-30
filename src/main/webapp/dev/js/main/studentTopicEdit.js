@@ -11,6 +11,14 @@ import {
     scrollToElement,
 } from '../common/scrollTo';
 
+function editTopic() {
+    $('#btnSaveTopic').show();
+    $('.toggle_inputs_').prop('disabled', false);
+    // $(`#${ParamsNames.TOPIC_NAME}`).prop('disabled', false);
+    // $(`#${ParamsNames.TOPIC_DESC}`).prop('disabled', false);
+    $('#btnEditTopic').hide();
+}
+
 function bindDeleteButtons() {
     $('body').on('click', '.topic_delete_', (event) => {
         event.preventDefault();
@@ -33,4 +41,6 @@ function bindDeleteButtons() {
 
 $(document).ready(() => {
   bindDeleteButtons();
+
+  $('#btnEditTopic').click(editTopic);
 });
