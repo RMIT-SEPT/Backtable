@@ -29,7 +29,7 @@ public class StudentDiscussionBoardTopicEditSaveAction extends Action {
 
         System.out.println(topicId + ", " + editedTopicName + ", " + editedTopicDesc);
 
-        TopicAttributes editedTopic = new TopicAttributes(topicId, editedTopicName, editedTopicDesc, replies, logic.getTopic(topicId).getCount());
+        TopicAttributes editedTopic = new TopicAttributes(topicId, editedTopicName, editedTopicDesc, replies, logic.getTopic(topicId).getCount(),logic.getTopic(topicId).getViewCounter());
 
         TopicsLogic.getTopicsDb().saveEntity(editedTopic.toEntity());
 

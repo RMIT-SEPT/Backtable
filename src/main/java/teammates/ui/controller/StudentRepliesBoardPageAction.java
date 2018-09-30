@@ -2,6 +2,8 @@ package teammates.ui.controller;
 
 import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
+import teammates.common.exception.EntityDoesNotExistException;
+import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
 import teammates.common.util.Logger;
@@ -25,8 +27,17 @@ public class StudentRepliesBoardPageAction extends Action {
         account.studentProfile = logic.getStudentProfile(account.googleId);
         data = new StudentRepliesBoardPageData(account, sessionToken);
         topic = logic.getTopic(topicId);
+
+        topic.setViewCounter(topic.getViewCounter() + 1);
         data.init(topic);
-        
+        try {
+            logic.updateTopic((topic));
+        } catch (InvalidParametersException e) {
+            e.printStackTrace();
+        } catch (EntityDoesNotExistException e) {
+            e.printStackTrace();
+        }
+
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
     }
 

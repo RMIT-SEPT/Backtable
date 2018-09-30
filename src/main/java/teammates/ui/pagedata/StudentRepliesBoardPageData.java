@@ -23,8 +23,36 @@ public class StudentRepliesBoardPageData extends PageData {
    
   public TopicAttributes topic;
   public ArrayList<RepliesDiv> replies;
-  
-  public StudentRepliesBoardPageData(AccountAttributes account, String sessionToken) {
+  public Integer count;
+
+    public Integer getViewcount() {
+        return viewcount;
+    }
+
+    public void setViewcount(Integer viewcount) {
+        this.viewcount = viewcount;
+    }
+
+    public Integer viewcount;
+
+
+    public void setTopic(TopicAttributes topic) {
+        this.topic = topic;
+    }
+
+    public void setReplies(ArrayList<RepliesDiv> replies) {
+        this.replies = replies;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public StudentRepliesBoardPageData(AccountAttributes account, String sessionToken) {
     super(account, sessionToken);
   }
   
@@ -35,6 +63,8 @@ public class StudentRepliesBoardPageData extends PageData {
           replies = new ArrayList<RepliesDiv>();
           convertReplies(topic.getReplies());
       }
+      this.count = topic.getCount();
+      this.viewcount = topic.getViewCounter();
 
   }
   
