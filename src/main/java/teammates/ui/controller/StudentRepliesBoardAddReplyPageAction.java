@@ -2,6 +2,9 @@
 package teammates.ui.controller;
 
 import teammates.common.datatransfer.attributes.RepliesAttributes;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
@@ -21,6 +24,8 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
     StudentRepliesBoardPageData data;
     TopicAttributes topic;
     private static final Logger log = Logger.getLogger();
+    String dateTime;
+
 
     @Override
     protected ActionResult execute() {
@@ -31,7 +36,11 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
         Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_DESC, replyDesc);
         topic = logic.getTopic(topicId);
         
-        RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount());
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy EEE MMM dd hh:mm");
+        dateTime = formatter.format(today);
+        System.out.println(dateTime);
+        RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount(), dateTime);
         topic.addReply(newReply);
         try {
             logic.updateTopic(topic);

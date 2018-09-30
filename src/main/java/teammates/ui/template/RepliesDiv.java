@@ -6,7 +6,7 @@ public class RepliesDiv {
     private String name;
     private String desc;
     private String id;
-    
+    private String dateTime;
     
     private String createdAtDateString;
     private String createdAtDateStamp;
@@ -15,18 +15,23 @@ public class RepliesDiv {
     
     private List<ElementTag> actions;
 
-    public RepliesDiv(String name, String id, String desc, List<ElementTag> actionsParam) {
+    public RepliesDiv(String name, String id, String desc, List<ElementTag> actionsParam, String dateTime) {
         
         this.name = name;
         this.desc = desc;
         this.id = id;
         this.actions = actionsParam;
+        this.dateTime = dateTime;
     }
 
     public String getId() {
         return id;
     }
 
+    public String getDateTime()
+    {
+      return dateTime;
+    }
     public String getName() {
         return name;
     }

@@ -105,7 +105,7 @@ public class StudentRepliesBoardPageData extends PageData {
        
           actionsParam.add(editButton);
           
-          this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam));
+          this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime()));
 
         }
     }
