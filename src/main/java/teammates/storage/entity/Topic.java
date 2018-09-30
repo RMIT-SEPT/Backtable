@@ -26,6 +26,17 @@ public class Topic extends BaseEntity {
     @Id
     private String topicID;
     private Integer count;
+
+    private Integer viewcount;
+
+    public Integer getViewcount() {
+        return viewcount;
+    }
+
+    public void setViewcount(Integer viewcount) {
+        this.viewcount = viewcount;
+    }
+
     private String name;
     private String desc;
     private ArrayList<Reply> replies;
@@ -35,12 +46,13 @@ public class Topic extends BaseEntity {
        // required by Objectify
    }
 
-    public Topic(String id,String name, String desc, ArrayList<Reply> replies, Integer count) {
+    public Topic(String id,String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewcount) {
         this.topicID = id;
         this.setName(name);
         this.setDesc(desc);
         this.replies = replies;
         this.count = count;
+        this.viewcount = viewcount;
     }
     
     public Integer getCount()

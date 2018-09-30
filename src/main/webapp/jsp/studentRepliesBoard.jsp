@@ -12,7 +12,7 @@
 </c:set>
 <ts:studentPage title="Replies Board" jsIncludes="${jsIncludes}" >
 
-<tsd:topicDetails name="${data.name}" desc="${data.desc}" />
+<tsd:topicDetails name="${data.name}" desc="${data.desc}" view ="${data.viewcount}" />
 
 <c:forEach items="${data.replies}" var= "reply">
     <tsd:reply reply="${reply}">
