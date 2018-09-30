@@ -10,13 +10,20 @@
 <%@ attribute name="name" required="true" %> 
 <%@ attribute name="desc" required="true" %>
 
+<%@ attribute name="view" required="true" %>
+
 
 <div class="well well-plain">
-    <label class="bold-label"  style="color:#3679B2; font-size:large;">${data.name}</label>
+    <label class="bold-label"  style="color:#3679B2; font-size:large;">${name}</label>
   <br>
     <label class="label-control">
     <br>
-    ${data.desc}
+    ${desc}
     </label>
+  <br>
+  <label class="label-control">
+    <br>
+    Total views: ${view}
+  </label>
   <br>
 </div>

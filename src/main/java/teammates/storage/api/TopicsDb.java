@@ -132,7 +132,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     protected TopicAttributes makeAttributes(Topic entity) {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
 
-      return TopicAttributes.builder(entity.getId(), entity.getName(), entity.getDesc(), entity.getReplies(), entity.getCount())
+      return TopicAttributes.builder(entity.getId(), entity.getName(), entity.getDesc(), entity.getReplies(), entity.getCount(),entity.getViewcount())
               .build();
     }
 
@@ -163,7 +163,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
         // only the courseId is important here, everything else are placeholders
         deleteEntity(TopicAttributes
-                .builder(topicID, null, null, null, null)
+                .builder(topicID, null, null, null, null,null)
                 .build());
 
 
