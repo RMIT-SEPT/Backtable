@@ -7,11 +7,16 @@
 <%@ taglib tagdir="/WEB-INF/tags/student/discussionBoard" prefix="tsd" %>
 <%@ taglib tagdir="/WEB-INF/tags/student/ReplyBoard" prefix="tsr" %>
 
-<ts:studentPage title="Edit Reply">
+<c:set var="jsIncludes">
+  <script type="text/javascript" src="/js/studentReplyEdit.js"></script>
+</c:set>
+
+<ts:studentPage title="Edit Reply" jsIncludes="${jsIncludes}">
   <tsr:editReplyForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"
       topicId="${data.topic.id}"
       replyId="${data.reply.id}"
-      replyDesc="${data.reply.desc}"/>
+      replyDesc="${data.reply.desc}"
+      editReplyButton="${data.editReplyButton}"/>
 </ts:studentPage>

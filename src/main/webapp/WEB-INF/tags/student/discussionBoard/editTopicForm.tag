@@ -57,7 +57,7 @@
       </div>
 
       <div class="form-group">
-        <div class=" col-sm-12 align-center">
+        <div class="col-sm-12 align-center">
           <input type="submit" class="btn btn-primary" id="btnSaveTopic" name="btnSaveTopic"
             style="display:none;" value="Save Changes">
         </div>

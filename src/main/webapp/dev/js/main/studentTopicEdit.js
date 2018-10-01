@@ -14,8 +14,6 @@ import {
 function editTopic() {
     $('#btnSaveTopic').show();
     $('.toggle_inputs_').prop('disabled', false);
-    // $(`#${ParamsNames.TOPIC_NAME}`).prop('disabled', false);
-    // $(`#${ParamsNames.TOPIC_DESC}`).prop('disabled', false);
     $('#btnEditTopic').hide();
 }
 
