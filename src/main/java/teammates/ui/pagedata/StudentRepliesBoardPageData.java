@@ -20,7 +20,7 @@ import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 
 public class StudentRepliesBoardPageData extends PageData {
-   
+
   public TopicAttributes topic;
   public ArrayList<RepliesDiv> replies;
   public Integer count;
@@ -55,7 +55,7 @@ public class StudentRepliesBoardPageData extends PageData {
     public StudentRepliesBoardPageData(AccountAttributes account, String sessionToken) {
     super(account, sessionToken);
   }
-  
+
   public void init(TopicAttributes topic) {
       this.topic = topic;
       if(topic.getReplies() != null)
@@ -67,16 +67,16 @@ public class StudentRepliesBoardPageData extends PageData {
       this.viewcount = topic.getViewCounter();
 
   }
-  
+
   public ArrayList<RepliesDiv> getReplies()
   {
       return replies;
   }
-  
+
   public String getDesc() {
       return topic.getDesc();
   }
-  
+
   public String getName() {
       return topic.getName();
   }
@@ -93,43 +93,43 @@ public class StudentRepliesBoardPageData extends PageData {
     private void convertReplies(List<RepliesAttributes> replies) {
 
         int idx = -1;
-        
+
         for (RepliesAttributes reply : replies) {
           idx++;
 
           List<ElementTag> actionsParam = new ArrayList<>();
 
-          ElementTag editButton = createButton("Edit Reply", "btn btn-warning reply_edit",
+          ElementTag editButton = createButton("Edit", "btn btn-xs btn-default reply_edit",
                                                getReplyBoardEditLink(topic.getId(), reply.getId().toString()),
                                                Const.Tooltips.REPLY_EDIT, false);
-       
+
           actionsParam.add(editButton);
-          
+
           this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime()));
 
         }
     }
-    
+
     private ElementTag createButton(String content, String buttonClass, String href, String title,
             boolean isDisabled) {
         ElementTag button = new ElementTag(content);
 
         button.setAttribute("class", buttonClass);
-        
+
         if (href != null && !href.isEmpty()) {
         button.setAttribute("href", href);
         }
-        
+
         if (title != null && !title.isEmpty()) {
         button.setAttribute("title", title);
         button.setAttribute("data-toggle", "tooltip");
         button.setAttribute("data-placement", "top");
         }
-        
+
         if (isDisabled) {
         button.setAttribute("disabled", null);
         }
         return button;
     }
-    
+
     }
