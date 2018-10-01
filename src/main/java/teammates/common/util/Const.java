@@ -447,7 +447,7 @@ public final class Const {
 
         public static final String ACTION_NOT_ALLOWED = "You do not have the permissions to access this feature";
 
-
+        public static final String REPLY_DELETE = "Delete this reply";
         public static final String TOPIC_DELETE = "Delete this topic";
     }
 
@@ -1105,6 +1105,7 @@ public final class Const {
         public static final String STUDENT_REPLIES_BOARD_EDIT_SAVE = "/page/studentRepliesBoardEditSave";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/instructDiscussionBoardEditTopic";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/instructorDiscussionBoardTopicEditSave";
+        public static final String STUDENT_REPLY_DELETE_PAGE = "/page/studentReplyDelete";
 
 
     }

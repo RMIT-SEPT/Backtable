@@ -320,6 +320,14 @@ public class PageData {
         return link;
     }
     
+    public String getReplyBoardDeleteLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLY_DELETE_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
     public String getReplyBoardEditLink(String topicId, String replyId)
     {
         String link = Const.ActionURIs.STUDENT_REPLIES_EDIT_PAGE;
