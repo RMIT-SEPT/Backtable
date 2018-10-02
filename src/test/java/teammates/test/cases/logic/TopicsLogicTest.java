@@ -7,7 +7,7 @@ import teammates.logic.core.TopicsLogic;
 
 public class TopicsLogicTest extends BaseLogicTest {
 
-    private static final TopicsLogic topicsLogic = TopicsLogic.inst();
+/*    private static final TopicsLogic topicsLogic = TopicsLogic.inst();
 
     @Test
     public void testAll() throws Exception {
@@ -49,5 +49,5 @@ public class TopicsLogicTest extends BaseLogicTest {
               .build();
       topicsLogic.deleteTopicCascade(topicAttributes.getName());
       verifyAbsentInDatastore(topicAttributes);
-    }
+    }*/
 }
