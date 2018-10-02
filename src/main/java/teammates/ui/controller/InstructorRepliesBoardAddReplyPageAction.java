@@ -54,7 +54,7 @@ public class InstructorRepliesBoardAddReplyPageAction extends Action {
         data = new InstructorRepliesBoardPageData(account, sessionToken);
         System.out.println(account.getName());
         data.init(topic);
-        return createShowPageResult(Const.ViewURIs.INSTRUCTOR_REPLIES_BOARD_PAGE, data);
+        return createRedirectResult(Const.ViewURIs.INSTRUCTOR_REPLIES_BOARD_PAGE); 
     }
 
 }

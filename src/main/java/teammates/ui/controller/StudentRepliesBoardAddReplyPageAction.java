@@ -53,7 +53,7 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
         data = new StudentRepliesBoardPageData(account, sessionToken);
         System.out.println(account.getName());
         data.init(topic);
-        return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
+        return createRedirectResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE);
     }
 
 }

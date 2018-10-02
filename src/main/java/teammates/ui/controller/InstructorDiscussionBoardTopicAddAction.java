@@ -51,7 +51,7 @@ public class InstructorDiscussionBoardTopicAddAction extends Action{
         data.init(allTopics);
         
         //Redirect the page to Discussion board page.
-        return createRedirectResult(Const.ActionURIs.STUDENT_DISCUSSION_BOARD_PAGE);
+        return createRedirectResult(Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE);
 
        
     }
