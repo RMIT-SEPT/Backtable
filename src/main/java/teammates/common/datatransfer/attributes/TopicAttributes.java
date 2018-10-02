@@ -23,33 +23,6 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public Integer viewCounter;
   public ArrayList<RepliesAttributes> replies;
 
-  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count, Integer viewCounter) {
-      this.id = SanitizationHelper.sanitizeTitle(topicID);
-      this.name = SanitizationHelper.sanitizeTitle(name);
-      this.desc = SanitizationHelper.sanitizeTitle(desc);
-      this.replies = replies;
-      this.count = count;
-      this.viewCounter = viewCounter;
-  }
-
-/*Builder is used as a constructor to initiate instance of TopicAttribute*/
-    public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
-     return new Builder(topicID, name, desc, replies, count,viewCounter);
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Integer getViewCounter() {
-        return viewCounter;
-    }
-
-    public void setViewCounter(Integer viewCounter) {
-        this.viewCounter = viewCounter;
-    }
-
-    public ArrayList<RepliesAttributes> replies;
 
   public TopicAttributes(String topicID, String creator, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count, Integer viewCounter) {
       this.id = SanitizationHelper.sanitizeTitle(topicID);
@@ -65,6 +38,18 @@ public class TopicAttributes extends EntityAttributes<Topic> {
 public static Builder builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
       return new Builder(topicID, creator, name, desc, replies, count,viewCounter);
   }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getViewCounter() {
+        return viewCounter;
+    }
+
+    public void setViewCounter(Integer viewCounter) {
+        this.viewCounter = viewCounter;
+    }
   public String getId() {
       return id;
   }

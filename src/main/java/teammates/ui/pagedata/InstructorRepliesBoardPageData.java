@@ -100,8 +100,8 @@ public class InstructorRepliesBoardPageData extends PageData {
                                                  Const.Tooltips.REPLY_EDIT, false);
          
             actionsParam.add(editButton);
-            
-            this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime()));
+
+            this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime(),reply.getLike(),reply.getDislike()));
 
           }
       }
