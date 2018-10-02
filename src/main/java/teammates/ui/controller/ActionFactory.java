@@ -144,6 +144,10 @@ public class ActionFactory {
         map(INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE, InstructorDiscussionBoardTopicEditSaveAction.class);
         
         map(STUDENT_REPLIES_EDIT_PAGE, StudentRepliesBoardEditAction.class);
+
+        map(STUDENT_REPLIES_LIKE_PAGE, StudentRepliesBoardLikeAction.class);
+
+        map(STUDENT_REPLIES_DISLIKE_PAGE, StudentRepliesBoardDislikeAction.class);
         map(STUDENT_REPLIES_BOARD_EDIT_SAVE, StudentRepliesBoardEditSaveAction.class);
         map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
         map(STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE,StudentRepliesBoardAddReplyPageAction.class);

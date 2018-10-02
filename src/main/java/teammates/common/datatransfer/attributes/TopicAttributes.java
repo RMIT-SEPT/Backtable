@@ -21,6 +21,21 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public String desc;
   public Integer count;
   public Integer viewCounter;
+  public ArrayList<RepliesAttributes> replies;
+
+  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count, Integer viewCounter) {
+      this.id = SanitizationHelper.sanitizeTitle(topicID);
+      this.name = SanitizationHelper.sanitizeTitle(name);
+      this.desc = SanitizationHelper.sanitizeTitle(desc);
+      this.replies = replies;
+      this.count = count;
+      this.viewCounter = viewCounter;
+  }
+
+/*Builder is used as a constructor to initiate instance of TopicAttribute*/
+    public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
+     return new Builder(topicID, name, desc, replies, count,viewCounter);
+    }
 
     public void setCount(Integer count) {
         this.count = count;
@@ -50,7 +65,6 @@ public class TopicAttributes extends EntityAttributes<Topic> {
 public static Builder builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
       return new Builder(topicID, creator, name, desc, replies, count,viewCounter);
   }
-
   public String getId() {
       return id;
   }
@@ -157,7 +171,7 @@ public static Builder builder(String topicID, String creator, String name, Strin
       ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
       for(Reply reply:replies)
       {
-        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime()));
+        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime(),reply.getLike(),reply.getDislike()));
       }      
       return repliesAtt;
     }
