@@ -46,7 +46,7 @@ public class StudentDiscussionBoardTopicAddAction extends Action {
 
         data.init(allTopics);
         //Redirect the page to Discussion board page.
-        return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
+        return createRedirectResult(Const.ActionURIs.STUDENT_DISCUSSION_BOARD_PAGE);
         
     }
 
