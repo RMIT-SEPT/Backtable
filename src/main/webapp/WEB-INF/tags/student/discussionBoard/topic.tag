@@ -12,7 +12,7 @@
       Name
     </th>
     <th id="button_sortcoursename">
-     Description
+     CreatedBy
     </th>
 
     <th class="align-center no-print">
@@ -24,8 +24,9 @@
   <%-- Active topic table have table rows, loop all instances to display content --%>
   <c:forEach items="${activeTopic.rows}" var="topicrow" varStatus="i">
   <tr>
-    <td id="topicName${i.index}">${topicrow.name}</td>
-    <td id="topicDesc${i.index}">${topicrow.desc}</td>
+    <span style="display: none;" id="topicId${i.index}">${topicrow.id}</span>
+    <td id="topicName${i.index}" style="vertical-align: middle;">${topicrow.name}</td>
+    <td  style="vertical-align: middle;"  id="topicCreator${i.index}"  > ${topicrow.creator}   </td> 
     <td class="align-center no-print">
       <c:forEach items="${topicrow.actions}" var="button">
         <a ${button.attributesToString}>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import teammates.common.datatransfer.UserType;
 import teammates.common.datatransfer.attributes.AccountAttributes;
+import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.EntityNotFoundException;
@@ -702,5 +703,17 @@ public abstract class Action {
 
     protected void excludeStudentDetailsFromResponseParams() {
         regkey = null;
+    }
+    public RepliesAttributes getReplyWithId(ArrayList<RepliesAttributes> replies, Integer replyId)
+    {
+        for(RepliesAttributes reply: replies)
+        {
+            if(reply.getId() == replyId)
+            {
+                return reply;
+            }
+        }
+        System.out.println("Could not find reply");
+        return null;
     }
 }

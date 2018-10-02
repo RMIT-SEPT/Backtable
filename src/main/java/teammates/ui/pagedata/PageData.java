@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.mailjet.client.resource.Contact;
+
 import teammates.common.datatransfer.CourseRoster;
 import teammates.common.datatransfer.FeedbackParticipantType;
 import teammates.common.datatransfer.attributes.AccountAttributes;
@@ -218,7 +220,7 @@ public class PageData {
       String link = Const.ActionURIs.STUDENT_REPLIES_BOARD_PAGE;
       return link;
     }
-    
+
     public String getStudentProfileLink() {
         return getStudentProfileLink(isUnregisteredStudent());
     }
@@ -302,20 +304,78 @@ public class PageData {
         link = addUserIdToUrl(link);
         return link;
     }
-    
-    public String getDiscussionBoardDetailsLink(String topicName) {
+
+    public String getDiscussionBoardDetailsLink(String topicName, String topicId) {
         String link = Const.ActionURIs.STUDENT_REPLIES_BOARD_PAGE;
         link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
-        link = addUserIdToUrl(link);
-        return link;
-    }
-    public String getDiscussionBoardDeleteLink(String topicName) {
-        String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
-        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
         link = addUserIdToUrl(link);
         return link;
     }
     
+    
+    
+    public String getDiscussionBoardDeleteLink(String topicName, String topicId) {
+        String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID , topicId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
+    
+    public String getReplyBoardDeleteLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLY_DELETE_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
+    public String getReplyBoardEditLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLIES_EDIT_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        return link;
+    }
+   
+    public String getInstructorReplyBoardEditLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.INSTRUCTOR_REPLIES_EDIT_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        return link;
+    }
+
+    public String getInstructorDiscussionBoardDetailsLink(String topicName, String topicId) {
+        String link = Const.ActionURIs.INSTRUCTOR_REPLIES_BOARD_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
+    public String getInstructorDiscussionBoardDeleteLink(String topicName, String topicId) {
+        String link = Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID , topicId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
+
+    public String getDiscussionBoardEditLink(String topicName, String topicId) {
+        String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
+    public String getInstructorDiscussionBoardEditLink(String topicName, String topicId) {
+        String link = Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
 
     public String getInstructorCourseEditLink(String courseId) {
         String link = Const.ActionURIs.INSTRUCTOR_COURSE_EDIT_PAGE;
