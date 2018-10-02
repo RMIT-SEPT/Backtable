@@ -156,7 +156,11 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
     }
     return null;
   }
-
+  
+  public void removeReply(RepliesAttributes reply)
+  {
+      replies.remove(reply);
+  }
 
 
 

@@ -312,6 +312,9 @@ public class PageData {
         link = addUserIdToUrl(link);
         return link;
     }
+    
+    
+    
     public String getDiscussionBoardDeleteLink(String topicName, String topicId) {
         String link = Const.ActionURIs.STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
         link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
@@ -320,6 +323,14 @@ public class PageData {
         return link;
     }
     
+    public String getReplyBoardDeleteLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.STUDENT_REPLY_DELETE_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        link = addUserIdToUrl(link);
+        return link;
+    }
     public String getReplyBoardEditLink(String topicId, String replyId)
     {
         String link = Const.ActionURIs.STUDENT_REPLIES_EDIT_PAGE;
@@ -328,6 +339,13 @@ public class PageData {
         return link;
     }
    
+    public String getInstructorReplyBoardEditLink(String topicId, String replyId)
+    {
+        String link = Const.ActionURIs.INSTRUCTOR_REPLIES_EDIT_PAGE;
+        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
+        link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
+        return link;
+    }
 
     public String getInstructorDiscussionBoardDetailsLink(String topicName, String topicId) {
         String link = Const.ActionURIs.INSTRUCTOR_REPLIES_BOARD_PAGE;
