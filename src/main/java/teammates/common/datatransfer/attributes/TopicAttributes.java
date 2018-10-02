@@ -155,7 +155,11 @@ public class TopicAttributes extends EntityAttributes<Topic> {
     }
     return null;
   }
-
+  
+  public void removeReply(RepliesAttributes reply)
+  {
+      replies.remove(reply);
+  }
 
 
 

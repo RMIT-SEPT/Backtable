@@ -100,6 +100,7 @@ public class StudentRepliesBoardPageData extends PageData {
           ElementTag editButton = createButton("Edit Reply", "btn btn-warning reply_edit",
                                                getReplyBoardEditLink(topic.getId(), reply.getId().toString()),
                                                Const.Tooltips.REPLY_EDIT, false);
+
           ElementTag upVote = createButton("Like", "btn btn-warning upvote",
                   getReplyUpVoteLink(topic.getId(), reply.getId().toString()),
                     Const.Tooltips.REPLY_UP_VOTE, false);
@@ -110,6 +111,16 @@ public class StudentRepliesBoardPageData extends PageData {
           actionsParam.add(upVote);
           actionsParam.add(downVote);
           this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime(),reply.getLike(),reply.getDislike()));
+
+          ElementTag deleteButton = createButton("Delete Reply", "btn btn-danger reply_delete", 
+                                                  getReplyBoardDeleteLink(topic.getId(), reply.getId().toString()),
+                                                  Const.Tooltips.REPLY_DELETE, false);
+       
+          actionsParam.add(editButton);
+          actionsParam.add(deleteButton);
+          
+          this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime()));
+
 
         }
     }

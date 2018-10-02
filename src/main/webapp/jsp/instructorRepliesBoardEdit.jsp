@@ -4,12 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
-<%@ taglib tagdir="/WEB-INF/tags/instructor/discussionBoard" prefix="tid" %>
-<ti:instructorPage title="Edit Topic">
-  <tid:editTopicForm
+<%@ taglib tagdir="/WEB-INF/tags/instructor/ReplyBoard" prefix="tir" %>
+
+<ti:instructorPage title="Edit Reply">
+  <tir:editReplyForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"
       topicId="${data.topic.id}"
-      topicName="${data.topic.name}"
-      topicDesc="${data.topic.desc}"/>
+      replyId="${data.reply.id}"
+      replyDesc="${data.reply.desc}"/>
 </ti:instructorPage>

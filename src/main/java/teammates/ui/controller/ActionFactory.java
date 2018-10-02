@@ -127,6 +127,7 @@ public class ActionFactory {
         map(STUDENT_PROFILE_CREATEUPLOADFORMURL, StudentProfileCreateFormUrlAction.class);
         map(STUDENT_PROFILE_EDIT_SAVE, StudentProfileEditSaveAction.class);
         map(STUDENT_HOME_PAGE, StudentHomePageAction.class);
+        map(STUDENT_REPLY_DELETE_PAGE, StudentRepliesBoardDeleteReplyPageAction.class);
 
         map(CREATE_IMAGE_UPLOAD_URL, CreateImageUploadUrlAction.class);
         map(IMAGE_UPLOAD, ImageUploadAction.class);
@@ -140,16 +141,23 @@ public class ActionFactory {
         map(INSTRUCTOR_DISCUSSION_BOARD_ADD_TOPIC_PAGE, InstructorDiscussionBoardTopicAddAction.class);
         map(INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE, InstructorDiscussionBoardTopicDeleteAction.class);
         map(INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE, InstructorDiscussionBoardTopicEditPageAction.class);
+        map(INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE, InstructorDiscussionBoardTopicEditSaveAction.class);
         
-        map(INSTRUCTOR_REPLIES_BOARD_PAGE, InstructorRepliesBoardPageAction.class);
-        map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
-        map(STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE,StudentRepliesBoardAddReplyPageAction.class);
         map(STUDENT_REPLIES_EDIT_PAGE, StudentRepliesBoardEditAction.class);
 
         map(STUDENT_REPLIES_LIKE_PAGE, StudentRepliesBoardLikeAction.class);
 
         map(STUDENT_REPLIES_DISLIKE_PAGE, StudentRepliesBoardDislikeAction.class);
         map(STUDENT_REPLIES_BOARD_EDIT_SAVE, StudentRepliesBoardEditSaveAction.class);
+        map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
+        map(STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE,StudentRepliesBoardAddReplyPageAction.class);
+        
+        map(INSTRUCTOR_REPLIES_EDIT_PAGE, InstructorRepliesBoardEditAction.class);
+        map(INSTRUCTOR_REPLIES_BOARD_EDIT_SAVE, InstructorRepliesBoardEditSaveAction.class);
+        map(INSTRUCTOR_REPLIES_BOARD_PAGE, InstructorRepliesBoardPageAction.class);
+        map(INSTRUCTOR_REPLIES_BOARD_ADD_REPLY_PAGE,InstructorRepliesBoardAddReplyPageAction.class);
+        
+       
         map(ERROR_FEEDBACK_SUBMIT, ErrorUserReportLogAction.class);
     }
 
