@@ -3,8 +3,7 @@
 <%@ page import="teammates.common.util.Const" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
-<%@ taglib tagdir="/WEB-INF/tags/student" prefix="ts" %>
-<%@ taglib tagdir="/WEB-INF/tags/instructor/discussionBoard" prefix="tid" %>
+<%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor/ReplyBoard" prefix="tir" %>
 
 <ti:instructorPage title="Edit Reply">
