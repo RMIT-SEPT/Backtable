@@ -44,7 +44,7 @@ public class InstructorDiscussionBoardTopicAddAction extends Action{
         data = new InstructorDiscussionBoardPageData(account, sessionToken);
 
         //Initiate a TopicAttribute - the following behaviours of this function will help to store the data into database
-        createTopic(uniqueID, newTopicName, newTopicDesc);
+        createTopic(uniqueID, account.getName(), newTopicName, newTopicDesc);
 
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
@@ -56,9 +56,9 @@ public class InstructorDiscussionBoardTopicAddAction extends Action{
        
     }
     
-    private void createTopic(String uniqueID, String newTopicName, String newTopicDesc) {
+    private void createTopic(String uniqueID, String creator, String newTopicName, String newTopicDesc) {
         try {
-            logic.createDiscussionBoardTopic(uniqueID, newTopicName, newTopicDesc, new ArrayList<Reply>());
+            logic.createDiscussionBoardTopic(uniqueID, creator, newTopicName, newTopicDesc, new ArrayList<Reply>());
             statusToUser.add(new StatusMessage("successufully added", StatusMessageColor.SUCCESS));
             isError = false;
         } catch (EntityAlreadyExistsException e) {

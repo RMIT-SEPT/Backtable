@@ -4,14 +4,16 @@ import java.util.List;
 
 public class ActiveTopicsTableRow {
     private String name;
+    private String creator;
     private String desc;
     private String href;
     private String id;
     private List<ElementTag> actions;
 
-    public ActiveTopicsTableRow(String id, String name, String desc,
+    public ActiveTopicsTableRow(String id, String creator, String name, String desc,
                                  List<ElementTag> actionsParam) {
         this.id = id;
+        this.creator = creator;
         this.name = name;
         this.desc = desc;
         this.href = href;
@@ -22,6 +24,10 @@ public class ActiveTopicsTableRow {
         return name;
     }
 
+    public String getCreator() {
+        return creator;
+    }
+    
     public String getDesc() {
         return desc;
     }

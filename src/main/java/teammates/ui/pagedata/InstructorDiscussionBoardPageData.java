@@ -93,7 +93,7 @@ public class InstructorDiscussionBoardPageData extends PageData {
           actionsParam.add(deleteButton);
           
 
-          ActiveTopicsTableRow row = new ActiveTopicsTableRow(topic.getId(), sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
+          ActiveTopicsTableRow row = new ActiveTopicsTableRow(topic.getId(), topic.getCreator(), sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
           activeTopics.getRows().add(row);
         }
         return activeTopics;
