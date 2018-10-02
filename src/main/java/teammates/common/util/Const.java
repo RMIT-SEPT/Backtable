@@ -1,5 +1,7 @@
 package teammates.common.util;
 
+import static teammates.common.util.Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -1087,22 +1089,26 @@ public final class Const {
 
         public static final String BACKDOOR = "/backdoor";
 
-
-
-
         public static final String INSTRUCTOR_DISCUSSION_BOARD_PAGE = "/page/instructorDiscussionBoard";
         public static final String STUDENT_DISCUSSION_BOARD_PAGE = "/page/studentDiscussionBoard";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/instructorDiscussionBoardAddTopic";
         public static final String STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE = "/page/studentDiscussionBoardAddTopic";
+        
         public static final String INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/instructorDiscussionBoardDeleteTopic";
         public static final String STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE = "/page/studentDiscussionBoardDeleteTopic";
         public static final String STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/studentDiscussionBoardEditTopic";
         public static final String STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/studentDiscussionBoardTopicEditSave";
+        
         public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/page/instructorRepliesBoard";
         public static final String STUDENT_REPLIES_BOARD_PAGE = "/page/studentRepliesBoard";
         public static final String STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE = "/page/studentRepliesBoardAddReply";
+        public static final String INSTRUCTOR_REPLIES_BOARD_ADD_REPLY_PAGE = "/page/instructorRepliesBoardAddReply";
+        
         public static final String STUDENT_REPLIES_EDIT_PAGE ="/page/studentRepliesBoardEditReply";
+        public static final String INSTRUCTOR_REPLIES_EDIT_PAGE ="/page/instructorRepliesBoardEditReply";
         public static final String STUDENT_REPLIES_BOARD_EDIT_SAVE = "/page/studentRepliesBoardEditSave";
+        
+        public static final String INSTRUCTOR_REPLIES_BOARD_EDIT_SAVE = "/page/instructorRepliesBoardEditSave";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE = "/page/instructDiscussionBoardEditTopic";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE = "/page/instructorDiscussionBoardTopicEditSave";
         public static final String STUDENT_REPLY_DELETE_PAGE = "/page/studentReplyDelete";
@@ -1268,6 +1274,7 @@ public final class Const {
         public static final String INSTRUCTOR_REPLIES_BOARD_PAGE = "/jsp/instructorRepliesBoard.jsp";
         public static final String STUDENT_REPLIES_EDIT_PAGE ="/jsp/studentRepliesBoardEdit.jsp";
         public static final String INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT="/jsp/instructorDiscussionBoardTopicEdit.jsp";
+        public static final String INSTRUCTOR_REPLIES_EDIT_PAGE ="/jsp/instructorRepliesBoardEdit.jsp";
     }
 
     /* These are status messages that may be shown to the user */
