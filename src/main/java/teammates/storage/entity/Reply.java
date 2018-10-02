@@ -16,6 +16,8 @@ public class Reply extends BaseEntity {
   private String studentName;
   private Integer id;
   private String dateTime;
+  private Integer like;
+  private Integer dislike;
   
   // TODO: change to `java.time.Instant` once we have upgraded to Objectify 6
   private Date createdAt;
@@ -25,12 +27,29 @@ public class Reply extends BaseEntity {
       // required by Objectify
   }
   
-  public Reply(String desc, String studentName, Integer id, String dateTime) {
+  public Reply(String desc, String studentName, Integer id, String dateTime, Integer like, Integer dislike) {
     this.setDesc(desc);
     this.setStudentName(studentName);
     this.setId(id);
     this.setDateTime(dateTime);
+    this.setLike(like);
+    this.setDislike(dislike);
 }
+  public Integer getLike() {
+    return like;
+  }
+
+  public void setLike(Integer like) {
+    this.like = like;
+  }
+
+  public Integer getDislike() {
+    return dislike;
+  }
+
+  public void setDislike(Integer dislike) {
+    this.dislike = dislike;
+  }
   public String getDesc() {
     return desc;
 }
