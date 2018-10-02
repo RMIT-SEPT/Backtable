@@ -5,7 +5,12 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/student" prefix="ts" %>
 <%@ taglib tagdir="/WEB-INF/tags/student/discussionBoard" prefix="tsd" %>
-<ts:studentPage title="Discussion Board" jsIncludes="">
+
+<c:set var="jsIncludes">
+  <script type="text/javascript" src="/js/studentTopicDelete.js"></script>
+</c:set>
+
+<ts:studentPage title="Discussion Board" jsIncludes="${jsIncludes}">
 
   <%-- Check whether if there is any topic in database, if yes, display all of them --%>
 

@@ -1,6 +1,7 @@
 package teammates.common.datatransfer.attributes;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import teammates.storage.entity.Reply;
@@ -11,6 +12,8 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
   public Instant createdAt;
   private String desc;
   private String studentName;
+  public Integer id;
+  private String dateTime;
   
   public String getDesc() {
     return desc;
@@ -19,10 +22,12 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
     return studentName;
   }
   
-  public RepliesAttributes(String desc, String studentName)
+  public RepliesAttributes(String desc, String studentName, Integer count, String dateTime)
   {
     this.desc = desc;
     this.studentName = studentName;
+    this.id = count;
+    this.dateTime = dateTime;
   }
   @Override
   public List<String> getInvalidityInfo() {
@@ -30,10 +35,24 @@ public class RepliesAttributes extends EntityAttributes<Reply> {
     return null;
   }
 
+  public Integer getId()
+  {
+      return id;
+  }
+  
+  public String getDateTime() {
+    return dateTime;
+  }
+  
+  public void setDesc(String desc)
+  {
+      this.desc = desc;
+  }
+  
   @Override
   public Reply toEntity() {
     // TODO Auto-generated method stub
-    return new Reply(getDesc(), getStudent(), createdAt);
+    return new Reply(getDesc(), getStudent(), getId(), getDateTime());
   }
 
   @Override

@@ -2,6 +2,7 @@ package teammates.logic.api;
 
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import teammates.logic.core.InstructorsLogic;
 import teammates.logic.core.ProfilesLogic;
 import teammates.logic.core.StudentsLogic;
 import teammates.logic.core.TopicsLogic;
+import teammates.storage.entity.Reply;
 
 /**
  * Provides the business logic for production usage of the system.
@@ -534,11 +536,11 @@ public class Logic {
 
         return coursesLogic.getCourse(courseId);
     }
-    
-    public TopicAttributes getTopic(String topicName) {
-        Assumption.assertNotNull(topicName);
-        
-        return topicsLogic.getTopic(topicName);
+
+    public TopicAttributes getTopic(String topicId) {
+        Assumption.assertNotNull(topicId);
+
+        return topicsLogic.getTopic(topicId);
     }
 
     /**
@@ -705,9 +707,9 @@ public class Logic {
         coursesLogic.deleteCourseCascade(courseId);
     }
 
-    public void deleteTopic(String topicName){
-        Assumption.assertNotNull(topicName);
-        topicsLogic.deleteTopicCascade(topicName);
+    public void deleteTopic(String topicId){
+      //  Assumption.assertNotNull(topicName);
+        topicsLogic.deleteTopicCascade(topicId);
     }
 
     public List<TopicAttributes> getAllTopics(){
@@ -2193,16 +2195,20 @@ public class Logic {
         Assumption.assertNotNull(teamName);
         return studentsLogic.getSectionForTeam(courseId, teamName);
     }
-
     
-    public void createDiscussionBoardTopic( String newTopicName, String newTopicDesc) throws InvalidParametersException, EntityAlreadyExistsException {
+    public void createDiscussionBoardTopic(String topicID, String newTopicName, String newTopicDesc, ArrayList<Reply> replies) throws InvalidParametersException, EntityAlreadyExistsException {
+        Assumption.assertNotNull(topicID);
         Assumption.assertNotNull(newTopicName);
         Assumption.assertNotNull(newTopicDesc);
         
-       topicsLogic.createTopicForDiscussionBoard(newTopicName, newTopicDesc);
+       topicsLogic.createTopicForDiscussionBoard(topicID, newTopicName, newTopicDesc, replies);
 
-        
+
+
     }
-    
 
+
+    public void updateTopic(TopicAttributes topic) throws InvalidParametersException, EntityDoesNotExistException {
+        topicsLogic.updateTopic(topic);
+    }
 }

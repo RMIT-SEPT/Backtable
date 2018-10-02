@@ -12,6 +12,7 @@ import com.googlecode.objectify.cmd.QueryKeys;
 
 import teammates.common.datatransfer.attributes.CourseAttributes;
 import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
+import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
@@ -42,7 +43,18 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     * * All parameters are non-null.
     * @return Null if not found.
     */
-
+    
+    //below method depreciated, based on idea of returning replies with partial keys of {topicId, replyId}
+    //replyId could enumerate based on how many replies exist to remain easily trackable and mainly rely on topicId in order to retrieve
+    //desired topic...
+    
+    /*
+    public RepliesAttributes getReply(String topicId, String replyId) {
+      Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicId);
+      Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, replyId);
+      return makeAttributesOrNull(getReplyEntity(topicId, replyId));
+    }
+*/
     /**
      * Return a topic based of the topicId
      * @param topicId Name of the topic
@@ -65,7 +77,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     /**
      * Unused method for now.
      */
-      
+
     public void updateTopic(TopicAttributes topicToUpdate) throws InvalidParametersException,
                                                                    EntityDoesNotExistException {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicToUpdate);
@@ -75,7 +87,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       if (!topicToUpdate.isValid()) {
           throw new InvalidParametersException(topicToUpdate.getInvalidityInfo());
       }
-      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getName());
+      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getId());
 
       if (topicEntityToUpdate == null) {
           throw new EntityDoesNotExistException(ERROR_UPDATE_NON_EXISTENT_TOPIC);
@@ -120,13 +132,13 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     protected TopicAttributes makeAttributes(Topic entity) {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
 
-      return TopicAttributes.builder(entity.getName(), entity.getDesc())
+      return TopicAttributes.builder(entity.getId(), entity.getName(), entity.getDesc(), entity.getReplies(), entity.getCount(),entity.getViewcount())
               .build();
     }
 
     @Override
     protected QueryKeys<Topic> getEntityQueryKeys(TopicAttributes attributes) {
-      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getName());
+      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getId());
       return load().filterKey(keyToFind).keys();
     }
 
@@ -143,15 +155,15 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
     /**
      * Remove the topic in the databased based on the topicID
-     * @param  topicName it's an id of the object in the database
+     * @param  topicID it's an id of the object in the database
      */
-    public void deleteTopic(String topicName) {
+    public void deleteTopic(String topicID) {
 
-        Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicName);
+       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicID);
 
         // only the courseId is important here, everything else are placeholders
         deleteEntity(TopicAttributes
-                .builder(topicName, "Non-existent course")
+                .builder(topicID, null, null, null, null,null)
                 .build());
 
 

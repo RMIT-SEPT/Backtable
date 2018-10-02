@@ -134,9 +134,25 @@ public class ActionFactory {
         map(STUDENT_DISCUSSION_BOARD_PAGE, StudentDiscussionBoardPageAction.class);
         map(STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE, StudentDiscussionBoardTopicAddAction.class);
         map(STUDENT_DISCUSSION_BOARD_DELETE_TOPIC_PAGE, StudentDiscussionBoardTopicDeleteAction.class);
+        map(STUDENT_DISCUSSION_BOARD_EDIT_TOPIC_PAGE, StudentDiscussionBoardTopicEditPageAction.class);
+        map(STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE, StudentDiscussionBoardTopicEditSaveAction.class);
         map(INSTRUCTOR_DISCUSSION_BOARD_PAGE, InstructorDiscussionBoardPageAction.class);
-
+        map(INSTRUCTOR_DISCUSSION_BOARD_ADD_TOPIC_PAGE, InstructorDiscussionBoardTopicAddAction.class);
+        map(INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE, InstructorDiscussionBoardTopicDeleteAction.class);
+        map(INSTRUCTOR_DISCUSSION_BOARD_EDIT_TOPIC_PAGE, InstructorDiscussionBoardTopicEditPageAction.class);
+        map(INSTRUCTOR_DISCUSSION_BOARD_TOPIC_EDIT_SAVE, InstructorDiscussionBoardTopicEditSaveAction.class);
+        
+        map(STUDENT_REPLIES_EDIT_PAGE, StudentRepliesBoardEditAction.class);
+        map(STUDENT_REPLIES_BOARD_EDIT_SAVE, StudentRepliesBoardEditSaveAction.class);
         map(STUDENT_REPLIES_BOARD_PAGE, StudentRepliesBoardPageAction.class);
+        map(STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE,StudentRepliesBoardAddReplyPageAction.class);
+        
+        map(INSTRUCTOR_REPLIES_EDIT_PAGE, InstructorRepliesBoardEditAction.class);
+        map(INSTRUCTOR_REPLIES_BOARD_EDIT_SAVE, InstructorRepliesBoardEditSaveAction.class);
+        map(INSTRUCTOR_REPLIES_BOARD_PAGE, InstructorRepliesBoardPageAction.class);
+        map(INSTRUCTOR_REPLIES_BOARD_ADD_REPLY_PAGE,InstructorRepliesBoardAddReplyPageAction.class);
+        
+       
         map(ERROR_FEEDBACK_SUBMIT, ErrorUserReportLogAction.class);
     }
 
