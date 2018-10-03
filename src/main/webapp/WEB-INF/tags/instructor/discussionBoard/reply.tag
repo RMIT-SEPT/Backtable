@@ -10,8 +10,14 @@
     <p style="display:inline;"> replied on ${reply.dateTime}.</p>
     <br>
     <br>
-    <p>${reply.desc}</p>
-    <br>
+    <p>
+      ${reply.desc}
+      <br>
+      <br>
+      <span class="label label-success">${reply.like}&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span></span>
+      <span class="label label-danger">${reply.dislike}&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-down"></span></span>
+      <br>
+    </p>
     <c:forEach items="${reply.actions}" var="button">
       <a ${button.attributesToString}>${button.content}</a>
     </c:forEach>

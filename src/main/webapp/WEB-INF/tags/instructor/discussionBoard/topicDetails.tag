@@ -19,6 +19,8 @@
     ${desc}
     <br>
     <br>
-    <small>Total Views: ${view}</small>
+    <span class="label label-info">
+      ${view}&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open"></span>
+    </span>
   </p>
 </div>
