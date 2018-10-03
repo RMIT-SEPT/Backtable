@@ -18,5 +18,6 @@
       topicId="${data.topic.id}"
       replyId="${data.reply.id}"
       replyDesc="${data.reply.desc}"
-      editReplyButton="${data.editReplyButton}"/>
+      editReplyButton="${data.editReplyButton}"
+      deleteReplyButton="${data.deleteReplyButton}"/>
 </ts:studentPage>

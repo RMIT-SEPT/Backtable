@@ -8,8 +8,11 @@
 
 <%@ taglib tagdir="/WEB-INF/tags/student/ReplyBoard" prefix="tsr" %>
 <%@ page import="teammates.common.util.Const" %>
+
 <c:set var="jsIncludes">
+  <script type="text/javascript" src="/js/studentReplyDelete.js"></script>
 </c:set>
+
 <ts:studentPage title="Replies Board" jsIncludes="${jsIncludes}" >
 
 <tsd:topicDetails name="${data.name}" desc="${data.desc}" view ="${data.viewcount}" />
@@ -18,8 +21,8 @@
     <tsd:reply reply="${reply}">
     </tsd:reply>
 </c:forEach>
- 
- 
+
+
 <c:if test="${empty data.replies}">
 <div class="col-sm-12" style="color: red">
   There are currently no responses for you for this feedback session.
@@ -28,9 +31,9 @@
 
 <br><br>
     <tsr:replyForm topicID="${data.topic.id}"/>
-  
-  
-  
+
+
+
   <t:bodyFooter />
 <%-- above code taken from studentHome... --%>
 </ts:studentPage>

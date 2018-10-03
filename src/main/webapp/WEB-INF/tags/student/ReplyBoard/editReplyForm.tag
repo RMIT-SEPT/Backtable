@@ -11,6 +11,7 @@
 <%@ attribute name="replyId" required="true" %>
 <%@ attribute name="replyDesc" required="true" %>
 <%@ attribute name="editReplyButton" type="teammates.ui.template.ElementTag" required="true" %>
+<%@ attribute name="deleteReplyButton" type="teammates.ui.template.ElementTag" required="true" %>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -19,6 +20,9 @@
     <div class="pull-right">
       <a ${editReplyButton.attributesToString}>
         ${editReplyButton.content}
+      </a>
+      <a ${deleteReplyButton.attributesToString}>
+        ${deleteReplyButton.content}
       </a>
     </div>
   </div>

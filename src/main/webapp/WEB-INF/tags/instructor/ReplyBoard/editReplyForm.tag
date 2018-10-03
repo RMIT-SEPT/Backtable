@@ -10,37 +10,47 @@
 <%@ attribute name="topicId" required="true" %>
 <%@ attribute name="replyId" required="true" %>
 <%@ attribute name="replyDesc" required="true" %>
+<%@ attribute name="editReplyButton" type="teammates.ui.template.ElementTag" required="true" %>
+<%@ attribute name="deleteReplyButton" type="teammates.ui.template.ElementTag" required="true" %>
 
-<div class="well well-plain">
-  <%-- The form will redirect to INSTRUCTOR_DISCUSSION_BOARD_REPLY_SAVE --%>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <strong>Reply:</strong>
 
-    <%-- These input are sent to InstructorDiscussionBoardTopicAddPageData to create a new Topic --%>
-<form method="post" action="<%=Const.ActionURIs.INSTRUCTOR_REPLIES_BOARD_EDIT_SAVE%>" name="discussion_reply_edit_save" class="form form-horizontal">
+    <div class="pull-right">
+      <a ${editReplyButton.attributesToString}>
+        ${editReplyButton.content}
+      </a>
+      <a ${deleteReplyButton.attributesToString}>
+        ${deleteReplyButton.content}
+      </a>
+    </div>
+  </div>
+
+  <div class="panel-body fill-plain">
+    <form method="post" action="<%=Const.ActionURIs.INSTRUCTOR_REPLIES_BOARD_EDIT_SAVE%>" name="discussion_reply_edit_save" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.SESSION_TOKEN%>" value="${sessionToken}">
       <input type="hidden" name="<%=Const.ParamsNames.USER_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.TOPIC_ID%>" value="${topicId}">
       <input type="hidden" name="<%=Const.ParamsNames.REPLY_ID%>" value="${replyId}">
-  <div>
-    <label class="bold-label"  style="color:#3679B2; font-size:large;">Edit Topic</label>
-  </div>
-  <br>
-  <div>
-    <label class="label-control">Reply:</label>
-     <textarea style="max-width:100%; max-height:30%;"
-               class="form-control" cols="20" rows="10"
-               name="<%=Const.ParamsNames.REPLY_DESC%>" id="<%=Const.ParamsNames.REPLY_DESC%>"
-               value="${replyDesc}" data-toggle="tooltip" data-placement="top"
-               tabindex=2>${replyDesc}</textarea>
-  </div>
-  <br>
- <div>
-     <input id="btnEditReply" type="submit" class="btn btn-success" value="Save Changes" tabindex="3">
-     <input id="resetEditReply" type="reset" class="btn btn-warning" value="Reset Changes" tabindex="4">
-     <a href="${data.discussionBoardDetailsLink}">
-        <input id="cancelEditTopic" class="btn btn-danger" value="Cancel Changes" tabindex="5">
-     </a>
-  </div>
 
-  </form>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Reply:</label>
+        <div class="col-sm-9">
+          <textarea style="max-width:100%; max-height:30%;"
+                    class="form-control toggle_inputs_" cols="20" rows="4"
+                    name="<%=Const.ParamsNames.REPLY_DESC%>" id="<%=Const.ParamsNames.REPLY_DESC%>"
+                    value="${replyDesc}" data-toggle="tooltip" data-placement="top"
+                    tabindex=2 disabled>${replyDesc}</textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12 align-center">
+          <input id="btnSaveReply" type="submit" class="btn btn-primary" value="Save Changes" tabindex="3"
+            style="display:none;" value="Save Changes">
+        </div>
+      </div>
+  </div>
 </div>

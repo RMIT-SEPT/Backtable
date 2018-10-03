@@ -9,15 +9,18 @@ public class StudentRepliesBoardEditPageData extends PageData {
     private TopicAttributes topic;
     private RepliesAttributes reply;
     private ElementTag editReplyButton;
+    private ElementTag deleteReplyButton;
 
-    public StudentRepliesBoardEditPageData(AccountAttributes account, String sessionToken) {
+    public StudentRepliesBoardEditPageData(AccountAttributes account, String sessionToken, TopicAttributes topic, RepliesAttributes reply) {
       super(account, sessionToken);
-
+      this.topic = topic;
+      this.reply = reply;
       createReplyRelatedButtons();
     }
 
     private void createReplyRelatedButtons() {
       editReplyButton = createEditReplyButton();
+      deleteReplyButton = createDeleteReplyButton();
     }
 
     private ElementTag createEditReplyButton() {
@@ -27,10 +30,17 @@ public class StudentRepliesBoardEditPageData extends PageData {
         return createBasicButton(buttonContent, buttonId, "javascript:;", null, false);
     }
 
-    public void init(TopicAttributes topic, RepliesAttributes reply)
-    {
-        this.topic = topic;
-        this.reply = reply;
+    private ElementTag createDeleteReplyButton() {
+        String buttonContent = "<span class=\"glyphicon glyphicon-trash\"></span> Delete";
+        String buttonId = "btnDeleteReply";
+        String href = getReplyBoardDeleteLink(topic.getId(), reply.getId().toString());
+
+        ElementTag button = createBasicButton(buttonContent, buttonId, href, null, false);
+        button.setAttribute("data-topicname", topic.getName());
+        String existingClasses = button.removeAttribute("class");
+        button.setAttribute("class", existingClasses + " topic_delete_");
+
+        return button;
     }
 
     public TopicAttributes getTopic()
@@ -47,11 +57,9 @@ public class StudentRepliesBoardEditPageData extends PageData {
         return editReplyButton;
     }
 
-    public String getDiscussionBoardDetailsLink()
-    {
-        return getDiscussionBoardDetailsLink(topic.getName(), topic.getId());
+    public ElementTag getDeleteReplyButton() {
+        return deleteReplyButton;
     }
-
     /**
      * Creates a basic bootstrap button for use in {@code <a></a>} tags in panel header.
      */

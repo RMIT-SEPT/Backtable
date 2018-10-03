@@ -96,29 +96,23 @@ public class StudentRepliesBoardPageData extends PageData {
           idx++;
 
           List<ElementTag> actionsParam = new ArrayList<>();
-
+          ElementTag upVote = createButton("Like", "btn btn-xs btn-default upvote",
+                  getReplyUpVoteLink(topic.getId(), reply.getId().toString()),
+                    Const.Tooltips.REPLY_UP_VOTE, false);
+          ElementTag downVote = createButton("Dislike", "btn btn-xs btn-default downvote",
+                    getReplyDownVoteLink(topic.getId(), reply.getId().toString()),
+                    Const.Tooltips.REPLY_DOWN_VOTE, false);
           ElementTag editButton = createButton("Edit", "btn btn-xs btn-default reply_edit",
                                                getReplyBoardEditLink(topic.getId(), reply.getId().toString()),
                                                Const.Tooltips.REPLY_EDIT, false);
-
-          ElementTag upVote = createButton("Like", "btn btn-warning upvote",
-                  getReplyUpVoteLink(topic.getId(), reply.getId().toString()),
-                    Const.Tooltips.REPLY_UP_VOTE, false);
-          ElementTag downVote = createButton("Dislike", "btn btn-warning downvote",
-                    getReplyDownVoteLink(topic.getId(), reply.getId().toString()),
-                    Const.Tooltips.REPLY_DOWN_VOTE, false);
-
-          ElementTag deleteButton = createButton("Delete Reply", "btn btn-danger reply_delete",
+          ElementTag deleteButton = createButton("Delete", "btn btn-xs btn-default topic_delete_ reply_delete",
                     getReplyBoardDeleteLink(topic.getId(), reply.getId().toString()),
                     Const.Tooltips.REPLY_DELETE, false);
-
-          actionsParam.add(editButton);
           actionsParam.add(upVote);
           actionsParam.add(downVote);
-            actionsParam.add(deleteButton);
+          actionsParam.add(editButton);
+          actionsParam.add(deleteButton);
           this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime(),reply.getLike(),reply.getDislike()));
-
-
         }
     }
 
