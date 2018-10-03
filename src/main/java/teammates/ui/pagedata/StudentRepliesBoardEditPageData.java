@@ -60,6 +60,7 @@ public class StudentRepliesBoardEditPageData extends PageData {
     public ElementTag getDeleteReplyButton() {
         return deleteReplyButton;
     }
+    
     /**
      * Creates a basic bootstrap button for use in {@code <a></a>} tags in panel header.
      */
