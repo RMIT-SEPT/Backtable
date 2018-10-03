@@ -2196,12 +2196,12 @@ public class Logic {
         return studentsLogic.getSectionForTeam(courseId, teamName);
     }
     
-    public void createDiscussionBoardTopic(String topicID, String newTopicName, String newTopicDesc, ArrayList<Reply> replies) throws InvalidParametersException, EntityAlreadyExistsException {
+    public void createDiscussionBoardTopic(String topicID, String creator, String newTopicName, String newTopicDesc, ArrayList<Reply> replies) throws InvalidParametersException, EntityAlreadyExistsException {
         Assumption.assertNotNull(topicID);
         Assumption.assertNotNull(newTopicName);
         Assumption.assertNotNull(newTopicDesc);
         
-       topicsLogic.createTopicForDiscussionBoard(topicID, newTopicName, newTopicDesc, replies);
+       topicsLogic.createTopicForDiscussionBoard(topicID, creator, newTopicName, newTopicDesc, replies);
 
 
 

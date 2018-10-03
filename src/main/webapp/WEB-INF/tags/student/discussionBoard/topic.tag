@@ -26,7 +26,7 @@
   <tr>
     <span style="display: none;" id="topicId${i.index}">${topicrow.id}</span>
     <td id="topicName${i.index}" style="vertical-align: middle;">${topicrow.name}</td>
-    <td id="accountName${i.index}" style="vertical-align: middle;">${data.account.googleId}</td>
+    <td  style="vertical-align: middle;"  id="topicCreator${i.index}"  > ${topicrow.creator}   </td> 
     <td class="align-center no-print">
       <c:forEach items="${topicrow.actions}" var="button">
         <a ${button.attributesToString}>

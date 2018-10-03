@@ -16,10 +16,28 @@ import teammates.storage.entity.Topic;
 public class TopicAttributes extends EntityAttributes<Topic> {
 
   public String id;
+  public String creator;
   public String name;
   public String desc;
   public Integer count;
   public Integer viewCounter;
+  public ArrayList<RepliesAttributes> replies;
+
+
+  public TopicAttributes(String topicID, String creator, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count, Integer viewCounter) {
+      this.id = SanitizationHelper.sanitizeTitle(topicID);
+      this.creator = SanitizationHelper.sanitizeTitle(creator);
+      this.name = SanitizationHelper.sanitizeTitle(name);
+      this.desc = SanitizationHelper.sanitizeTitle(desc);
+      this.replies = replies;
+      this.count = count;
+      this.viewCounter = viewCounter;
+  }
+
+/*Builder is used as a constructor to initiate instance of TopicAttribute*/
+public static Builder builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
+      return new Builder(topicID, creator, name, desc, replies, count,viewCounter);
+  }
 
     public void setCount(Integer count) {
         this.count = count;
@@ -32,27 +50,15 @@ public class TopicAttributes extends EntityAttributes<Topic> {
     public void setViewCounter(Integer viewCounter) {
         this.viewCounter = viewCounter;
     }
-
-    public ArrayList<RepliesAttributes> replies;
-
-  public TopicAttributes(String topicID, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count, Integer viewCounter) {
-      this.id = SanitizationHelper.sanitizeTitle(topicID);
-      this.name = SanitizationHelper.sanitizeTitle(name);
-      this.desc = SanitizationHelper.sanitizeTitle(desc);
-      this.replies = replies;
-      this.count = count;
-      this.viewCounter = viewCounter;
-  }
-
-/*Builder is used as a constructor to initiate instance of TopicAttribute*/
-public static Builder builder(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
-      return new Builder(topicID, name, desc, replies, count,viewCounter);
-  }
-
   public String getId() {
       return id;
   }
+  
+  public String getCreator() {
+      return creator;
+  }
 
+  
    public String getName() {
       return name;
     }
@@ -104,7 +110,7 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
           repliesEntity.add(replyAtt.toEntity());
         }
     }
-    return new Topic(getId(), getName(), getDesc(), repliesEntity, count,viewCounter);
+    return new Topic(getId(), getCreator(), getName(), getDesc(), repliesEntity, count,viewCounter);
   }
   public void print(){
       for (RepliesAttributes reply:replies) {
@@ -150,13 +156,17 @@ public static Builder builder(String topicID, String name, String desc, ArrayLis
       ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
       for(Reply reply:replies)
       {
-        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime()));
+        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime(),reply.getLike(),reply.getDislike()));
       }      
       return repliesAtt;
     }
     return null;
   }
-
+  
+  public void removeReply(RepliesAttributes reply)
+  {
+      replies.remove(reply);
+  }
 
 
 
@@ -165,11 +175,11 @@ public static class Builder {
     private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
     private final TopicAttributes topicAttributes;
 
-    public Builder(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
+    public Builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
        // validateRequiredFields(name, desc);
         ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
         
-        topicAttributes = new TopicAttributes(topicID, name, desc, repliesAtt, count,viewCounter);
+        topicAttributes = new TopicAttributes(topicID, creator, name, desc, repliesAtt, count,viewCounter);
     }
 
 
@@ -185,5 +195,14 @@ public static class Builder {
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
 }

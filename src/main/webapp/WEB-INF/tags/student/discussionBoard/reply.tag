@@ -5,8 +5,15 @@
 <%@ attribute name="reply" type="teammates.ui.template.RepliesDiv" required="true" %>
 
 <div class="panel panel-default">
-  <div class="panel-body">
-    <span class="pull-right">
+  <div class="panel-heading">  
+    <b><c:out value="${reply.name}"  /></b> ${reply.dateTime}:</br>
+      <div class="panel-body">
+          <c:out value="${reply.desc}"   /></br>
+          Like: <c:out value="${reply.like}"   /></br>
+          Dislike <c:out value="${reply.dislike}"   /></br>
+
+     </div>
+
       <c:forEach items="${reply.actions}" var="button">
         <a ${button.attributesToString}>${button.content}</a>
       </c:forEach>

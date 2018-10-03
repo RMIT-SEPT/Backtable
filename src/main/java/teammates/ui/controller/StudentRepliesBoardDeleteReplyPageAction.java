@@ -11,6 +11,7 @@ import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
 import teammates.common.util.Logger;
+import teammates.logic.core.TopicsLogic;
 import teammates.ui.pagedata.StudentRepliesBoardAddReplyPage;
 import teammates.ui.pagedata.StudentRepliesBoardPageData;
 
@@ -19,10 +20,11 @@ import java.util.UUID;
 /**
  * Action: showing the profile page for a student in a course.
  */
-public class StudentRepliesBoardAddReplyPageAction extends Action {
+public class StudentRepliesBoardDeleteReplyPageAction extends Action {
 
     StudentRepliesBoardPageData data;
     TopicAttributes topic;
+    RepliesAttributes replyToDelete;
     private static final Logger log = Logger.getLogger();
     String dateTime;
 
@@ -32,26 +34,22 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
         //getting topic name at the moment, whereas would be better to use topic id
         String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
-        String replyDesc = getRequestParamValue(Const.ParamsNames.REPLY_DESC);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_DESC, replyDesc);
+        
+        String replyId = getRequestParamValue(Const.ParamsNames.REPLY_ID);
+        Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_ID, replyId);
+        
         topic = logic.getTopic(topicId);
         
-        Date today = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy EEE MMM dd hh:mm");
-        dateTime = formatter.format(today);
-        System.out.println(dateTime);
-        RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount(), dateTime,0,0);
-        topic.addReply(newReply);
-        try {
-            logic.updateTopic(topic);
-        } catch (InvalidParametersException e) {
-            e.printStackTrace();
-        } catch (EntityDoesNotExistException e) {
-            e.printStackTrace();
+        for(RepliesAttributes reply : topic.getReplies())
+        {
+            if(reply.getId() == Integer.valueOf(replyId))
+            {
+               replyToDelete = reply;
+            }
         }
-        
+        topic.removeReply(replyToDelete);
+        TopicsLogic.getTopicsDb().saveEntity(topic.toEntity());
         data = new StudentRepliesBoardPageData(account, sessionToken);
-        System.out.println(account.getName());
         data.init(topic);
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
     }

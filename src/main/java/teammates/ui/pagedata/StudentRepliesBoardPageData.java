@@ -24,16 +24,14 @@ public class StudentRepliesBoardPageData extends PageData {
   public TopicAttributes topic;
   public ArrayList<RepliesDiv> replies;
   public Integer count;
+  public Integer viewcount;
 
     public Integer getViewcount() {
         return viewcount;
     }
 
-    public void setViewcount(Integer viewcount) {
-        this.viewcount = viewcount;
-    }
-
-    public Integer viewcount;
+    public Integer like;
+  public Integer dislike;
 
 
     public void setTopic(TopicAttributes topic) {
@@ -103,9 +101,23 @@ public class StudentRepliesBoardPageData extends PageData {
                                                getReplyBoardEditLink(topic.getId(), reply.getId().toString()),
                                                Const.Tooltips.REPLY_EDIT, false);
 
-          actionsParam.add(editButton);
+          ElementTag upVote = createButton("Like", "btn btn-warning upvote",
+                  getReplyUpVoteLink(topic.getId(), reply.getId().toString()),
+                    Const.Tooltips.REPLY_UP_VOTE, false);
+          ElementTag downVote = createButton("Dislike", "btn btn-warning downvote",
+                    getReplyDownVoteLink(topic.getId(), reply.getId().toString()),
+                    Const.Tooltips.REPLY_DOWN_VOTE, false);
 
-          this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime()));
+          ElementTag deleteButton = createButton("Delete Reply", "btn btn-danger reply_delete",
+                    getReplyBoardDeleteLink(topic.getId(), reply.getId().toString()),
+                    Const.Tooltips.REPLY_DELETE, false);
+
+          actionsParam.add(editButton);
+          actionsParam.add(upVote);
+          actionsParam.add(downVote);
+            actionsParam.add(deleteButton);
+          this.replies.add(new RepliesDiv(reply.getStudent(), reply.getId().toString(), reply.getDesc(), actionsParam, reply.getDateTime(),reply.getLike(),reply.getDislike()));
+
 
         }
     }
@@ -132,4 +144,4 @@ public class StudentRepliesBoardPageData extends PageData {
         return button;
     }
 
-    }
+}

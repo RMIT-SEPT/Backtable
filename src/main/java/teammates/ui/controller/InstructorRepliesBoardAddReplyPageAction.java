@@ -11,6 +11,7 @@ import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
 import teammates.common.util.Logger;
+import teammates.ui.pagedata.InstructorRepliesBoardPageData;
 import teammates.ui.pagedata.StudentRepliesBoardAddReplyPage;
 import teammates.ui.pagedata.StudentRepliesBoardPageData;
 
@@ -19,9 +20,9 @@ import java.util.UUID;
 /**
  * Action: showing the profile page for a student in a course.
  */
-public class StudentRepliesBoardAddReplyPageAction extends Action {
+public class InstructorRepliesBoardAddReplyPageAction extends Action {
 
-    StudentRepliesBoardPageData data;
+    InstructorRepliesBoardPageData data;
     TopicAttributes topic;
     private static final Logger log = Logger.getLogger();
     String dateTime;
@@ -50,10 +51,10 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
             e.printStackTrace();
         }
         
-        data = new StudentRepliesBoardPageData(account, sessionToken);
+        data = new InstructorRepliesBoardPageData(account, sessionToken);
         System.out.println(account.getName());
         data.init(topic);
-        return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
+        return createShowPageResult(Const.ViewURIs.INSTRUCTOR_REPLIES_BOARD_PAGE, data); 
     }
 
 }

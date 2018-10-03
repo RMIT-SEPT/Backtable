@@ -52,9 +52,9 @@ public class TopicsLogic {
      *
      */
 
-  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewcounter) throws InvalidParametersException{
+  public TopicAttributes validateAndCreateTopicAttributes(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewcounter) throws InvalidParametersException{
       Assumption.assertNotNull("Non-null value expected", name);
-      return TopicAttributes.builder(topicID, name,desc, replies, count,viewcounter).build();
+      return TopicAttributes.builder(topicID, creator, name, desc, replies, count,viewcounter).build();
   }
 
     /**
@@ -63,11 +63,11 @@ public class TopicsLogic {
      * via createEntity() function.
      *
      */
-  public void createTopic(String topicID, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewcounter)
+  public void createTopic(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewcounter)
       throws InvalidParametersException, EntityAlreadyExistsException {
 
         System.out.println(name);
-        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, name,desc, replies, count,viewcounter);
+        TopicAttributes topicToAdd = validateAndCreateTopicAttributes(topicID, creator, name,desc, replies, count,viewcounter);
         topicsDb.createEntity(topicToAdd);       
     System.out.println("Topic entity has been created...");
   }
@@ -164,16 +164,12 @@ public class TopicsLogic {
     public static TopicsLogic inst() {
       return instance;
     }
-    public void createTopicForDiscussionBoard(String topicID, String topicName, String topicDesc, ArrayList<Reply> replies)
-
+    public void createTopicForDiscussionBoard(String topicID, String creator, String topicName, String topicDesc, ArrayList<Reply> replies)
           throws InvalidParametersException, EntityAlreadyExistsException {
 
-
-    createTopic(topicID, topicName, topicDesc, replies, 0,0);
+    createTopic(topicID, creator, topicName, topicDesc, replies, 0,0);
 
     /* Create the initial instructor for the course */
-
-    //AccountAttributes account = AccountAttributes.builder().build();
 
     }
 

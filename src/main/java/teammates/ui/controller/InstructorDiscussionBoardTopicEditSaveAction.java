@@ -3,18 +3,15 @@ package teammates.ui.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.util.Assumption;
 import teammates.common.util.Const;
-import teammates.common.util.StatusMessage;
-import teammates.common.util.StatusMessageColor;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.datatransfer.attributes.RepliesAttributes;
-import teammates.ui.pagedata.StudentDiscussionBoardPageData;
+import teammates.ui.pagedata.InstructorDiscussionBoardPageData;
 import teammates.logic.core.TopicsLogic;
 
 
-public class StudentDiscussionBoardTopicEditSaveAction extends Action {
+public class InstructorDiscussionBoardTopicEditSaveAction extends Action {
 
     @Override
     public ActionResult execute() {
@@ -33,13 +30,13 @@ public class StudentDiscussionBoardTopicEditSaveAction extends Action {
 
         TopicsLogic.getTopicsDb().saveEntity(editedTopic.toEntity());
 
-        StudentDiscussionBoardPageData data = new StudentDiscussionBoardPageData(account, sessionToken);
+        InstructorDiscussionBoardPageData data = new InstructorDiscussionBoardPageData(account, sessionToken);
 
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
         data.init(allTopics);
 
-        return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
+        return createShowPageResult(Const.ViewURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE, data);
     }
 
 }

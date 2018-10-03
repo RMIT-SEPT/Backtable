@@ -4,13 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
-<%@ taglib tagdir="/WEB-INF/tags/instructor/discussionBoard" prefix="tid" %>
+<%@ taglib tagdir="/WEB-INF/tags/instructor/discussionBoard" prefix="tid" %> 
+
 <%@ page import="teammates.common.util.Const" %>
 <c:set var="jsIncludes"></c:set>
 
+
 <ti:instructorPage title="Discussion Board" jsIncludes="${jsIncludes}">
 
-<%-- Check whether if there is any topic in database, if yes, display all of them --%>
+  <%-- Check whether if there is any topic in database, if yes, display all of them --%>
 
   <table class="table-responsive table table-striped table-bordered margin-0">
   <c:choose>
@@ -36,5 +38,5 @@
         googleId="${data.account.googleId}"
         sessionToken="${data.sessionToken}"/>
   <t:bodyFooter />
-
+<%-- above code taken from studentHome... --%>
 </ti:instructorPage>
