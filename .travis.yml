@@ -34,6 +34,7 @@ before_script:
   - ./google-cloud-sdk/install.sh --usage-reporting false --path-update false --command-completion false
   - cd $TRAVIS_BUILD_DIR
   - gcloud -q components install app-engine-java
+  - gcloud config set account pchristina.au@gmail.com
 #  - ./gradlew createConfigs testClasses
   - ./gradlew downloadStaticAnalysisTools
 #  - ./gradlew lint --continue
