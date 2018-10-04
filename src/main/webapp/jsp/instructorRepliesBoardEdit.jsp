@@ -6,11 +6,17 @@
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor/ReplyBoard" prefix="tir" %>
 
-<ti:instructorPage title="Edit Reply">
+<c:set var="jsIncludes">
+  <script type="text/javascript" src="/js/studentReplyEdit.js"></script>
+</c:set>
+
+<ti:instructorPage title="Edit Reply" jsIncludes="${jsIncludes}">
   <tir:editReplyForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"
       topicId="${data.topic.id}"
       replyId="${data.reply.id}"
-      replyDesc="${data.reply.desc}"/>
+      replyDesc="${data.reply.desc}"
+      editReplyButton="${data.editReplyButton}"
+      deleteReplyButton="${data.deleteReplyButton}"/>
 </ti:instructorPage>

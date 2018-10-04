@@ -5,11 +5,18 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/student" prefix="ts" %>
 <%@ taglib tagdir="/WEB-INF/tags/student/discussionBoard" prefix="tsd" %>
-<ts:studentPage title="Edit Topic">
+
+<c:set var="jsIncludes">
+  <script type="text/javascript" src="/js/studentTopicEdit.js"></script>
+</c:set>
+
+<ts:studentPage title="Edit Topic" jsIncludes="${jsIncludes}">
   <tsd:editTopicForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"
       topicId="${data.topic.id}"
       topicName="${data.topic.name}"
-      topicDesc="${data.topic.desc}"/>
+      topicDesc="${data.topic.desc}"
+      editTopicButton="${data.editTopicButton}"
+      deleteTopicButton="${data.deleteTopicButton}"/>
 </ts:studentPage>
