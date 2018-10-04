@@ -31,7 +31,6 @@ before_script:
     false"
   - cd $TRAVIS_BUILD_DIR
   - gcloud -q components install app-engine-java
-  - gcloud config set account pchristina.au@gmail.com
   - gcloud auth activate-service-account --key-file client-secret.json
   - "./gradlew downloadStaticAnalysisTools"
   - npm install
