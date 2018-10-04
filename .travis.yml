@@ -1,6 +1,6 @@
 language: java
 jdk:
-- oraclejdk8
+  - oraclejdk8
 notifications:
   email: false
 sudo: required
@@ -8,48 +8,49 @@ dist: trusty
 addons:
   firefox: '46.0'
 before_install:
-- openssl aes-256-cbc -K $encrypted_14db10676614_key -iv $encrypted_14db10676614_iv -in client-secret.json.enc -out client-secret.json -d
-- |
-  git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(\.md)|(\.txt)|(\.png)|(\.jpg)|(\.gif)|^(LICENSE)|^(docs)|^(\.templates)'
-  status_codes=( ${PIPESTATUS[*]} ); git_diff_status=${status_codes[0]}; grep_status=${status_codes[1]}
-  if [[ $git_diff_status == 0 && $grep_status == 1 && $TRAVIS_PULL_REQUEST != "false" ]]
-  then
-    echo "Only doc files or IDE configurations were updated in PR, not running the CI."
-    exit
-  fi
-- "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
-  --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1440x900x16"
-- nvm install node
+  - openssl aes-256-cbc -K $encrypted_14db10676614_key -iv $encrypted_14db10676614_iv -in client-secret.json.enc -out client-secret.json -d
+  - |
+    git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(\.md)|(\.txt)|(\.png)|(\.jpg)|(\.gif)|^(LICENSE)|^(docs)|^(\.templates)'
+    status_codes=( ${PIPESTATUS[*]} ); git_diff_status=${status_codes[0]}; grep_status=${status_codes[1]}
+    if [[ $git_diff_status == 0 && $grep_status == 1 && $TRAVIS_PULL_REQUEST != "false" ]]
+    then
+      echo "Only doc files or IDE configurations were updated in PR, not running the CI."
+      exit
+    fi
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
+    --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1440x900x16"
+  - nvm install node
 before_script:
-- export DISPLAY=:99.0
-- tar -xjf /tmp/firefox-46.0.tar.bz2 --directory $TRAVIS_BUILD_DIR/
-- export PATH=$TRAVIS_BUILD_DIR/firefox:./node_modules/.bin:$HOME/google-cloud-sdk/bin:$PATH
-- curl -fsS -o $HOME/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.tar.gz
-- cd $HOME
-- tar -xzf google-cloud-sdk.tar.gz
-- "./google-cloud-sdk/install.sh --usage-reporting false --path-update false --command-completion
-  false"
-- cd $TRAVIS_BUILD_DIR
-- gcloud -q components install app-engine-java
-- gcloud config set account pchristina.au@gmail.com
-- gcloud auth activate-service-account --key-file client-secret.json
-- "./gradlew downloadStaticAnalysisTools"
-- npm install
+  - export DISPLAY=:99.0
+  - tar -xjf /tmp/firefox-46.0.tar.bz2 --directory $TRAVIS_BUILD_DIR/
+  - export PATH=$TRAVIS_BUILD_DIR/firefox:./node_modules/.bin:$HOME/google-cloud-sdk/bin:$PATH
+  - curl -fsS -o $HOME/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.tar.gz
+  - cd $HOME
+  - tar -xzf google-cloud-sdk.tar.gz
+  - "./google-cloud-sdk/install.sh --usage-reporting false --path-update false --command-completion
+    false"
+  - cd $TRAVIS_BUILD_DIR
+  - gcloud -q components install app-engine-java
+  - gcloud config set account pchristina.au@gmail.com
+  - gcloud auth activate-service-account --key-file client-secret.json
+  - "./gradlew downloadStaticAnalysisTools"
+  - npm install
 install: true
+
 script:
-- npm run build
-- ./gradlew appengineStart
-- gcloud config set project 'backtable-sept'
-" gcloud projects add-iam-policy-binding backtable-sept \--member serviceAccount:jeffbacktable@backtable-sept.iam.gserviceaccount.com --role roles/editor"
--  ./gradlew appengineDeployAll
+  - npm run build
+  - ./gradlew appengineStart
+  - gcloud config set project 'backtable-sept'
+  " gcloud projects add-iam-policy-binding backtable-sept \--member serviceAccount:jeffbacktable@backtable-sept.iam.gserviceaccount.com --role roles/editor"
+  -  ./gradlew appengineDeployAll
 
 deploy:
   provider: gae
   keyfile: client-secret.json
   project: backtable-sept
 after_failure:
-- gem install gist
-- "./gradlew generateFailedCmd"
+  - gem install gist
+  - "./gradlew generateFailedCmd"
 after_success:
-- "./gradlew jacocoReport"
-- bash <(curl -s https://codecov.io/bash)
+  - "./gradlew jacocoReport"
+  - bash <(curl -s https://codecov.io/bash)
