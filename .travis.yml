@@ -44,6 +44,7 @@ install: true
 script:
   - npm run build
   - ./gradlew appengineStart
+  - ./gradlew appengineDeployAll
 #  - ./gradlew ciTests
 
 after_failure:
