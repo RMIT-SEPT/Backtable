@@ -8,7 +8,7 @@ dist: trusty
 addons:
   firefox: '46.0'
 before_install:
-
+- openssl aes-256-cbc -K $encrypted_14db10676614_key -iv $encrypted_14db10676614_iv -in client-secret.json.enc -out client-secret.json -d
 - |
   git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(\.md)|(\.txt)|(\.png)|(\.jpg)|(\.gif)|^(LICENSE)|^(docs)|^(\.templates)'
   status_codes=( ${PIPESTATUS[*]} ); git_diff_status=${status_codes[0]}; grep_status=${status_codes[1]}
@@ -20,7 +20,6 @@ before_install:
 - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile
   --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1440x900x16"
 - nvm install node
-
 before_script:
 - export DISPLAY=:99.0
 - tar -xjf /tmp/firefox-46.0.tar.bz2 --directory $TRAVIS_BUILD_DIR/
@@ -33,15 +32,16 @@ before_script:
 - cd $TRAVIS_BUILD_DIR
 - gcloud -q components install app-engine-java
 - gcloud config set account pchristina.au@gmail.com
-
 - gcloud auth activate-service-account --key-file client-secret.json
 - "./gradlew downloadStaticAnalysisTools"
 - npm install
 install: true
 script:
 - npm run build
-- "./gradlew appengineStart"
+- ./gradlew appengineStart
 - gcloud config set project 'backtable-sept'
+
+-  ./gradlew appengineDeployAll
 deploy:
   provider: gae
   keyfile: client-secret.json
