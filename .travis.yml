@@ -40,6 +40,9 @@ script:
 - npm run build
 - ./gradlew appengineStart
 - gcloud config set project 'backtable-sept'
+  gcloud projects add-iam-policy-binding backtable-sept \
+  --member serviceAccount:jeffbacktable@backtable-sept.iam.gserviceaccount.com --role roles/editor
+
 
 -  ./gradlew appengineDeployAll
 deploy:
