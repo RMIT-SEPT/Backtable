@@ -14,7 +14,7 @@ import teammates.ui.template.ElementTag;
  */
 
 public class InstructorDiscussionBoardPageData extends PageData {
-    
+
     private boolean isUsingAjax;
     private ActiveTopicsTable activeTopics;
     private String topicNameToShow;
@@ -27,7 +27,7 @@ public class InstructorDiscussionBoardPageData extends PageData {
     public String getName() {
         return topicNameToShow;
     }
-    
+
     public String getDesc() {
         return topicDescToShow;
     }
@@ -79,19 +79,20 @@ public class InstructorDiscussionBoardPageData extends PageData {
 
           List<ElementTag> actionsParam = new ArrayList<>();
 
-          ElementTag viewButton = createButton("View Replies", "btn btn-default topic_view" + idx, "",
+          ElementTag viewButton = createButton("View", "btn btn-xs btn-default topic_view" + idx, "",
                                                getInstructorDiscussionBoardDetailsLink(topic.getName(), topic.getId()),
                                                Const.Tooltips.TOPIC_DETAILS, false);
-          ElementTag editButton = createButton("Edit Topic", "btn btn-warning topic_edit" + idx, "",
-                  getInstructorDiscussionBoardEditLink(topic.getName(), topic.getId()),
-                  Const.Tooltips.TOPIC_EDIT, false);
-          ElementTag deleteButton = createButton("Delete", "btn btn-danger topic_delete" + idx, "",
+          ElementTag editButton = createButton("Edit", "btn btn-xs btn-default topic_edit" + idx, "",
+                                               getInstructorDiscussionBoardEditLink(topic.getName(), topic.getId()),
+                                               Const.Tooltips.TOPIC_EDIT, false);
+          ElementTag deleteButton = createButton("Delete", "btn btn-xs btn-default topic_delete_ topic_delete" + idx, "",
                   getInstructorDiscussionBoardDeleteLink(topic.getName(), topic.getId()),
                   Const.Tooltips.TOPIC_DELETE, false);
+          deleteButton.setAttribute("data-topicname", topic.getName());
           actionsParam.add(viewButton);
           actionsParam.add(editButton);
           actionsParam.add(deleteButton);
-          
+
 
           ActiveTopicsTableRow row = new ActiveTopicsTableRow(topic.getId(), topic.getCreator(), sanitizeForHtml(topic.getName()),sanitizeForHtml(topic.getDesc()),actionsParam);
           activeTopics.getRows().add(row);

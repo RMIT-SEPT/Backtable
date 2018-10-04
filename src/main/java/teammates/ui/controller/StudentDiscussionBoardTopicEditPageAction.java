@@ -10,10 +10,8 @@ import teammates.common.datatransfer.attributes.TopicAttributes;
      @Override
     public ActionResult execute() {
          String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
-        Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
-        //
-        // String topicName = getRequestParamValue(Const.ParamsNames.TOPIC_NAME);
-        // Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, topicName);
+         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
+        
          TopicAttributes topic = logic.getTopic(topicId);
          System.out.println("Editing Topic: " + topic.getName() + ", " + topic.getDesc());
          StudentDiscussionBoardTopicEditPageData data =

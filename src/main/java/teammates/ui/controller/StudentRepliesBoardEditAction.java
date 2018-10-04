@@ -13,8 +13,9 @@ import teammates.ui.pagedata.StudentRepliesBoardPageData;
  */
 public class StudentRepliesBoardEditAction extends Action {
 
-    StudentRepliesBoardEditPageData data;
-    TopicAttributes topic;
+    private StudentRepliesBoardEditPageData data;
+    private TopicAttributes topic;
+    private RepliesAttributes reply;
     private static final Logger log = Logger.getLogger();
 
     @Override
@@ -22,19 +23,16 @@ public class StudentRepliesBoardEditAction extends Action {
         //getting topic name at the moment, whereas would be better to use topic id
         String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
-        
+
         String replyId = getRequestParamValue(Const.ParamsNames.REPLY_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_ID,  replyId);
-        
+
         account.studentProfile = logic.getStudentProfile(account.googleId);
-        
-        
-        data = new StudentRepliesBoardEditPageData(account, sessionToken);
-        
+
         topic = logic.getTopic(topicId);
-        
-        data.init(topic, getReplyWithId(topic.getReplies(), Integer.parseInt(replyId)));
-        
+        reply = getReplyWithId(topic.getReplies(), Integer.parseInt(replyId));
+        data = new StudentRepliesBoardEditPageData(account, sessionToken, topic, reply);
+
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_EDIT_PAGE, data);
     }
 
