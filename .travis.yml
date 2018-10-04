@@ -43,6 +43,7 @@ script:
 " gcloud projects add-iam-policy-binding backtable-sept \
 #  --member serviceAccount:jeffbacktable@backtable-sept.iam.gserviceaccount.com --role roles/editor"
 -  ./gradlew appengineDeployAll
+
 deploy:
   provider: gae
   keyfile: client-secret.json
