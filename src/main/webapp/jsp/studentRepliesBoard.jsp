@@ -28,7 +28,7 @@
 <c:if test="${empty data.replies}">
 <div class="col-sm-12" style="color: red">
   There are currently no responses for you for this feedback session.
-    aaaa
+
 </div>
 </c:if>
 
