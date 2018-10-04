@@ -17,6 +17,8 @@
 
 <tsd:topicDetails name="${data.name}" desc="${data.desc}" view ="${data.viewcount}" />
 
+
+
 <c:forEach items="${data.replies}" var= "reply">
     <tsd:reply reply="${reply}">
     </tsd:reply>
@@ -26,6 +28,7 @@
 <c:if test="${empty data.replies}">
 <div class="col-sm-12" style="color: red">
   There are currently no responses for you for this feedback session.
+
 </div>
 </c:if>
 
