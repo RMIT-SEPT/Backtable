@@ -366,14 +366,7 @@ public class PageData {
         link = Url.addParamToUrl(link, Const.ParamsNames.REPLY_ID, replyId);
         return link;
     }
-
-    public String getInstructorDiscussionBoardDetailsLink(String topicName, String topicId) {
-        String link = Const.ActionURIs.INSTRUCTOR_REPLIES_BOARD_PAGE;
-        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
-        link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_ID, topicId);
-        link = addUserIdToUrl(link);
-        return link;
-    }
+    
     public String getInstructorDiscussionBoardDeleteLink(String topicName, String topicId) {
         String link = Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_DELETE_TOPIC_PAGE;
         link = Url.addParamToUrl(link, Const.ParamsNames.TOPIC_NAME, topicName);
