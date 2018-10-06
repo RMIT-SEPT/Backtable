@@ -15,15 +15,31 @@ import teammates.ui.template.ElementTag;
 
 public class InstructorDiscussionBoardPageData extends PageData {
 
+    /*
+     * Variable declarations
+     */
     private boolean isUsingAjax;
     private ActiveTopicsTable activeTopics;
     private String topicNameToShow;
     private String topicDescToShow;
 
-  public InstructorDiscussionBoardPageData(AccountAttributes account, String sessionToken) {
-    super(account, sessionToken);
-  }
-
+    //Constructor
+    public InstructorDiscussionBoardPageData(AccountAttributes account, String sessionToken) {
+      super(account, sessionToken);
+    }
+   
+    //initialise data with active topics
+    public void init(List<TopicAttributes> activeTopicsParam) {
+        this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
+    }
+    //initialise data with active topics and new topic
+    public void init(List<TopicAttributes> activeTopicsParam, String topicNameToShowParam, String topicDescToShowParam) {
+        this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
+        this.topicNameToShow = topicNameToShowParam;
+        this.topicDescToShow = topicDescToShowParam;
+    }
+    
+    // GETTERS & SETTERS
     public String getName() {
         return topicNameToShow;
     }
@@ -32,22 +48,8 @@ public class InstructorDiscussionBoardPageData extends PageData {
         return topicDescToShow;
     }
 
-    public void init(List<TopicAttributes> activeTopicsParam) {
-        this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
-    }
-
-    public void init(List<TopicAttributes> activeTopicsParam, String topicNameToShowParam, String topicDescToShowParam) {
-        this.activeTopics = convertToActiveTopicsTable(activeTopicsParam);
-        this.topicNameToShow = topicNameToShowParam;
-        this.topicDescToShow = topicDescToShowParam;
-    }
-
     public void setUsingAjax(boolean isUsingAjax) {
     this.isUsingAjax = isUsingAjax;
-    }
-
-    public boolean isUsingAjax() {
-    return this.isUsingAjax;
     }
 
     public String getTopicDescToShow() {
@@ -62,6 +64,9 @@ public class InstructorDiscussionBoardPageData extends PageData {
     return activeTopics;
     }
 
+    public boolean isUsingAjax() {
+        return this.isUsingAjax;
+    }
     /**
     * Convert TopicAttribute to ActiveTopicsTable for front-end purposes
     * Each TopicAttributes will be converted into ActiveTopicsTableRow which is one of elements of  ActiveTopicsTable
@@ -100,6 +105,9 @@ public class InstructorDiscussionBoardPageData extends PageData {
         return activeTopics;
     }
 
+    /*
+     * Creates a button with relevant values, used while converting topics to Active topics table
+     */
     private ElementTag createButton(String content, String buttonClass, String id, String href, String title,
                               boolean isDisabled) {
         ElementTag button = new ElementTag(content);

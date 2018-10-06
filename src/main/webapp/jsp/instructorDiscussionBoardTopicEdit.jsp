@@ -5,11 +5,11 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor/discussionBoard" prefix="tid" %>
-
+<%-- instructor discussion board edit page --%>
 <c:set var="jsIncludes">
   <script type="text/javascript" src="/js/studentTopicEdit.js"></script>
 </c:set>
-
+<%-- passes variables to tag edit topic form --%>
 <ti:instructorPage title="Edit Topic" jsIncludes="${jsIncludes}">
   <tid:editTopicForm
       googleId="${data.account.googleId}"

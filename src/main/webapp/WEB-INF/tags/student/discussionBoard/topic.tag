@@ -4,7 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ attribute name="activeTopic" type="teammates.ui.template.ActiveTopicsTable" required="true" %>
 
+<%-- TAG: used for displaying each topic on discussion board --%>
 <h2>Active Topics</h2>
+
 <table class="table table-bordered table-striped" id="tableActiveCourses">
   <thead class="fill-primary">
   <tr>

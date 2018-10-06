@@ -6,12 +6,18 @@ import teammates.common.util.Const;
 import teammates.common.util.StatusMessage;
 import teammates.common.util.StatusMessageColor;
 
+/**
+ * 
+ * Action to delete topic from discussion board when instructor is active account
+ *
+ */
 public class InstructorDiscussionBoardTopicDeleteAction extends Action {
 
     
     @Override
     protected ActionResult execute() throws EntityDoesNotExistException {        
         
+        //request id of topic to be deleted from parameter
         String idOfTopicToDelete = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, idOfTopicToDelete);
         System.out.println(idOfTopicToDelete);

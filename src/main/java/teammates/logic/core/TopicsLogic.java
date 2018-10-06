@@ -3,21 +3,16 @@ package teammates.logic.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import teammates.common.datatransfer.attributes.AccountAttributes;
-import teammates.common.datatransfer.attributes.InstructorAttributes;
-import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
 import teammates.common.util.Assumption;
-import teammates.common.util.Logger;
 import teammates.storage.api.TopicsDb;
 import teammates.storage.entity.Reply;
 
 public class TopicsLogic {
-  private static final Logger log = Logger.getLogger();
 
   private static TopicsLogic instance = new TopicsLogic();
 
@@ -30,15 +25,16 @@ public class TopicsLogic {
    */
 
   private static final TopicsDb topicsDb = new TopicsDb();
-  private static final AccountsLogic accountsLogic = AccountsLogic.inst();
-  private static final FeedbackSessionsLogic feedbackSessionsLogic = FeedbackSessionsLogic.inst();
-  private static final InstructorsLogic instructorsLogic = InstructorsLogic.inst();
   private static final StudentsLogic studentsLogic = StudentsLogic.inst();
 
   private TopicsLogic() {
       // prevent initialization
   }
 
+  /**
+   * Returns instance of topics database
+   * @return
+   */
   public static TopicsDb getTopicsDb() {
     return topicsDb;
   }
@@ -91,7 +87,11 @@ public class TopicsLogic {
         topicsDb.deleteTopic(topicName);
     }
 
-    // Get topic for testing
+    /**
+     * Get Topic from database
+     * @param topicId
+     * @return
+     */
     public TopicAttributes getTopic(String topicId) {
         return topicsDb.getTopic(topicId);
     }
@@ -114,66 +114,37 @@ public class TopicsLogic {
       }
       return topicsDb.getTopics(topicIds);
     }
-
-
-
-
-
-    public List<TopicAttributes> getTopicsForInstructor(String googleId) {
-      return getTopicsForInstructor(googleId, false);
-    }
-
-
-
-
-    public List<TopicAttributes> getTopicsForInstructor(String googleId, boolean omitArchived) {
-      List<InstructorAttributes> instructorList = instructorsLogic.getInstructorsForGoogleId(googleId, omitArchived);
-      return getTopicsForInstructor(instructorList);
-    }
-
-
-
-
-
-
-    public List<TopicAttributes> getTopicsForInstructor(List<InstructorAttributes> instructorList) {
-        Assumption.assertNotNull("Supplied parameter was null", instructorList);
-        List<String> topicIdList = new ArrayList<>();
-
-        for (InstructorAttributes instructor : instructorList) {
-          topicIdList.add(instructor.topicId);
-        }
-
-        List<TopicAttributes> topicList = topicsDb.getTopics(topicIdList);
-
-        // Check that all topicIds queried returned a topic.
-        if (topicIdList.size() > topicList.size()) {
-          for (TopicAttributes ca : topicList) {
-              topicIdList.remove(ca.getName());
-          }
-          log.severe("Topic(s) was deleted but the instructor still exists: " + System.lineSeparator()
-                  + topicIdList.toString());
-        }
-
-        return topicList;
-    }
-
-
-
-
+    
+    /**
+     * returns instance of TopicsLogic
+     * @return
+     */
     public static TopicsLogic inst() {
       return instance;
     }
+    
+    /**
+     * Creates topic object in database
+     * @param topicID
+     * @param creator
+     * @param topicName
+     * @param topicDesc
+     * @param replies
+     * @throws InvalidParametersException
+     * @throws EntityAlreadyExistsException
+     */
     public void createTopicForDiscussionBoard(String topicID, String creator, String topicName, String topicDesc, ArrayList<Reply> replies)
-          throws InvalidParametersException, EntityAlreadyExistsException {
-
-    createTopic(topicID, creator, topicName, topicDesc, replies, 0,0);
-
-    /* Create the initial instructor for the course */
-
+    throws InvalidParametersException, EntityAlreadyExistsException {
+        
+        createTopic(topicID, creator, topicName, topicDesc, replies, 0,0);
     }
 
-
+    /**
+     * 
+     * @param topic
+     * @throws InvalidParametersException
+     * @throws EntityDoesNotExistException
+     */
     public void updateTopic(TopicAttributes topic) throws InvalidParametersException, EntityDoesNotExistException {
         topicsDb.saveEntity(topic.toEntity());
     }

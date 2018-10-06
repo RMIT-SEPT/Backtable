@@ -17,31 +17,41 @@ import teammates.ui.pagedata.StudentRepliesBoardPageData;
 import java.util.UUID;
 
 /**
- * Action: showing the profile page for a student in a course.
+ * Action: showing the add reply page for student.
  */
 public class StudentRepliesBoardAddReplyPageAction extends Action {
 
+    /*
+     * Variable declarations
+     */
     StudentRepliesBoardPageData data;
     TopicAttributes topic;
-    private static final Logger log = Logger.getLogger();
     String dateTime;
 
 
     @Override
     protected ActionResult execute() {
-        //getting topic name at the moment, whereas would be better to use topic id
+        //get url request parameters and assert not null
         String topicId = getRequestParamValue(Const.ParamsNames.TOPIC_ID);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_ID, topicId);
         String replyDesc = getRequestParamValue(Const.ParamsNames.REPLY_DESC);
         Assumption.assertPostParamNotNull(Const.ParamsNames.REPLY_DESC, replyDesc);
+        
+        //retreive relevant topic from database
         topic = logic.getTopic(topicId);
         
+        //get string with date and time for displaying on reply
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy EEE MMM dd hh:mm");
         dateTime = formatter.format(today);
-        System.out.println(dateTime);
+        
+        //instantiate new reply with values
         RepliesAttributes newReply = new RepliesAttributes(replyDesc, account.getName(), topic.getCount(), dateTime,0,0);
+        
+        //add reply to the topic
         topic.addReply(newReply);
+        
+        //update topic in the database
         try {
             logic.updateTopic(topic);
         } catch (InvalidParametersException e) {
@@ -50,8 +60,10 @@ public class StudentRepliesBoardAddReplyPageAction extends Action {
             e.printStackTrace();
         }
         
+        //instantiate new data object for replies board
         data = new StudentRepliesBoardPageData(account, sessionToken);
-        System.out.println(account.getName());
+        
+        //set data with topic values
         data.init(topic);
         return createShowPageResult(Const.ViewURIs.STUDENT_REPLIES_BOARD_PAGE, data);
     }

@@ -7,7 +7,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ attribute name="googleId" required="true" %>
 <%@ attribute name="sessionToken" required="true" %>
-<%-- needs much work --%>
+<%-- TAG: used for adding a reply on reply board of relevant topic --%>
 
 <div class="well well-plain">
   <%-- The form will redirect to STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE which is map to StudentDiscussionBoardTopicAddPageData Action --%>

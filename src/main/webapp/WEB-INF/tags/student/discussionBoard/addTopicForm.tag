@@ -8,13 +8,15 @@
 <%@ attribute name="googleId" required="true" %>
 <%@ attribute name="sessionToken" required="true" %>
 
+<%-- TAG: used for add topic page in discussion board --%>
+
 <div class="panel panel-primary">
   <div class="panel-body fill-plain">
     <form method="get" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_ADD_TOPIC_PAGE%>" name="discussion_topic_add" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
       <input type="hidden" name="<%=Const.ParamsNames.SESSION_TOKEN%>" value="${sessionToken}">
       <input type="hidden" name="<%=Const.ParamsNames.USER_ID%>" value="${googleId}">
-
+ 
       <div class="form-group">
         <label class="col-sm-3 control-label">Topic Name:</label>
         <div class="col-sm-3">
@@ -37,7 +39,6 @@
                     tabindex=2 placeholder="e.g. Assignment 1 Advice"></textarea>
         </div>
       </div>
-
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
           <input id="btnAddCourse" type="submit" class="btn btn-primary" value="Add Topic" tabindex="3">

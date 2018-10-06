@@ -2,8 +2,8 @@
 <%@ tag description="Add New Topic Panel of Discussion Board Page" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%-- <%@ attribute name="topic" type="teammates.common.datatransfer.attributes.TopicAttributes" required="true" %>
- --%>
+
+<%-- TAG: Topic details tag is used to display the topic name and description on replies board --%>
 
 <%@ tag import="teammates.common.util.Const" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>

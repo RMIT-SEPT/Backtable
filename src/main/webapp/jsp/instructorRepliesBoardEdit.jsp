@@ -10,7 +10,9 @@
   <script type="text/javascript" src="/js/studentReplyEdit.js"></script>
 </c:set>
 
+<%-- PAGE: instructor page for editing reply --%>
 <ti:instructorPage title="Edit Reply" jsIncludes="${jsIncludes}">
+<%-- insert tag for editing reply form while passing variables required --%>
   <tir:editReplyForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"

@@ -2,7 +2,6 @@
 <%@ tag description="Edit Topic Panel of Discussion Board Page" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%@ tag import="teammates.common.util.Const" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ attribute name="googleId" required="true" %>
@@ -13,7 +12,9 @@
 <%@ attribute name="editReplyButton" type="teammates.ui.template.ElementTag" required="true" %>
 <%@ attribute name="deleteReplyButton" type="teammates.ui.template.ElementTag" required="true" %>
 
+<%-- TAG: used for page edit Reply on discussion board --%>
 <div class="panel panel-primary">
+<%-- DIV: shows reply information --%>
   <div class="panel-heading">
     <strong>Reply:</strong>
 
@@ -27,6 +28,7 @@
     </div>
   </div>
 
+<%--DIV/FORM: used to post the edit reply to the edit save page --%>
   <div class="panel-body fill-plain">
     <form method="post" action="<%=Const.ActionURIs.STUDENT_REPLIES_BOARD_EDIT_SAVE%>" name="discussion_reply_edit_save" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">
@@ -45,7 +47,6 @@
                     tabindex=2 disabled>${replyDesc}</textarea>
         </div>
       </div>
-
       <div class="form-group">
         <div class="col-sm-12 align-center">
           <input id="btnSaveReply" type="submit" class="btn btn-primary" value="Save Changes" tabindex="3"

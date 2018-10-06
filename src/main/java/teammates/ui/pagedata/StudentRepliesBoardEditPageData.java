@@ -4,13 +4,19 @@ import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.ui.template.ElementTag;
-
+/**
+ * Page data for replies board edit 
+ */
 public class StudentRepliesBoardEditPageData extends PageData {
+    /*
+     * Variable Declarations
+     */
     private TopicAttributes topic;
     private RepliesAttributes reply;
     private ElementTag editReplyButton;
     private ElementTag deleteReplyButton;
 
+    //Constructor
     public StudentRepliesBoardEditPageData(AccountAttributes account, String sessionToken, TopicAttributes topic, RepliesAttributes reply) {
       super(account, sessionToken);
       this.topic = topic;
@@ -18,11 +24,13 @@ public class StudentRepliesBoardEditPageData extends PageData {
       createReplyRelatedButtons();
     }
 
+    //create buttons related to reply
     private void createReplyRelatedButtons() {
       editReplyButton = createEditReplyButton();
       deleteReplyButton = createDeleteReplyButton();
     }
-
+    
+    //create edit reply button
     private ElementTag createEditReplyButton() {
         String buttonContent = "<span class=\"glyphicon glyphicon-pencil\"></span> Edit";
         String buttonId = "btnEditReply";
@@ -30,6 +38,7 @@ public class StudentRepliesBoardEditPageData extends PageData {
         return createBasicButton(buttonContent, buttonId, "javascript:;", null, false);
     }
 
+    //create delete reply button
     private ElementTag createDeleteReplyButton() {
         String buttonContent = "<span class=\"glyphicon glyphicon-trash\"></span> Delete";
         String buttonId = "btnDeleteReply";
@@ -43,6 +52,7 @@ public class StudentRepliesBoardEditPageData extends PageData {
         return button;
     }
 
+    //GETTERS 
     public TopicAttributes getTopic()
     {
         return topic;

@@ -19,7 +19,6 @@ import teammates.ui.pagedata.StudentDiscussionBoardPageData;
  * Action: Student create a topic.
  */
 public class StudentDiscussionBoardTopicAddAction extends Action { 
-    private static final Logger log = Logger.getLogger();
     StudentDiscussionBoardPageData data;
     
     @Override

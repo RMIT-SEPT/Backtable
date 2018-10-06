@@ -1,12 +1,8 @@
 package teammates.common.datatransfer.attributes;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import teammates.common.util.Assumption;
 import teammates.common.util.FieldValidator;
 import teammates.common.util.JsonUtils;
 import teammates.common.util.SanitizationHelper;
@@ -15,6 +11,7 @@ import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
 
+  /* Variable declarations */  
   public String id;
   public String creator;
   public String name;
@@ -23,7 +20,7 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public Integer viewCounter;
   public ArrayList<RepliesAttributes> replies;
 
-
+  /* TopicAttributes constructor */
   public TopicAttributes(String topicID, String creator, String name, String desc, ArrayList<RepliesAttributes> replies, Integer count, Integer viewCounter) {
       this.id = SanitizationHelper.sanitizeTitle(topicID);
       this.creator = SanitizationHelper.sanitizeTitle(creator);
@@ -34,175 +31,148 @@ public class TopicAttributes extends EntityAttributes<Topic> {
       this.viewCounter = viewCounter;
   }
 
-/*Builder is used as a constructor to initiate instance of TopicAttribute*/
-public static Builder builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
+  /*Builder is used as a constructor to initiate new instance of TopicAttribute*/
+  public static Builder builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
       return new Builder(topicID, creator, name, desc, replies, count,viewCounter);
   }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Integer getViewCounter() {
-        return viewCounter;
-    }
-
-    public void setViewCounter(Integer viewCounter) {
-        this.viewCounter = viewCounter;
-    }
+  
+  /* Getters */
+  
+  public Integer getViewCounter() {
+      return viewCounter;
+  }
+  
   public String getId() {
       return id;
+  }
+  
+  public String getName() {
+      return name;
   }
   
   public String getCreator() {
       return creator;
   }
-
   
-   public String getName() {
-      return name;
+  public String getDesc() {
+      return desc;
+    }
+  
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
-   public String getDesc() {
-     return desc;
-   }
-   public Integer getCount()    {
-       return count;
-   }
-   
-   public ArrayList<RepliesAttributes> getReplies(){
-       return replies;
-   }
+    public ArrayList<RepliesAttributes> getReplies(){
+        return replies;
+    }
+    
+    public Integer getCount()    {
+        return count;
+    }
+    
+
+    /* Setters */
+    
+    public void setViewCounter(Integer viewCounter) {
+        this.viewCounter = viewCounter;
+    }
  
-   public void addReply(RepliesAttributes reply)
-   {
-     if(replies == null)
-     {
-         replies = new ArrayList<RepliesAttributes>();
-     }
-     replies.add(reply);
-     count++;
-     
-   }
-   
-   public void setReplies(ArrayList<RepliesAttributes> replies)
-   {
-       this.replies = replies;
-   }
-
-
-  @Override
-  public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
-      List<String> errors = new ArrayList<>();
-
-      addNonEmptyError(validator.getInvalidityInfoForCourseName(getName()), errors);
-
-      return errors;
-  }
-
-  @Override
-  public Topic toEntity() {
-    ArrayList<Reply> repliesEntity = new ArrayList<Reply>();
-    if(getReplies() != null)
+    public void setReplies(ArrayList<RepliesAttributes> replies)
     {
-        for(RepliesAttributes replyAtt: getReplies())
-        {
-          repliesEntity.add(replyAtt.toEntity());
-        }
+        this.replies = replies;
     }
-    return new Topic(getId(), getCreator(), getName(), getDesc(), repliesEntity, count,viewCounter);
-  }
-  public void print(){
-      for (RepliesAttributes reply:replies) {
-
-          System.out.println(reply.getDesc());
-      }
-  }
-
-  @Override
-  public String getIdentificationString() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public String getEntityTypeAsString() {
-    // TODO Auto-generated method stub
-    return "Topic";
-  }
-
-  @Override
-  public String getBackupIdentifier() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public String getJsonString() {
-    // TODO Auto-generated method stub
-    return JsonUtils.toJson(this, TopicAttributes.class);
-  }
-
-  @Override
-  public void sanitizeForSaving() {
-
-
-  }
-
-  public static ArrayList<RepliesAttributes> getRepliesAtt(ArrayList<Reply> replies)
-  {
-    if(replies != null)
-    {
-      ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
-      for(Reply reply:replies)
-      {
-        repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime(),reply.getLike(),reply.getDislike()));
-      }      
-      return repliesAtt;
-    }
-    return null;
-  }
   
-  public void removeReply(RepliesAttributes reply)
-  {
-      replies.remove(reply);
-  }
-
-
-
-
-public static class Builder {
-    private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
-    private final TopicAttributes topicAttributes;
-
-    public Builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
-       // validateRequiredFields(name, desc);
-        ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
-        
-        topicAttributes = new TopicAttributes(topicID, creator, name, desc, repliesAtt, count,viewCounter);
-    }
-
-
-
-
-    public TopicAttributes build() {
-        return topicAttributes;
-    }
-
-    private void validateRequiredFields(Object... objects) {
-        for (Object object : objects) {
-            Assumption.assertNotNull(REQUIRED_FIELD_CANNOT_BE_NULL, object);
+    
+    /* Function to add a reply to the topic count iterated as it is used as partial key to identify reply*/
+    public void addReply(RepliesAttributes reply)
+    {
+        if(replies == null)
+        {
+           replies = new ArrayList<RepliesAttributes>();
         }
+        replies.add(reply);
+        count++;
     }
-}
+   
+    /* Used to validate strings stored in topic */
+    @Override
+    public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
+          List<String> errors = new ArrayList<>();
+          addNonEmptyError(validator.getInvalidityInfoForCourseName(getName()), errors);
+          return errors;
+    }
 
-
-
-
-
-
-
-
-
-
+     /* returns object Topic representing this TopicAttributes, will then be able to be stored in database */
+     @Override
+     public Topic toEntity() {
+        ArrayList<Reply> repliesEntity = new ArrayList<Reply>();
+        if(getReplies() != null)
+        {
+           for(RepliesAttributes replyAtt: getReplies())
+           {
+               repliesEntity.add(replyAtt.toEntity());
+           }
+        }
+        return new Topic(getId(), getCreator(), getName(), getDesc(), repliesEntity, count,viewCounter);
+      }
+  
+      /* Inherited methods, not all necessary for our functionality */
+      @Override
+      public String getIdentificationString() {
+        return null;
+      }
+    
+      @Override
+      public String getEntityTypeAsString() {
+        return "Topic";
+      }
+    
+      @Override
+      public String getBackupIdentifier() {
+        return null;
+      }
+    
+      @Override
+      public String getJsonString() {
+        return JsonUtils.toJson(this, TopicAttributes.class);
+      }
+    
+      @Override
+      public void sanitizeForSaving() {
+      }
+    
+      /* Takes ArrayList of Reply entities, returns array of RepliesAttributes */
+      /* Required in order to take objects from database and build them back up to a usable state */
+      public static ArrayList<RepliesAttributes> getRepliesAtt(ArrayList<Reply> replies)
+      {
+        if(replies != null)
+        {
+          ArrayList<RepliesAttributes> repliesAtt = new ArrayList<RepliesAttributes>();
+          for(Reply reply:replies)
+          {
+            repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime(),reply.getLike(),reply.getDislike()));
+          }      
+          return repliesAtt;
+        }
+        return null;
+      }
+      
+      public void removeReply(RepliesAttributes reply)
+      {
+          replies.remove(reply);
+      }
+      
+      /* Calls above method, is used to return a TopicAttributes instance based on a Topic entity in database */
+      public static class Builder {
+         private final TopicAttributes topicAttributes;
+            
+         public Builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
+             ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
+             topicAttributes = new TopicAttributes(topicID, creator, name, desc, repliesAtt, count,viewCounter);
+         }
+    
+         public TopicAttributes build() {
+             return topicAttributes;
+         }
+    }
 }
