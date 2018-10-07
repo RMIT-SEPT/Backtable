@@ -2,7 +2,6 @@ package teammates.ui.pagedata;
 
 import teammates.common.util.Const;
 
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import teammates.common.datatransfer.attributes.AccountAttributes;

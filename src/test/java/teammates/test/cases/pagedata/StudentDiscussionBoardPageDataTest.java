@@ -11,7 +11,6 @@ import teammates.test.cases.BaseTestCase;
 import teammates.ui.pagedata.StudentDiscussionBoardPageData;
 import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
-import teammates.common.datatransfer.TopicDetailsBundle;
 
 public class StudentDiscussionBoardPageDataTest extends BaseTestCase {
 
