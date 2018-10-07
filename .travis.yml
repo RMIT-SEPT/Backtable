@@ -1,3 +1,4 @@
+
 language: java
 jdk:
   - oraclejdk8
@@ -33,7 +34,7 @@ before_script:
   - gcloud -q components install app-engine-java
   - gcloud auth activate-service-account --key-file client-secret.json
   - "./gradlew downloadStaticAnalysisTools"
-#  - ./gradlew createConfigs testClasses
+  - ./gradlew createConfigs testClasses
   - ./gradlew downloadStaticAnalysisTools
 #  - ./gradlew lint --continue
   - npm install
