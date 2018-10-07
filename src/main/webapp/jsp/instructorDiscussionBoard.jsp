@@ -6,17 +6,17 @@
 <%@ taglib tagdir="/WEB-INF/tags/instructor" prefix="ti" %>
 <%@ taglib tagdir="/WEB-INF/tags/instructor/discussionBoard" prefix="tid" %>
 <%@ page import="teammates.common.util.Const" %>
-
+<%--PAGE: instructor discussion board page --%>
 <c:set var="jsIncludes">
   <script type="text/javascript" src="/js/studentTopicDelete.js"></script>
 </c:set>
-
+<%-- is an instructors page, titled discussion board --%>
 <ti:instructorPage title="Discussion Board" jsIncludes="${jsIncludes}">
+<%-- inserts tag for add topic form --%>
   <tid:addTopicForm googleId="${data.account.googleId}" sessionToken="${data.sessionToken}"/>
-
   <br/>
   <br/>
-
+  <%-- table for active topics in order to loop through each and display to page --%>
   <table class="table-responsive table table-striped table-bordered margin-0">
     <c:choose>
       <c:when test="${not empty data.activeTopics}">

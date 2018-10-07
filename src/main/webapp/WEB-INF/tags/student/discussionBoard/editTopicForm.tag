@@ -13,6 +13,8 @@
 <%@ attribute name="editTopicButton" type="teammates.ui.template.ElementTag" required="true" %>
 <%@ attribute name="deleteTopicButton" type="teammates.ui.template.ElementTag" required="true" %>
 
+<%-- TAG: edit topic form used for editing a topic accessed via discussion board --%>
+
 <div class="panel panel-primary">
   <div class="panel-heading">
     <strong>Topic:</strong>
@@ -27,7 +29,7 @@
       </a>
     </div>
   </div>
-
+  <%-- DIV: contains form that posts to the save topic page action, holds hidden attributes required for saving successfully --%>
   <div class="panel-body fill-plain">
     <form method="post" action="<%=Const.ActionURIs.STUDENT_DISCUSSION_BOARD_TOPIC_EDIT_SAVE%>" name="discussion_topic_edit_save" class="form form-horizontal">
       <input type="hidden" id="<%=Const.ParamsNames.STUDENT_ID%>" name="<%=Const.ParamsNames.STUDENT_ID%>" value="${googleId}">

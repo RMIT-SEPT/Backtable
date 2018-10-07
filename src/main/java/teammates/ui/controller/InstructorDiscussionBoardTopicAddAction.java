@@ -24,12 +24,13 @@ import teammates.ui.pagedata.InstructorDiscussionBoardPageData;
  */
 public class InstructorDiscussionBoardTopicAddAction extends Action{
 
-    private static final Logger log = Logger.getLogger();
+    //declare data object
     InstructorDiscussionBoardPageData data;
    
     
     @Override
     protected ActionResult execute() throws EntityDoesNotExistException {
+        //generate unique String for topicId
         String uniqueID = UUID.randomUUID().toString();
         
        //Request the value from front-end for TopicAttribute initiation
@@ -37,25 +38,23 @@ public class InstructorDiscussionBoardTopicAddAction extends Action{
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_NAME, newTopicName);
         String newTopicDesc = getRequestParamValue(Const.ParamsNames.TOPIC_DESC);
         Assumption.assertPostParamNotNull(Const.ParamsNames.TOPIC_DESC, newTopicDesc);
-
-
-        System.out.println(newTopicName + "    " + newTopicDesc);
-
+        
         data = new InstructorDiscussionBoardPageData(account, sessionToken);
 
         //Initiate a TopicAttribute - the following behaviours of this function will help to store the data into database
         createTopic(uniqueID, account.getName(), newTopicName, newTopicDesc);
 
         List<TopicAttributes> allTopics = logic.getAllTopics();
-
+        
+        //initiate data with topics
         data.init(allTopics);
         
         //Redirect the page to Discussion board page.
         return createRedirectResult(Const.ActionURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE);
-
-       
     }
     
+    //creates topic in the database
+    //fails if parameters are invalid or entity already exists
     private void createTopic(String uniqueID, String creator, String newTopicName, String newTopicDesc) {
         try {
             logic.createDiscussionBoardTopic(uniqueID, creator, newTopicName, newTopicDesc, new ArrayList<Reply>());

@@ -5,24 +5,30 @@ import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.ui.template.ElementTag;
 
 public class InstructorDiscussionBoardTopicEditPageData extends PageData {
+    /*
+     * Variable declarations
+     */
     private TopicAttributes topic;
     private Integer count;
     private ElementTag editTopicButton;
     private ElementTag deleteTopicButton;
 
+    //Constructor
     public InstructorDiscussionBoardTopicEditPageData(AccountAttributes account, String sessionToken, TopicAttributes topic, Integer count) {
       super(account, sessionToken);
       this.topic = topic;
       this.count = count;
-
+      //creates buttons for topic edit page
       createTopicRelatedButtons();
     }
 
+    //create buttons for the topic
     private void createTopicRelatedButtons() {
         editTopicButton = createEditTopicButton();
         deleteTopicButton = createDeleteTopicButton();
     }
 
+    //GETTERS
     public TopicAttributes getTopic() {
       return topic;
     }
@@ -35,6 +41,7 @@ public class InstructorDiscussionBoardTopicEditPageData extends PageData {
         return deleteTopicButton;
     }
 
+    //create button for editing topic
     private ElementTag createEditTopicButton() {
         String buttonContent = "<span class=\"glyphicon glyphicon-pencil\"></span> Edit";
         String buttonId = "btnEditTopic";
@@ -42,6 +49,7 @@ public class InstructorDiscussionBoardTopicEditPageData extends PageData {
         return createBasicButton(buttonContent, buttonId, "javascript:;", null, false);
     }
 
+    //create button for deleting topic
     private ElementTag createDeleteTopicButton() {
         String buttonContent = "<span class=\"glyphicon glyphicon-trash\"></span> Delete";
         String buttonId = "btnDeleteTopic";

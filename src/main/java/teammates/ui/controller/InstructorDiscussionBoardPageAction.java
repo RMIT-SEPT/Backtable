@@ -9,21 +9,27 @@ import teammates.ui.pagedata.InstructorDiscussionBoardPageData;
 import teammates.ui.pagedata.StudentDiscussionBoardPageData;
 
 /**
- * Action: showing the profile page for a student in a course.
+ * Action: Showing the discussion board for a logged in instructor.
  */
 public class InstructorDiscussionBoardPageAction extends Action {
 
-    private static final Logger log = Logger.getLogger();
+    //Declare data object
     InstructorDiscussionBoardPageData data;
     
+    //called when accessing the page, accesses and pushes data to the instructor discussion board page data
     @Override
     public ActionResult execute() {
         
+        //instantiate data as an InstructorDiscussionBoardPageData object
         data = new InstructorDiscussionBoardPageData(account, sessionToken);
-        // use Logic to retrieve all topics data for front-end using
+        
+        //access all topics in database
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
+        //update the data with the topics retrieved from database
         data.init(allTopics);
+        
+        //return the page with data
         return createShowPageResult(Const.ViewURIs.INSTRUCTOR_DISCUSSION_BOARD_PAGE, data);
         
         

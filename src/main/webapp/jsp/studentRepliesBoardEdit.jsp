@@ -11,7 +11,10 @@
   <script type="text/javascript" src="/js/studentReplyEdit.js"></script>
 </c:set>
 
+<%-- student replies board edit page --%>
+
 <ts:studentPage title="Edit Reply" jsIncludes="${jsIncludes}">
+<%-- passes variables to tag editReplyForm in order to display form and hold data needed to save --%>
   <tsr:editReplyForm
       googleId="${data.account.googleId}"
       sessionToken="${data.sessionToken}"

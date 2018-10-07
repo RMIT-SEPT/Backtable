@@ -3,6 +3,8 @@
 <%@ tag import="teammates.common.util.Const" %>
 <%@ attribute name="topicID" required="true" %>
 
+<%-- TAG: DEPRECIATED  --%>
+
 <div class="panel panel-primary">
   <div class="panel-body fill-plain">
     <form method="get" action="<%=Const.ActionURIs.STUDENT_REPLIES_BOARD_ADD_REPLY_PAGE%>" name="form_addreply" class="form form-horizontal">

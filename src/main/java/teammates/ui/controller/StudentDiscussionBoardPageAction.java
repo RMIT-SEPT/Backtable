@@ -15,19 +15,18 @@ public class StudentDiscussionBoardPageAction extends Action {
     
     @Override
     public ActionResult execute() {
-        
+        //get profile of logged in student
         account.studentProfile = logic.getStudentProfile(account.googleId);
 
         data = new StudentDiscussionBoardPageData(account, sessionToken);
+        
         // use Logic to retrieve all topics data for front-end using
         List<TopicAttributes> allTopics = logic.getAllTopics();
 
+        //set topics in page data
         data.init(allTopics);
+        
         return createShowPageResult(Const.ViewURIs.STUDENT_DISCUSSION_BOARD_PAGE, data);
-        
-        
-        
+  
     }
-
-
 }

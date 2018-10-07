@@ -537,6 +537,9 @@ public class Logic {
         return coursesLogic.getCourse(courseId);
     }
 
+    /*
+     * returns topic based on topicId identifier
+     */
     public TopicAttributes getTopic(String topicId) {
         Assumption.assertNotNull(topicId);
 
@@ -707,8 +710,12 @@ public class Logic {
         coursesLogic.deleteCourseCascade(courseId);
     }
 
+    /**
+     * Deletes topic from database
+     * @param topicId
+     */
     public void deleteTopic(String topicId){
-      //  Assumption.assertNotNull(topicName);
+        Assumption.assertNotNull(topicId);
         topicsLogic.deleteTopicCascade(topicId);
     }
 

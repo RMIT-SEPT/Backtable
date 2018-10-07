@@ -107,6 +107,7 @@ public class StudentDiscussionBoardPageData extends PageData {
         return activeTopics;
     }
 
+    //Create button method
     private ElementTag createButton(String content, String buttonClass, String id, String href, String title,
                               boolean isDisabled) {
         ElementTag button = new ElementTag(content);

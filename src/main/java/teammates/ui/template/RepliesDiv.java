@@ -1,8 +1,14 @@
 package teammates.ui.template;
 
 import java.util.List;
-
+/**
+ * Template for replies div used on replies board
+ * 
+ */
 public class RepliesDiv {
+    /*
+     * Variable Declarations
+     */
     private String name;
     private String desc;
     private String id;
@@ -12,10 +18,9 @@ public class RepliesDiv {
     private String createdAtDateString;
     private String createdAtDateStamp;
     private String createdAtFullDateTimeString;
-    
-    
     private List<ElementTag> actions;
 
+    //Constructor
     public RepliesDiv(String name, String id, String desc, List<ElementTag> actionsParam, String dateTime, Integer like, Integer dislike) {
         
         this.name = name;
@@ -27,6 +32,7 @@ public class RepliesDiv {
         this.dislike = dislike;
     }
 
+    //GETTERS & SETTERS
     public String getId() {
         return id;
     }

@@ -4,6 +4,8 @@
 
 <%@ attribute name="reply" type="teammates.ui.template.RepliesDiv" required="true" %>
 
+<%-- TAG: used for displaying reply  --%>
+
 <div class="panel panel-default">
   <div class="panel-body">
     <h5 style="display:inline-block;"><strong>${reply.name}</strong></h5>
