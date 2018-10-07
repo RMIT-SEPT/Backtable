@@ -36,7 +36,6 @@ before_script:
   - "./gradlew downloadStaticAnalysisTools"
   - ./gradlew createConfigs testClasses
   - ./gradlew downloadStaticAnalysisTools
-  - ./gradlew lint --continue
   - npm install
 install: true
 
@@ -44,7 +43,7 @@ script:
   - npm run build
   - ./gradlew appengineStart
   - gcloud config set project 'backtable-sept'
-  -  ./gradlew appengineDeployAll
+  - ./gradlew appengineDeployAll
 
 deploy:
   provider: gae
