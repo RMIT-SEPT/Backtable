@@ -79,7 +79,7 @@ public abstract class BaseTestCaseWithDatastoreAccess extends BaseTestCaseWithOb
 
         } else if (expected instanceof StudentAttributes) {
             return getStudent((StudentAttributes) expected);
-            
+
         } else if (expected instanceof TopicAttributes) {
             return getTopic((TopicAttributes) expected);
 
@@ -126,6 +126,7 @@ public abstract class BaseTestCaseWithDatastoreAccess extends BaseTestCaseWithOb
         } else if (expected instanceof TopicAttributes) {
             TopicAttributes expectedTopic = (TopicAttributes) expected;
             TopicAttributes actualTopic = (TopicAttributes) actual;
+            equalizeIrrelevantData(expectedTopic, actualTopic);
             assertEquals(JsonUtils.toJson(expectedTopic), JsonUtils.toJson(actualTopic));
 
         } else if (expected instanceof FeedbackQuestionAttributes) {
@@ -188,12 +189,19 @@ public abstract class BaseTestCaseWithDatastoreAccess extends BaseTestCaseWithOb
     }
 
     protected abstract CourseAttributes getCourse(CourseAttributes course);
-    
+
     protected abstract TopicAttributes getTopic(TopicAttributes topic);
 
     private void equalizeIrrelevantData(CourseAttributes expected, CourseAttributes actual) {
         // Ignore time field as it is stamped at the time of creation in testing
         expected.createdAt = actual.createdAt;
+    }
+    
+    private void equalizeIrrelevantData(TopicAttributes expected, TopicAttributes actual) {
+        System.out.println(actual.toString());
+        expected.id = actual.id;
+        expected.replies = actual.replies;
+        expected.viewCounter = actual.viewCounter;
     }
 
     protected abstract FeedbackQuestionAttributes getFeedbackQuestion(FeedbackQuestionAttributes fq);

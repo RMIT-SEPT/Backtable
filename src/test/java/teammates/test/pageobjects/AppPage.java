@@ -568,7 +568,7 @@ public abstract class AppPage {
     }
 
     /**
-     * Equivalent of clicking the 'Discussion Boad' tab on the top menu of the page.
+     * Equivalent of clicking the 'Discussion Board' tab on the top menu of the page.
      * @return the loaded page
      */
     public StudentDiscussionBoardPage loadDiscussionBoardTab() {

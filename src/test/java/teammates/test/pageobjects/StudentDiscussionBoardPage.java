@@ -1,11 +1,5 @@
 package teammates.test.pageobjects;
 
-import static org.testng.Assert.assertTrue;
-
-import java.util.List;
-
-import org.testng.annotations.Test;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,13 +16,19 @@ public class StudentDiscussionBoardPage extends AppPage {
     @FindBy(id = "btnAddCourse")
     private WebElement submitButton;
 
+    @FindBy(className = "modal-btn-ok")
+    private WebElement deleteButton;
+
+    @FindBy(className = "modal-btn-cancel")
+    private WebElement cancelButton;
+
     public StudentDiscussionBoardPage(Browser browser) {
         super(browser);
     }
 
     @Override
     protected boolean containsExpectedPageContents() {
-        return getPageSource().contains("<h1>Discussion Board</h1>");
+        return getPageSource().contains("<h1>Add New Topic</h1>");
     }
 
     public boolean containsTestTopic() {
@@ -44,9 +44,17 @@ public class StudentDiscussionBoardPage extends AppPage {
       return this;
     }
 
+    public StudentDiscussionBoardPage cancelDeleteTopic(String topicName) {
+        click(getDeleteLink(topicName));
+        waitForPageToLoad();
+        click(cancelButton);
+        return this;
+    }
+
     public StudentDiscussionBoardPage deleteTopic(String topicName) {
       click(getDeleteLink(topicName));
       waitForPageToLoad();
+      click(deleteButton);
       return this;
     }
 
@@ -54,6 +62,11 @@ public class StudentDiscussionBoardPage extends AppPage {
       int topicRowNumber = getRowNumberOfTopic(topicName);
       return getDeleteLinkInRow(topicRowNumber);
     }
+    
+    public String getEditLink(String topicName) {
+        int topicRowNumber = getRowNumberOfTopic(topicName);
+        return getEditLinkInRow(topicRowNumber);
+      }
 
     private int getTopicCount() {
       // id should be renamed to tableActiveTopics
@@ -79,5 +92,9 @@ public class StudentDiscussionBoardPage extends AppPage {
       By deleteLink = By.className("topic_delete" + rowId);
       return browser.driver.findElement(deleteLink);
     }
-
+    
+    public String getEditLinkInRow(int rowId) {
+        By editLink = By.className("topic_edit" + rowId);
+        return browser.driver.findElement(editLink).getAttribute("href");
+    }
 }
