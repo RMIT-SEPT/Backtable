@@ -47,7 +47,8 @@ public class StudentRepliesBoardPageUiTest extends BaseUiTestCase {
         repliesBoardPage.addReply(replyDesc);
         // Get the replies board page and assert the reply has been added
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
+        assertTrue(repliesBoardPage.containsExpectedReply(
+                   testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
     }
 
     private void testLikeAction() throws Exception {
@@ -64,14 +65,16 @@ public class StudentRepliesBoardPageUiTest extends BaseUiTestCase {
         repliesBoardPage.cancelDeleteReply(replyDesc);
         // Get the replies board page and assert the reply still exists
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
+        assertTrue(repliesBoardPage.containsExpectedReply(
+                   testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
     }
 
     private void testDeleteAction() throws Exception {
         repliesBoardPage.deleteReply(replyDesc);
         // Get the replies board page and assert the reply has been deleted
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertFalse(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
+        assertFalse(repliesBoardPage.containsExpectedReply(
+                    testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
     }
 
     private StudentDiscussionBoardPage createTestTopic() {

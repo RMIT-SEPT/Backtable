@@ -53,7 +53,8 @@ public class StudentRepliesBoardEditPageUiTest extends BaseUiTestCase {
         repliesBoardEditPage.editReply(newReplyDesc);
         // Get the replies board page and assert the reply has been edited
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
+        assertTrue(repliesBoardPage.containsExpectedReply(
+                   testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
     }
 
     private void testCancelDeleteReply() {
@@ -62,7 +63,8 @@ public class StudentRepliesBoardEditPageUiTest extends BaseUiTestCase {
         repliesBoardEditPage.cancelDeleteReply();
         // Get the replies board page and assert the reply still exists
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
+        assertTrue(repliesBoardPage.containsExpectedReply(
+                   testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
     }
 
     private void testDeleteReply() {
@@ -71,7 +73,8 @@ public class StudentRepliesBoardEditPageUiTest extends BaseUiTestCase {
         repliesBoardEditPage.deleteReply();
         // Get thre replies board page and assert the reply is gone
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertFalse(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
+        assertFalse(repliesBoardPage.containsExpectedReply(
+                    testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
     }
 
     private StudentDiscussionBoardPage createTestTopic() {
