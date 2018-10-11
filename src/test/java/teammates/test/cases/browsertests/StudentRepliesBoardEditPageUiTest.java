@@ -5,21 +5,24 @@ import org.testng.annotations.Test;
 import teammates.common.util.AppUrl;
 import teammates.common.util.Const;
 import teammates.test.pageobjects.StudentDiscussionBoardPage;
+import teammates.test.pageobjects.StudentRepliesBoardEditPage;
 import teammates.test.pageobjects.StudentRepliesBoardPage;
 
-public class StudentRepliesBoardPageUiTest extends BaseUiTestCase {
+public class StudentRepliesBoardEditPageUiTest extends BaseUiTestCase {
     private StudentDiscussionBoardPage discussionBoardPage;
     private StudentRepliesBoardPage repliesBoardPage;
-    private String topicId, topicName, topicDesc, replyDesc;
+    private StudentRepliesBoardEditPage repliesBoardEditPage;
+    private String topicId, topicName, topicDesc, replyDesc, newReplyDesc;
 
     @Override
     protected void prepareTestData() throws Exception {
         testData = loadDataBundle("/StudentRepliesBoardPageUiTest.json");
         removeAndRestoreDataBundle(testData);
-      
-        topicName = "TESTING_REPLIES_BOARD";
-        topicDesc = "testing_replies_board_desc";
+
+        topicName = "TESTING_REPLIES_BOARD_EDIT_PAGE";
+        topicDesc = "testing_replies_board_edit_pagedesc";
         replyDesc = "this_is_a_test_reply";
+        newReplyDesc = "this_is_a_changed_test_reply";
     }
 
     @Test
@@ -29,49 +32,46 @@ public class StudentRepliesBoardPageUiTest extends BaseUiTestCase {
         // Create the test topic and get the replies board for that topic
         discussionBoardPage = createTestTopic();
         repliesBoardPage = getRepliesBoardPage(topicName);
+        // Create the test reply and get the replies board edit page for that reply
+        repliesBoardPage.addReply(replyDesc);
+        repliesBoardEditPage = getRepliesBoardEditPage();
 
         testContent();
-        testAddAction();
-        testLikeAction();
-        testDislikeAction();
-        testCancelDeleteAction();
-        testDeleteAction();
+        testEditReply();
+        testCancelDeleteReply();
+        testDeleteReply();
         deleteTestData();
     }
 
     private void testContent() {
-        assertTrue(repliesBoardPage.containsExpectedTopic(topicName, topicDesc));
+        assertTrue(repliesBoardEditPage.containsExpectedPageContents());
     }
 
-    private void testAddAction() throws Exception {
-        repliesBoardPage.addReply(replyDesc);
-        // Get the replies board page and assert the reply has been added
+    private void testEditReply() {
+        // Get the replies board edit page
+        repliesBoardEditPage = getRepliesBoardEditPage();
+        repliesBoardEditPage.editReply(newReplyDesc);
+        // Get the replies board page and assert the reply has been edited
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
+        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
     }
 
-    private void testLikeAction() throws Exception {
-        // Assert the like button increments the likes by one
-        assertTrue(repliesBoardPage.likeReply(replyDesc));
-    }
-
-    private void testDislikeAction() throws Exception {
-        // Assert the dislike button increments the dislikes by one
-        assertTrue(repliesBoardPage.dislikeReply(replyDesc));
-    }
-
-    private void testCancelDeleteAction() throws Exception {
-        repliesBoardPage.cancelDeleteReply(replyDesc);
+    private void testCancelDeleteReply() {
+        // Get the replies board edit page
+        repliesBoardEditPage = getRepliesBoardEditPage();
+        repliesBoardEditPage.cancelDeleteReply();
         // Get the replies board page and assert the reply still exists
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
+        assertTrue(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
     }
 
-    private void testDeleteAction() throws Exception {
-        repliesBoardPage.deleteReply(replyDesc);
-        // Get the replies board page and assert the reply has been deleted
+    private void testDeleteReply() {
+        // Get the replies board edit page
+        repliesBoardEditPage = getRepliesBoardEditPage();
+        repliesBoardEditPage.deleteReply();
+        // Get thre replies board page and assert the reply is gone
         repliesBoardPage = getRepliesBoardPage(topicName);
-        assertFalse(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, replyDesc));
+        assertFalse(repliesBoardPage.containsExpectedReply(testData.accounts.get("studentWithEmptyProfile").name, newReplyDesc));
     }
 
     private StudentDiscussionBoardPage createTestTopic() {
@@ -100,6 +100,15 @@ public class StudentRepliesBoardPageUiTest extends BaseUiTestCase {
               .withTopicId(topicId)
               .withUserId(testData.accounts.get("studentWithEmptyProfile").googleId);
         return loginAdminToPage(repliesBoardPageLink, StudentRepliesBoardPage.class);
+    }
+
+    private StudentRepliesBoardEditPage getRepliesBoardEditPage() {
+        // Get the replies board edit page for the test reply
+        // Since there is only one test reply, there is no need to get the replyId
+        AppUrl repliesBoardEditPageLink = createUrl(Const.ActionURIs.STUDENT_REPLIES_EDIT_PAGE)
+                .withTopicId(topicId)
+                .withReplyId(0);
+        return loginAdminToPage(repliesBoardEditPageLink, StudentRepliesBoardEditPage.class);
     }
 
     private void deleteTestData() {

@@ -1,6 +1,5 @@
 package teammates.test.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -46,7 +45,6 @@ public class StudentDiscussionBoardTopicEditPage extends AppPage {
       fillTextBox(topicNameTextBox, topicName);
       fillTextBox(topicDescTextBox, topicDesc);
       click(saveTopicButton);
-      waitForPageToLoad();
       return this;
     }
     
@@ -54,16 +52,13 @@ public class StudentDiscussionBoardTopicEditPage extends AppPage {
         click(deleteTopicButton);
         waitForPageToLoad();
         click(cancelDeleteButton);
-        waitForPageToLoad();
         return this;
-      }
+    }
 
-    
     public StudentDiscussionBoardTopicEditPage deleteTopic() {
       click(deleteTopicButton);
       waitForPageToLoad();
       click(confirmDeleteButton);
-      waitForPageToLoad();
       return this;
     }
 
