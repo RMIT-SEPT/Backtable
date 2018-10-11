@@ -39,7 +39,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
      * Return a topic based of the topicId
      * @param topicId Name of the topic
      */
-    
+
     public TopicAttributes getTopic(String topicId) {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicId);
       return makeAttributesOrNull(getTopicEntity(topicId));
@@ -55,7 +55,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
       return makeAttributes(getTopicEntities(topicIds));
     }
-   
+
     /**
      * Updates a topic by asserting that a topic with the same id is contained within database already,
      * if so the topic is overwritten by new topic with new values
@@ -155,9 +155,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
        Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicID);
        //Only the key is important, the rest are irrelevant
         deleteEntity(TopicAttributes
-                .builder(topicID, null, null, null, null, null,null)
+                .builder(topicID, "Non-existing", "Non-existing", "Non-existing", null, null,null)
                 .build());
-
-
     }
 }
