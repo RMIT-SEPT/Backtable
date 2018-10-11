@@ -1,0 +1,12 @@
+{
+  "accounts": {
+    "studentWithEmptyProfile": {
+      "googleId": "SHomeUiT.benny.c",
+      "name": "Benny Charles",
+      "isInstructor": false,
+      "email": "SHomeUiT.benny.c@gmail.tmt",
+      "institute": "TEAMMATES Test Institute 1"
+    }
+  },
+  "topics": {}
+}

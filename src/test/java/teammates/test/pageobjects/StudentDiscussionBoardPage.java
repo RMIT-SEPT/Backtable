@@ -62,7 +62,7 @@ public class StudentDiscussionBoardPage extends AppPage {
       int topicRowNumber = getRowNumberOfTopic(topicName);
       return getDeleteLinkInRow(topicRowNumber);
     }
-    
+
     public String getEditLink(String topicName) {
         int topicRowNumber = getRowNumberOfTopic(topicName);
         return getEditLinkInRow(topicRowNumber);
@@ -92,7 +92,7 @@ public class StudentDiscussionBoardPage extends AppPage {
       By deleteLink = By.className("topic_delete" + rowId);
       return browser.driver.findElement(deleteLink);
     }
-    
+
     public String getEditLinkInRow(int rowId) {
         By editLink = By.className("topic_edit" + rowId);
         return browser.driver.findElement(editLink).getAttribute("href");

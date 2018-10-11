@@ -72,7 +72,7 @@ public class StudentDiscussionBoardTopicEditPageUiTest extends BaseUiTestCase {
         // Load a discussion board page
         discussionBoardPage = getDiscussionBoardPage();
         // Get the edit page link for a pre-existing testing topic
-        String topicEditPageUrl= discussionBoardPage.getEditLink(topicName);
+        String topicEditPageUrl = discussionBoardPage.getEditLink(topicName);
 
         // Get the id of the topic from the edit link
         // There was no easy way to get the id, which was crucial for creating the edit topic page
