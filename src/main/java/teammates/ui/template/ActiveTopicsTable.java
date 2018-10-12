@@ -1,7 +1,7 @@
 
-
-
-
+/**
+ * Template for the topics table used on discussion board
+ */
 package teammates.ui.template;
 
 import java.util.ArrayList;

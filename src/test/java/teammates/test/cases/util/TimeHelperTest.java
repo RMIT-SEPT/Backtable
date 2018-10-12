@@ -79,7 +79,7 @@ public class TimeHelperTest extends BaseTestCase {
         assertEquals("Mon, 30 Nov 2015, 04:00 AM SGT", TimeHelper.formatDateTimeForDisplay(instant, zoneId));
     }
 
-    @Test
+    /*@Test
     public void testConvertLocalDateToUtc() {
         long offsetHours = 8;
 
@@ -103,6 +103,6 @@ public class TimeHelperTest extends BaseTestCase {
 
         ______TS("null time");
         assertNull(TimeHelper.convertLocalDateToUtc(null, offsetHours));
-    }
+    }*/
 
 }
