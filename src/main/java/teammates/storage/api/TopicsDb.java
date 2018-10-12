@@ -12,6 +12,7 @@ import com.googlecode.objectify.cmd.QueryKeys;
 
 import teammates.common.datatransfer.attributes.CourseAttributes;
 import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
+import teammates.common.datatransfer.attributes.RepliesAttributes;
 import teammates.common.datatransfer.attributes.TopicAttributes;
 import teammates.common.exception.EntityDoesNotExistException;
 import teammates.common.exception.InvalidParametersException;
@@ -34,19 +35,11 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
     public static final String ERROR_UPDATE_NON_EXISTENT_TOPIC = "Trying to update a Topic that doesn't exist: ";
 
-
-
-
-    /**
-    * Preconditions: <br>
-    * * All parameters are non-null.
-    * @return Null if not found.
-    */
-
     /**
      * Return a topic based of the topicId
      * @param topicId Name of the topic
      */
+    
     public TopicAttributes getTopic(String topicId) {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicId);
       return makeAttributesOrNull(getTopicEntity(topicId));
@@ -62,10 +55,15 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
 
       return makeAttributes(getTopicEntities(topicIds));
     }
+   
     /**
-     * Unused method for now.
+     * Updates a topic by asserting that a topic with the same id is contained within database already,
+     * if so the topic is overwritten by new topic with new values
+     * Often used when changes need to be saved to the topic
+     * @param topicToUpdate
+     * @throws InvalidParametersException
+     * @throws EntityDoesNotExistException
      */
-      
     public void updateTopic(TopicAttributes topicToUpdate) throws InvalidParametersException,
                                                                    EntityDoesNotExistException {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicToUpdate);
@@ -75,7 +73,7 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       if (!topicToUpdate.isValid()) {
           throw new InvalidParametersException(topicToUpdate.getInvalidityInfo());
       }
-      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getName());
+      Topic topicEntityToUpdate = getTopicEntity(topicToUpdate.getId());
 
       if (topicEntityToUpdate == null) {
           throw new EntityDoesNotExistException(ERROR_UPDATE_NON_EXISTENT_TOPIC);
@@ -101,6 +99,11 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
       return load().id(topicId).now();
     }
 
+    /**
+     * Loads topics from the database based on array of id's held as parameter
+     * @param topicIds
+     * @return
+     */
     private List<Topic> getTopicEntities(List<String> topicIds) {
       if (topicIds.isEmpty()) {
           return new ArrayList<>();
@@ -120,13 +123,16 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
     protected TopicAttributes makeAttributes(Topic entity) {
       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, entity);
 
-      return TopicAttributes.builder(entity.getName(), entity.getDesc())
+      return TopicAttributes.builder(entity.getId(), entity.getCreator(), entity.getName(), entity.getDesc(), entity.getReplies(), entity.getCount(),entity.getViewcount())
               .build();
     }
 
+    /**
+     * Used to retrive key for Topic
+     */
     @Override
     protected QueryKeys<Topic> getEntityQueryKeys(TopicAttributes attributes) {
-      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getName());
+      Key<Topic> keyToFind = Key.create(Topic.class, attributes.getId());
       return load().filterKey(keyToFind).keys();
     }
 
@@ -135,23 +141,21 @@ public class TopicsDb extends EntitiesDb<Topic, TopicAttributes> {
      * Retrieve all topics stored in the database
      * @return List<TopicAttributes>
      */
-
     public List<TopicAttributes> getAllTopics(){
       return makeAttributes(load().list());
     }
 
 
     /**
-     * Remove the topic in the databased based on the topicID
-     * @param  topicName it's an id of the object in the database
+     * Remove the topic in the database based on the topicId
+     * @param  topicID it's an id of the object in the database
      */
-    public void deleteTopic(String topicName) {
+    public void deleteTopic(String topicID) {
 
-        Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicName);
-
-        // only the courseId is important here, everything else are placeholders
+       Assumption.assertNotNull(Const.StatusCodes.DBLEVEL_NULL_INPUT, topicID);
+       //Only the key is important, the rest are irrelevant
         deleteEntity(TopicAttributes
-                .builder(topicName, "Non-existent course")
+                .builder(topicID, null, null, null, null, null,null)
                 .build());
 
 
