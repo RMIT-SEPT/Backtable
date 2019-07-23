@@ -25,6 +25,18 @@ public class AppUrl extends Url {
     public AppUrl withCourseId(String courseId) {
         return withParam(Const.ParamsNames.COURSE_ID, courseId);
     }
+    
+    public AppUrl withTopicName(String topicName) {
+        return withParam(Const.ParamsNames.TOPIC_NAME, topicName);
+    }
+    
+    public AppUrl withTopicId(String topicId) {
+        return withParam(Const.ParamsNames.TOPIC_ID, topicId);
+    }
+    
+    public AppUrl withReplyId(int replyId) {
+        return withParam(Const.ParamsNames.REPLY_ID, Integer.toString(replyId));
+    }
 
     public AppUrl withSessionName(String feedbackSessionName) {
         return withParam(Const.ParamsNames.FEEDBACK_SESSION_NAME, feedbackSessionName);
@@ -45,5 +57,4 @@ public class AppUrl extends Url {
     public AppUrl withEnableSessionEditDetails(boolean shouldLoadInEditMode) {
         return withParam(Const.ParamsNames.FEEDBACK_SESSION_ENABLE_EDIT, Boolean.toString(shouldLoadInEditMode));
     }
-
 }

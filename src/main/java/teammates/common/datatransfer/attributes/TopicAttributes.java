@@ -3,6 +3,7 @@ package teammates.common.datatransfer.attributes;
 import java.util.ArrayList;
 import java.util.List;
 
+import teammates.common.util.Assumption;
 import teammates.common.util.FieldValidator;
 import teammates.common.util.JsonUtils;
 import teammates.common.util.SanitizationHelper;
@@ -11,7 +12,7 @@ import teammates.storage.entity.Topic;
 
 public class TopicAttributes extends EntityAttributes<Topic> {
 
-  /* Variable declarations */  
+  /* Variable declarations */
   public String id;
   public String creator;
   public String name;
@@ -35,29 +36,29 @@ public class TopicAttributes extends EntityAttributes<Topic> {
   public static Builder builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
       return new Builder(topicID, creator, name, desc, replies, count,viewCounter);
   }
-  
+
   /* Getters */
-  
+
   public Integer getViewCounter() {
       return viewCounter;
   }
-  
+
   public String getId() {
       return id;
   }
-  
+
   public String getName() {
       return name;
   }
-  
+
   public String getCreator() {
       return creator;
   }
-  
+
   public String getDesc() {
       return desc;
     }
-  
+
     public void setCount(Integer count) {
         this.count = count;
     }
@@ -65,24 +66,24 @@ public class TopicAttributes extends EntityAttributes<Topic> {
     public ArrayList<RepliesAttributes> getReplies(){
         return replies;
     }
-    
+
     public Integer getCount()    {
         return count;
     }
-    
+
 
     /* Setters */
-    
+
     public void setViewCounter(Integer viewCounter) {
         this.viewCounter = viewCounter;
     }
- 
+
     public void setReplies(ArrayList<RepliesAttributes> replies)
     {
         this.replies = replies;
     }
-  
-    
+
+
     /* Function to add a reply to the topic count iterated as it is used as partial key to identify reply*/
     public void addReply(RepliesAttributes reply)
     {
@@ -93,7 +94,7 @@ public class TopicAttributes extends EntityAttributes<Topic> {
         replies.add(reply);
         count++;
     }
-   
+
     /* Used to validate strings stored in topic */
     @Override
     public List<String> getInvalidityInfo() { FieldValidator validator = new FieldValidator();
@@ -115,32 +116,32 @@ public class TopicAttributes extends EntityAttributes<Topic> {
         }
         return new Topic(getId(), getCreator(), getName(), getDesc(), repliesEntity, count,viewCounter);
       }
-  
+
       /* Inherited methods, not all necessary for our functionality */
       @Override
       public String getIdentificationString() {
         return null;
       }
-    
+
       @Override
       public String getEntityTypeAsString() {
         return "Topic";
       }
-    
+
       @Override
       public String getBackupIdentifier() {
         return null;
       }
-    
+
       @Override
       public String getJsonString() {
         return JsonUtils.toJson(this, TopicAttributes.class);
       }
-    
+
       @Override
       public void sanitizeForSaving() {
       }
-    
+
       /* Takes ArrayList of Reply entities, returns array of RepliesAttributes */
       /* Required in order to take objects from database and build them back up to a usable state */
       public static ArrayList<RepliesAttributes> getRepliesAtt(ArrayList<Reply> replies)
@@ -151,28 +152,36 @@ public class TopicAttributes extends EntityAttributes<Topic> {
           for(Reply reply:replies)
           {
             repliesAtt.add(new RepliesAttributes(reply.getDesc(), reply.getStudentName(), reply.getId(), reply.getDateTime(),reply.getLike(),reply.getDislike()));
-          }      
+          }
           return repliesAtt;
         }
         return null;
       }
-      
+
       public void removeReply(RepliesAttributes reply)
       {
           replies.remove(reply);
       }
-      
+
       /* Calls above method, is used to return a TopicAttributes instance based on a Topic entity in database */
       public static class Builder {
+         private static final String REQUIRED_FIELD_CANNOT_BE_NULL = "Non-null value expected";
          private final TopicAttributes topicAttributes;
-            
+
          public Builder(String topicID, String creator, String name, String desc, ArrayList<Reply> replies, Integer count,Integer viewCounter) {
+             validateRequiredFields(name, desc);
              ArrayList<RepliesAttributes> repliesAtt = getRepliesAtt(replies);
              topicAttributes = new TopicAttributes(topicID, creator, name, desc, repliesAtt, count,viewCounter);
          }
-    
+
          public TopicAttributes build() {
              return topicAttributes;
+         }
+
+         private void validateRequiredFields(Object... objects) {
+             for (Object object : objects) {
+             Assumption.assertNotNull(REQUIRED_FIELD_CANNOT_BE_NULL, object);
+             }
          }
     }
 }
